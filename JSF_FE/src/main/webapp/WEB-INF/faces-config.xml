@@ -4,19 +4,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
     version="2.3">
-    <managed-bean>
-		<managed-bean-name>userMB</managed-bean-name>
-		<managed-bean-class>de.impf.mb.UserMB</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
 
-	<!-- Hauptmenue -->
+	<!-- Test -->
 	<navigation-rule>
-		<from-view-id>/pages/protected/Hauptmenue.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>PATIENTENVERWALTUNG_MENUE</from-outcome>
-			<to-view-id>/pages/protected/patientenvw/PatientenVerwaltungMenue.xhtml</to-view-id>
-		</navigation-case>
+		<from-view-id>/pages/publiuc/test.xhtml</from-view-id>
 	</navigation-rule>
 
 </faces-config>

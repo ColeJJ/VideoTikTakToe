@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+    version="2.3">
+    <managed-bean>
+		<managed-bean-name>userMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.UserMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>impfstoffchargeMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.ImpfstoffchargeMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>impfungMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.ImpfungMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>patientMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.PatientMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>terminMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.TerminMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>applicationSecurityConfig</managed-bean-name>
+		<managed-bean-class>de.impf.mb.ApplicationSecurityConfig</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>menueMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.MenueMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>	
+
+	<!-- Hauptmenue -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/Hauptmenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>PATIENTENVERWALTUNG_MENUE</from-outcome>
+			<to-view-id>/pages/protected/patientenvw/PatientenVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>TERMINEVERWALTUNG_MENUE</from-outcome>
+			<to-view-id>/pages/protected/terminevw/TermineVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>VAKZINEVERWALTUNG_MENUE</from-outcome>
+			<to-view-id>/pages/protected/vakzinevw/VakzineVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Patientenverwaltung -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/patientenvw/PatientenVerwaltungMenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>PATIENT_ANLEGEN</from-outcome>
+			<to-view-id>/pages/protected/patientenvw/PatientAnlegen.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Patient anlegen -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/patientenvw/PatientAnlegen.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>PATIENT_ANLEGEN_ABBRECHEN</from-outcome>
+			<to-view-id>/pages/protected/patientenvw/PatientenVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>	
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>	
+	</navigation-rule>
+	
+	<!-- Vakzineverwaltung  -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/vakzinevw/VakzineVerwaltungMenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>IMPFCHARGE_ERFASSEN</from-outcome>
+			<to-view-id>/pages/protected/vakzinevw/ImpfstoffchargeErfassen.xhtml</to-view-id>
+		</navigation-case>	
+		<navigation-case>
+			<from-outcome>ANZEIGE_IMPFDOSENMENGE</from-outcome>
+			<to-view-id>/pages/protected/vakzinevw/AnzeigeImpfdosenMenge.xhtml</to-view-id>
+		</navigation-case>			
+		<navigation-case>
+			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>		
+	</navigation-rule>
+	
+	<!-- Impfstoffcharge erfassen -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/vakzinevw/ImpfstoffchargeErfassen.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>IMPFSTOFFCHARGE_ERFASSEN_ABBRECHEN</from-outcome>
+			<to-view-id>/pages/protected/vakzinevw/VakzineVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>				
+	</navigation-rule>
+	
+	<!-- Anzeige der Impfdosenmenge -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/vakzinevw/AnzeigeImpfdosenMenge.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>ANZEIGE_IMPFDOSENMENGE_ABBRECHEN</from-outcome>
+			<to-view-id>/pages/protected/vakzinevw/VakzineVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>				
+	</navigation-rule>
+	
+	<!-- Termineverwaltung  -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/terminevw/TermineVerwaltungMenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>IMPFUNG_PFLEGEN</from-outcome>
+			<to-view-id>/pages/protected/terminevw/ImpfungPflegen.xhtml</to-view-id>
+		</navigation-case>	
+		<navigation-case>
+			<from-outcome>TERMINE_PFLEGEN</from-outcome>
+			<to-view-id>/pages/protected/terminevw/TerminePflegen.xhtml</to-view-id>
+		</navigation-case>	
+		<navigation-case>
+			<from-outcome>IMPFTERMINE_ANSEHEN</from-outcome>
+			<to-view-id>/pages/protected/terminevw/ImpfterminAnsicht.xhtml</to-view-id>
+		</navigation-case>			
+		<navigation-case>
+			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>		
+	</navigation-rule>
+	
+	<!-- Impfung Pflegen -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/terminevw/ImpfungPflegen.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>IMPFUNG_PFLEGEN_ABBRECHEN</from-outcome>
+			<to-view-id>/pages/protected/terminevw/TermineVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>				
+	</navigation-rule>
+	
+	<!-- Ansicht Impfung -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/terminevw/ImpfterminAnsicht.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>UPDATE_IMPFUNG</from-outcome>
+			<to-view-id>/pages/protected/terminevw/ImpfungUpdate.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>ANSICHT_IMPFUNG_ABBRECHEN</from-outcome>
+			<to-view-id>/pages/protected/terminevw/TermineVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>				
+	</navigation-rule>
+	
+	<!-- Update Impfung -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/terminevw/ImpfungUpdate.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>UPDATE_IMPFUNG_ABBRECHEN</from-outcome>
+			<to-view-id>/pages/protected/terminevw/ImpfterminAnsicht.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>				
+	</navigation-rule>
+	
+	<!-- Termine Pflegen -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/terminevw/TerminePflegen.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>TERMINE_PFLEGEN_ABBRECHEN</from-outcome>
+			<to-view-id>/pages/protected/terminevw/TermineVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>LOGOUT</from-outcome>
+			<to-view-id>/pages/protected/Hauptmenue.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>				
+	</navigation-rule>
+
+</faces-config>

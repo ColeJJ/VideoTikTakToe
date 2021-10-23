@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Impfung anlegen</title>
+</h:head>	
+
+<h:body>
+ 
+ 
+	<h:form id="impfungTestForm">
+		<h:messages />
+		<h3>Impfung anlegen</h3>
+		<br/> 
+        <h:outputText value="Welcome #{userMB.user.username}" /> || 
+		<h:commandLink action="#{userMB.logOut()}" value="Abmelden" >
+			<f:ajax execute="@form" render="@form" />
+		</h:commandLink>
+		<br/> <br/>
+		
+		<h:panelGroup id="impfung">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Datum" />
+				<h:inputText value="#{impfungMB.aImpfungTO.datum}" />
+				<h:outputLabel value="Uhrzeit" />
+				<h:inputText value="#{impfungMB.aImpfungTO.uhrzeit}" />
+				<h:outputLabel value="Termin" />
+ 				<h:selectOneMenu value="#{impfungMB.aImpfungTO.terminID}">
+    				<f:selectItems value="#{impfungMB.termine}" var="termin" itemValue="#{termin.terminID}" itemLabel="#{termin.datum}, #{termin.uhrzeit}" />
+				</h:selectOneMenu>
+				<h:outputLabel value="Impfstoffcharge" />
+				<h:selectOneMenu value="#{impfungMB.aImpfungTO.chargeID}">
+    				<f:selectItems value="#{impfungMB.chargen}" var="charge" itemValue="#{charge.chargeID}" itemLabel="#{charge.hersteller}, #{charge.anzahl}" />
+				</h:selectOneMenu>
+				<h:outputLabel value="Bemerkung" />
+				<h:inputTextarea value="#{impfungMB.aImpfungTO.bemerkung}" />
+			</h:panelGrid>
+		</h:panelGroup>
+		<br />
+		<h:commandButton value="Speichern" action="#{impfungMB.impfungAnlegen()}" style=" width: 200px" />
+		<h:commandButton value="Refresh" action="#{impfungMB.ladeTermineAndChargen()}" style=" width: 200px" />
+	</h:form>
+	
+	<h:form>
+		<h:commandButton value="Abbruch" action="#{impfungMB.impfungPflegenAbbruchKlicked()}" style=" width: 200px" />
+	</h:form>	
+	<br/> <br/>
+  	<h:outputText value="Clicks: #{userMB.clicks}" />
+  	<br/>
+	<h:outputText value="Session-Time: #{userMB.time} seconds" />
+</h:body>
+</html>

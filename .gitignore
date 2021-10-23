@@ -5,3 +5,4 @@ config
 target
 mvnw
 mvnw.cmd
+/.metadata/

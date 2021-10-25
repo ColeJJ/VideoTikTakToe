@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Impfdosenmengen</title>
+</h:head>	
+
+<h:body>
+  	<h3>Menge der Impfdosen nach Hersteller</h3>
+  	<br/> 
+  	<h:outputText value="Welcome #{userMB.user.username}" /> || 
+  	<h:commandLink action="#{userMB.logOut()}" value="Abmelden" >
+		<f:ajax execute="@form" render="@form" />
+	</h:commandLink>
+	<br/> <br/>
+ 	<h:form id = "impfdosenMengeAnzeigeForm">
+ 	<h:dataTable 
+ 			value="#{impfstoffchargeMB.herstellerListe }" 
+ 			var="impfstoffcharge"
+ 			styleClass="table" 
+ 			headerClass="tableColumnsHeader"
+ 			rowClasses="tableFirstLine,tableNextLine">
+ 		<h:column>
+ 			<f:facet name="header">Hersteller</f:facet>
+ 			#{impfstoffcharge.hersteller}
+ 		</h:column>
+ 		<h:column>
+ 			<f:facet name="header">Anzahl</f:facet>
+ 			#{impfstoffcharge.anzahl}
+ 		</h:column>
+ 	</h:dataTable>
+ 	
+ 	<h:commandButton value="Refresh" action="#{impfstoffchargeMB.anzeigeImpfdosenNachHersteller()}" style=" width: 200px" >
+	</h:commandButton>
+	</h:form>
+	
+	<h:form>
+		<h:commandButton value="Abbruch" action="#{impfstoffchargeMB.chargeListeAbbruchKlicked()}" style=" width: 200px" />
+	</h:form>
+	
+	<br/> <br/>
+  	<h:outputText value="Clicks: #{userMB.clicks}" />
+  	<br/>
+	<h:outputText value="Session-Time: #{userMB.time} seconds" />
+</h:body>
+</html>

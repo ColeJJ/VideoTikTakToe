@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Patient anlegen</title>
+</h:head>	
+
+<h:body>
+	<h:form id="patientTestForm">
+		<h:messages />
+		<h3>Patient anlegen</h3>
+		<br/> 
+        <h:outputText value="Welcome #{userMB.user.username}" /> || 
+		<h:commandLink action="#{userMB.logOut()}" value="Abmelden" >
+			<f:ajax execute="@form" render="@form" />
+		</h:commandLink>
+		<br/> <br/>
+		
+		<h:panelGroup id="patient">
+			<h:panelGrid columns="2">
+					<h:outputLabel value="Vorname" />
+					<h:inputText value="#{patientMB.aPatientTO.vorname}"></h:inputText>
+					<h:outputLabel value="Name" />
+					<h:inputText value="#{patientMB.aPatientTO.name}" />
+					<h:outputLabel value="Geburtsdatum" />
+					<h:inputText value="#{patientMB.aPatientTO.geburtsdatum}"></h:inputText>
+					<h:outputLabel value="Mail" />
+					<h:inputText value="#{patientMB.aPatientTO.mail}"></h:inputText>
+					<h:outputLabel value="TelefonNR" />
+					<h:inputText value="#{patientMB.aPatientTO.telefonNr}"></h:inputText>
+			</h:panelGrid>
+		</h:panelGroup>
+	<br />
+	<h:commandButton value="Speichern" action="#{patientMB.patientAnlegen()}" style=" width: 200px" >
+	</h:commandButton>
+	
+	</h:form>
+	<h:form>
+		<h:commandButton value="Abbruch" action="#{patientMB.patientAnlegenAbbrechenClicked()}" style=" width: 200px" />
+	</h:form>	
+
+	<br/> <br/>
+    <h:outputText value="Clicks: #{userMB.clicks}" />
+    <br/>
+    <h:outputText value="Session-Time: #{userMB.time} seconds" />
+</h:body>
+</html>

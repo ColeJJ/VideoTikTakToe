@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+    	<h:outputStylesheet library="css" name="main.css" />
+        <title>Vakzineverwaltung</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h3>Hauptmen&uuml; Vakzineverwaltung</h3>
+			<br/> 
+        	<h:outputText value="Welcome #{userMB.user.username}" /> || 
+			<h:commandLink action="#{userMB.logOut()}" value="Abmelden" >
+				<f:ajax execute="@form" render="@form" />
+			</h:commandLink>
+            <br/> <br/>
+            <h:commandButton 
+            			value="Impfstoffcharge erfassen" 
+            			action="#{impfstoffchargeMB.starteChargeErfassen()}"
+            			disabled="#{!userMB.isUserMaterialmanager()}"
+            			style=" width: 200px">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+            <br /> 
+            <h:commandButton 
+            			value="Anzeige Impfdosenmenge" 
+            			action="#{impfstoffchargeMB.starteAnzeigeImpfdosenMenge()}"
+            			disabled="#{!userMB.isUserMaterialmanager()}"
+            			style=" width: 200px">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+             <br />
+            <h:commandButton 
+             			value="Abbruch" 
+             			action="#{impfstoffchargeMB.vakzineVwAbbruchKlicked()}"
+             			style=" width: 200px">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+            <br />           
+        </h:form>
+        
+        <br/> <br/>
+  		<h:outputText value="Clicks: #{userMB.clicks}" />
+  		<br/>
+  		<h:outputText value="Session-Time: #{userMB.time} seconds" />
+    </h:body>
+</html>

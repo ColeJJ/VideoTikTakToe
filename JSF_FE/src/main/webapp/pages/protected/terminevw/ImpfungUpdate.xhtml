@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Update Impfung</title>
+</h:head>	
+
+<h:body>
+ 
+ 
+	<h:form id="impfungUpdateForm">
+		<h:messages />
+		<h3>Impfung update</h3>
+		<br/> 
+       	<h:outputText value="Welcome #{userMB.user.username}" /> || 
+		<h:commandLink action="#{userMB.logOut()}" value="Abmelden" >
+			<f:ajax execute="@form" render="@form" />
+		</h:commandLink>
+		<br/> <br/>
+		
+		<h:panelGroup id="impfung">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Impfungsnummer: " />
+				<h:inputText value="#{impfungMB.aImpfungTO.impfungID}" readonly="true" />
+				<h:inputHidden value=  "#{impfungMB.aImpfungTO.impfungID}" />
+				<br />
+				<h:outputLabel value="Datum" />
+				<h:inputText value="#{impfungMB.aImpfungTO.datum}" />
+				<h:outputLabel value="Uhrzeit" />
+				<h:inputText value="#{impfungMB.aImpfungTO.uhrzeit}" />
+				<h:outputLabel value="Termin" />
+ 				<h:selectOneMenu value="#{impfungMB.aImpfungTO.terminID}">
+    				<f:selectItems value="#{impfungMB.termine}" var="termin" itemValue="#{termin.terminID}" itemLabel="#{termin.datum}, #{termin.uhrzeit}" />
+				</h:selectOneMenu>
+				<h:outputLabel value="Impfstoffcharge" />
+				<h:selectOneMenu value="#{impfungMB.aImpfungTO.chargeID}">
+    				<f:selectItems value="#{impfungMB.chargen}" var="charge" itemValue="#{charge.chargeID}" itemLabel="#{charge.hersteller}, #{charge.anzahl}" />
+				</h:selectOneMenu>
+				<h:outputLabel value="Bemerkung" />
+				<h:inputTextarea value="#{impfungMB.aImpfungTO.bemerkung}" />
+				<h:outputLabel value="Impftermin" />
+				<h:inputText value="#{impfungMB.aImpfungTO.impfdatum}" />
+				<h:outputLabel value="Genutzte Impfcharge" />
+				<h:selectOneMenu value="#{impfungMB.aImpfungTO.usedChargeID}">
+    				<f:selectItems value="#{impfungMB.chargen}" var="charge" itemValue="#{charge.chargeID}" itemLabel="#{charge.hersteller}, #{charge.anzahl}" />
+				</h:selectOneMenu>
+			</h:panelGrid>
+		</h:panelGroup>
+		<br />
+		<h:commandButton value="Speichern" action="#{impfungMB.impfungUpdaten()}" style=" width: 200px" >
+			<f:setPropertyActionListener value="#{impfungMB.aImpfungTO}" target="#{impfungMB.aImpfungTO}"></f:setPropertyActionListener>
+		</h:commandButton>
+		<h:commandButton value="Refresh" action="#{impfungMB.ladeTermineAndChargen()}" style=" width: 200px" />
+	</h:form>
+	
+	<h:form>
+		<h:commandButton value="Abbruch" action="#{impfungMB.impfungUpdateAbbruchKlicked()}" style=" width: 200px" />
+	</h:form>	
+	<br/> <br/>
+  	<h:outputText value="Clicks: #{userMB.clicks}" />
+  	<br/>
+ 	<h:outputText value="Session-Time: #{userMB.time} seconds" />
+</h:body>
+</html>

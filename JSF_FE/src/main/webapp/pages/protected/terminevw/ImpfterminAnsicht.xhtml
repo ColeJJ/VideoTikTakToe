@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Impftermine</title>
+</h:head>	
+
+<h:body>
+    <h3>Impftermine Ansicht</h3>
+    <br/> 
+    <h:outputText value="Welcome #{userMB.user.username}" /> || 
+	<h:commandLink action="#{userMB.logOut()}" value="Abmelden" >
+		<f:ajax execute="@form" render="@form" />
+	</h:commandLink>
+	<br/> <br/>
+ 	<h:form id = "impftermineAnsichtForm">
+ 	<h:dataTable 
+ 			value="#{impfungMB.impfungen }" 
+ 			var="impfung"
+ 			styleClass="table" 
+ 			headerClass="tableColumnsHeader"
+ 			rowClasses="tableFirstLine,tableNextLine">
+ 		<h:column>
+ 			<f:facet name="header">Datum</f:facet>
+ 			#{impfung.datum}
+ 		</h:column>
+ 		<h:column>
+ 			<f:facet name="header">Uhrzeit</f:facet>
+ 			#{impfung.uhrzeit}
+ 		</h:column>
+ 		<h:column>
+ 			<f:facet name="header">Bemerkung</f:facet>
+ 			#{impfung.bemerkung}
+ 		</h:column>
+ 		<h:column>
+ 			<f:facet name="header">Impfstoffcharge</f:facet>
+ 			#{impfung.chargeID}
+ 		</h:column>
+ 		<h:column>
+ 			<f:facet name="header">Termin</f:facet>
+ 			#{impfung.terminID}
+ 		</h:column>
+ 		
+ 		<h:column>
+			<h:panelGrid columns="2">
+				<h:inputHidden value="#{impfung.impfungID}" />
+				
+				<h:commandButton action="#{impfungMB.updateImpfungStart()}" value="Update">
+					<f:setPropertyActionListener target="#{impfungMB.aImpfungTO}" value="#{impfung}"  /> 
+				</h:commandButton>
+			</h:panelGrid>
+		</h:column>
+ 	</h:dataTable>
+ 	
+ 	<h:commandButton value="Refresh" action="#{impfungMB.ladeImpfungen()}" style=" width: 200px" >
+	</h:commandButton>
+	</h:form>
+	
+	<h:form>
+		<h:commandButton value="Abbruch" action="#{impfungMB.impfungListanzeigeAbbruchClicked()}" style=" width: 200px" />
+	</h:form>
+	<br /> <br/>
+   	<h:outputText value="Clicks: #{userMB.clicks}" />
+ 	<br/>
+  	<h:outputText value="Session-Time: #{userMB.time} seconds" />
+</h:body>
+</html>

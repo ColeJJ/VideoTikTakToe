@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+	<title>Impfstoffcharge erfassen</title>
+</h:head>	
+
+<h:body>
+	<h:form id="chargeTestForm">
+		<h:messages />
+		<h3>Impfstoffcharge erfassen</h3>
+		<br/> 
+        <h:outputText value="Welcome #{userMB.user.username}" /> || 
+		<h:commandLink action="#{userMB.logOut()}" value="Abmelden" >
+			<f:ajax execute="@form" render="@form" />
+		</h:commandLink>
+		<br/> <br/>
+		
+		<h:panelGroup id="impfstoffcharge">
+			<h:panelGrid columns="2">
+					<h:outputLabel value="Anzahl" />
+					<h:inputText value="#{impfstoffchargeMB.aChargeTO.anzahl}">
+						<f:convertNumber integerOnly="true"/>
+					</h:inputText>
+					<h:outputLabel value="Hersteller" />
+					<h:selectOneMenu value="#{impfstoffchargeMB.aChargeTO.hersteller}">
+    					<f:selectItems value="#{impfstoffchargeMB.hersteller}" />
+					</h:selectOneMenu>
+					<h:outputLabel value="Lieferdatum" />
+					<h:inputText value="#{impfstoffchargeMB.aChargeTO.datumAnlieferung}"></h:inputText>
+			</h:panelGrid>
+		</h:panelGroup>
+		
+	<br />
+	<h:commandButton value="Speichern" action="#{impfstoffchargeMB.chargeErfassen()}" style=" width: 200px" >
+	</h:commandButton>
+	
+	</h:form>
+	<h:form>
+		<h:commandButton value="Abbruch" action="#{impfstoffchargeMB.chargeErfassenAbbruchKlicked()}" style=" width: 200px" />
+	</h:form>
+	
+	<br/> <br/>
+  	<h:outputText value="Clicks: #{userMB.clicks}" />
+  	<br/>
+  	<h:outputText value="Session-Time: #{userMB.time} seconds" />
+</h:body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+    version="2.3">
+    <managed-bean>
+		<managed-bean-name>userMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.UserMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>impfstoffchargeMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.ImpfstoffchargeMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>impfungMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.ImpfungMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>patientMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.PatientMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>terminMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.TerminMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>applicationSecurityConfig</managed-bean-name>
+		<managed-bean-class>de.impf.mb.ApplicationSecurityConfig</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>menueMB</managed-bean-name>
+		<managed-bean-class>de.impf.mb.MenueMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>	
+
+	<!-- Hauptmenue -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/Hauptmenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>PATIENTENVERWALTUNG_MENUE</from-outcome>
+			<to-view-id>/pages/protected/patientenvw/PatientenVerwaltungMenue.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+</faces-config>

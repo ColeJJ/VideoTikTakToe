@@ -22,5 +22,7 @@ import javax.ws.rs.ApplicationPath;
 @ApplicationScoped
 @Named
 public class ApplicationSecurityConfig {
+	
+	//kommentar
 
 }

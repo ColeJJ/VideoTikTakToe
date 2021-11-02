@@ -23,6 +23,6 @@ import javax.ws.rs.ApplicationPath;
 @Named
 public class ApplicationSecurityConfig {
 	
-	//kommentar
+	//besserer Kommentar
 
 }

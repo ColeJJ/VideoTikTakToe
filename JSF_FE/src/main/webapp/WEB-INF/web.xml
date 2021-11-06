@@ -19,7 +19,7 @@
   
   
   <welcome-file-list>
-    <welcome-file>/pages/public/test.xhtml</welcome-file>
+    <welcome-file>/pages/public/jitsi.xhtml</welcome-file>
   </welcome-file-list>
   
 </web-app>

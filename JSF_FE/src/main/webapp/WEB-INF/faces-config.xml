@@ -7,7 +7,7 @@
 
 	<!-- Test -->
 	<navigation-rule>
-		<from-view-id>/pages/publiuc/test.xhtml</from-view-id>
+		<from-view-id>/pages/public/test.xhtml</from-view-id>
 	</navigation-rule>
 
 </faces-config>

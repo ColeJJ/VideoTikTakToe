@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 const X_CLASS = "x";
 const CIRCLE_CLASS = "circle";
 const WINNING_COMBINATIONS = [
@@ -10,13 +14,11 @@ const WINNING_COMBINATIONS = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-const cellElements = document.querySelectorAll("[data-cell]");
+const cellElements = document.querySelectorAll("[id='data-cell']");
 const board = document.getElementById("board");
 const winningMessageElement = document.getElementById("winningMessage");
 const restartButton = document.getElementById("restartButton");
-const winningMessageTextElement = document.querySelector(
-  "[data-winning-message-text]"
-);
+const winningMessageTextElement = document.querySelector("[id='data-winning-message-text']");
 let circleTurn;
 
 startGame();

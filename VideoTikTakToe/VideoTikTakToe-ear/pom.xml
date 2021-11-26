@@ -49,7 +49,7 @@
         </dependency>
         <dependency>
             <groupId>com.videotiktaktoe.app</groupId>
-            <artifactId>VideoTikTakToe-ejb</artifactId>
+            <artifactId>VideoTikTakToe-ejb_user</artifactId>
             <type>ejb</type>
         </dependency>
     </dependencies>

@@ -24,8 +24,7 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import com.videotiktaktoe.app.VideoTikTakToe.model.Member;
-import com.videotiktaktoe.app.VideoTikTakToe.service.MemberRegistration;
+
 import com.videotiktaktoe.app.VideoTikTakToe.util.Resources;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -36,7 +35,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class MemberRegistrationTest {
-    @Deployment
+    /*@Deployment
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
                 .addClasses(Member.class, MemberRegistration.class, Resources.class)
@@ -61,6 +60,6 @@ public class MemberRegistrationTest {
         memberRegistration.register(newMember);
         assertNotNull(newMember.getId());
         log.info(newMember.getName() + " was persisted with id " + newMember.getId());
-    }
+    }*/
 
 }

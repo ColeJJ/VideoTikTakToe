@@ -9,7 +9,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "VTTT_User")
+@Table(name = "VTTT_user")
 @NamedQuery(name="User.findUserByNickname", query="select u from User u where u.username = :username")
 public class User {
 	

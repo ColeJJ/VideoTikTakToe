@@ -10,7 +10,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
 import javax.servlet.ServletException;
-import javax.xml.registry.infomodel.User;
+
+import com.videotiktaktoe.app.VideoTikTakToe.entity.User;
+import com.videotiktaktoe.app.VideoTikTakToe.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
 @Named("userMB")
@@ -23,8 +25,8 @@ public class UserMB implements Serializable{
 	
 	private User user;
 	
-	//@Inject
-	//private ISpielerVerwaltungFacade spielerverwaltungFacade;
+	@Inject
+	private ISpielerverwaltungFacade spielerverwaltungFacade;
 	
 	@SuppressWarnings("cdi-ambiguous-dependency")
 	@Inject
@@ -36,7 +38,7 @@ public class UserMB implements Serializable{
 		
 		System.out.println("getUser() in UserMB called");
 		String username = securityContext.getCallerPrincipal().getName();
-		//user = userFacade.findUserByName(username);
+		user = spielerverwaltungFacade.findUserByName(username);
 		
 		return user;
 	}

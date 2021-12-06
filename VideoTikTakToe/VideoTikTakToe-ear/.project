@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>VideoTikTakToe-ejb_user</project>
+		<project>VideoTikTakToe-ejb_spielerverwaltung</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

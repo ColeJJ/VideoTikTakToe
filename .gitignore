@@ -6,3 +6,13 @@ target
 mvnw
 mvnw.cmd
 /.metadata/
+.classpath
+.project
+VideoTikTakToe/.project
+VideoTikTakToe/VideoTikTakToe-ejb_spielerverwaltung/.project
+VideoTikTakToe/VideoTikTakToe-web/.project
+VideoTikTakToe/VideoTikTakToe_ejb_gamecenter/.project
+VideoTikTakToe/VideoTikTakToe-ear/.project
+VideoTikTakToe/VideoTikTakToe-ejb_spielerverwaltung/.classpath
+VideoTikTakToe/VideoTikTakToe-web/.classpath
+VideoTikTakToe/VideoTikTakToe_ejb_gamecenter/.classpath

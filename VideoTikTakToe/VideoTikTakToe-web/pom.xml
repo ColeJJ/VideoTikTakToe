@@ -51,7 +51,7 @@
 	    </dependency>
 	    <dependency>
                 <groupId>com.videotiktaktoe.app</groupId>
-                <artifactId>VideoTikTakToe-ejb_user</artifactId>
+                <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
         </dependency>

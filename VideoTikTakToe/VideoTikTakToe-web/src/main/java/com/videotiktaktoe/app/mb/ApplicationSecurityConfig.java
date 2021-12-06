@@ -17,6 +17,7 @@ import javax.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
 
 		dataSourceLookup = "java:/OracleDS",
 		callerQuery = "select PASSWORD from VTTT_user where USERNAME=?",
+		groupsQuery = "select ROLENAME as GROUPNAME from VTTT_roles where USERNAME=?",
 		//hashAlgorithm = PlainSHA512PasswordHash.class,
 		hashAlgorithm = PlainTextPasswordHash.class
 

@@ -18,7 +18,7 @@
     <profiles>
     	<profile>
         	<modules>
-           		<module>VideoTikTakToe-ejb_user</module>
+           		<module>VideoTikTakToe-ejb_spielerverwaltung</module>
         		<module>VideoTikTakToe-web</module>
         		<module>VideoTikTakToe-ear</module>          
         	</modules>
@@ -60,7 +60,7 @@
                 to repeat ourselves in every module -->
             <dependency>
                 <groupId>com.videotiktaktoe.app</groupId>
-                <artifactId>VideoTikTakToe-ejb_user</artifactId>
+                <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
             </dependency>

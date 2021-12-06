@@ -13,11 +13,8 @@ public interface ISpielerverwaltungFacade {
 	
 	//Methoden (auch hier Aufruf der anderen UseCase Methoden über dessen Schnittstellen)
 	public User findUserByName(String username);
-	
 	/*
 	public void userRegistrieren() {
 		userRegistrieren.meth
-	}*/
-	
-	
+	}*/	
 }

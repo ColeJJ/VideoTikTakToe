@@ -17,7 +17,9 @@ import javax.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
 
 		dataSourceLookup = "java:/OracleDS",
 		callerQuery = "select PASSWORD from VTTT_user where USERNAME=?",
-		hashAlgorithm = PlainSHA512PasswordHash.class
+		//hashAlgorithm = PlainSHA512PasswordHash.class,
+		hashAlgorithm = PlainTextPasswordHash.class
+
 )
 		
 @ApplicationScoped

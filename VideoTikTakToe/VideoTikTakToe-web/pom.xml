@@ -49,6 +49,12 @@
 	        <version>8.0.0</version>
 	        <scope>provided</scope>
 	    </dependency>
+	    <dependency>
+                <groupId>com.videotiktaktoe.app</groupId>
+                <artifactId>VideoTikTakToe-ejb_user</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+        </dependency>
    </dependencies>
 
    <build>

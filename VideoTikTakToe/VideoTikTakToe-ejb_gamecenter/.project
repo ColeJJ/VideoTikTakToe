@@ -16,11 +16,12 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<name>org.eclipse.wst.validation.validationbuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 		<buildCommand>
+<<<<<<< HEAD:VideoTikTakToe/VideoTikTakToe-ejb_gamecenter/.project
 			<name>org.jboss.tools.jst.web.kb.kbbuilder</name>
 			<arguments>
 			</arguments>
@@ -37,6 +38,9 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.wst.validation.validationbuilder</name>
+=======
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+>>>>>>> c582b47a53469022fb7df0ac9166e0fc5ab03bea:VideoTikTakToe/VideoTikTakToe_ejb_gamecenter/.project
 			<arguments>
 			</arguments>
 		</buildCommand>

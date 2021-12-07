@@ -9,11 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-<<<<<<< HEAD
     <artifactId>VideoTikTakToe-ejb_user</artifactId>
-=======
-    <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
->>>>>>> c582b47a53469022fb7df0ac9166e0fc5ab03bea
     <packaging>ejb</packaging>
 
     <name>VideoTikTakToe: EJB User Module</name>

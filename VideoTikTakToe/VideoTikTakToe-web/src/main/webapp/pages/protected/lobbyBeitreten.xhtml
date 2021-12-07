@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Spielloby beitreten</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h3>TikTakToe - Spiellobby beitreten</h3>
+            <br/>
+            
+            <h:panelGrid columns="2">
+			<h:outputLabel value="Einladungscode: " />
+			<input type="text" id="j_einladungscode" name="j_einladungscode" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2">
+				
+				<h:commandButton 
+             			value="Beitreten"
+             			action="#{verwaltungMB.lobbyBeitretenClicked()}" 					
+             			style=" width: 200px">
+                	<f:ajax execute="@form" render="@form" />
+            	</h:commandButton>
+            	
+            	<h:commandButton 
+             			value="Abbrechen" 
+             			action="#{verwaltungMB.lobbyBeitretenAbbrechenClicked()}"
+             			style=" width: 200px">
+                	<f:ajax execute="@form" render="@form" />
+            	</h:commandButton>
+            	
+			</h:panelGrid>
+
+        </h:form>
+    </h:body>
+</html>

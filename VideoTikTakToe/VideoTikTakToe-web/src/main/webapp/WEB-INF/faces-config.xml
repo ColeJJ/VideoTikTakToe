@@ -10,9 +10,102 @@
     	<managed-bean-class>com.videotiktaktoe.app.mb.UserMB</managed-bean-class>
     	<managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+   
     <managed-bean>
     	<managed-bean-name>applicationSecurityConfig</managed-bean-name>
     	<managed-bean-class>com.videotiktaktoe.app.mb.ApplicationSecurityConfig</managed-bean-class>
     	<managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>menueMB</managed-bean-name>
+		<managed-bean-class>com.videotiktaktoe.app.mb.MenueMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>verwaltungMB</managed-bean-name>
+		<managed-bean-class>com.videotiktaktoe.app.mb.VerwaltungMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+
+	<!-- Login_Dialog -->
+	<navigation-rule>
+		<from-view-id>/pages/public/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>REGISTRIEREN</from-outcome>
+			<to-view-id>/pages/public/registrierung.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Registrierung_Dialog -->
+	<navigation-rule>
+		<from-view-id>/pages/public/registrierung.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>BACK_TO_LOGIN</from-outcome>
+			<to-view-id>/pages/public/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- Hauptmenue_Dialog -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/hauptmenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>LOBBY_ERSTELLEN</from-outcome>
+			<to-view-id>/pages/protected/lobbyErstellen.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/pages/protected/hauptmenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>LOBBY_BEITRETEN</from-outcome>
+			<to-view-id>/pages/protected/lobbyBeitreten.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/pages/protected/hauptmenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>STARTE_FREUNDESLISTE</from-outcome>
+			<to-view-id>/pages/protected/freundesliste.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+		<from-view-id>/pages/protected/hauptmenue.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>ABMELDEN</from-outcome>
+			<to-view-id>/pages/public/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Lobby_Erstellen_Dialog -->
+	<navigation-rule>	
+		<from-view-id>/pages/protected/lobbyErstellen.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
+			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+	
+	<!-- Lobby_Beitreten_Dialog -->
+	<navigation-rule>	
+		<from-view-id>/pages/protected/lobbyBeitreten.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
+			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Freundesliste_Dialog -->
+	<navigation-rule>	
+		<from-view-id>/pages/protected/freundesliste.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
+			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>    
+
 </faces-config>

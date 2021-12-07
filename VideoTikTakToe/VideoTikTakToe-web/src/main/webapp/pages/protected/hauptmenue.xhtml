@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Hauptmen&uuml;</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h3>TikTakToe - Hauptmen&uuml;</h3>
+            <br/>
+            <h:commandButton 
+            			value="Lobby erstellen" 
+            			action="#{menueMB.starteLobbyErstellen}"
+            			style=" width: 200px">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+            <br />
+             <h:commandButton 
+             			value="Lobby beitreten" 
+             			action="#{menueMB.starteLobbyBeitreten}"
+             			style=" width: 200px">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+            <br />
+            <h:commandButton 
+             			value="Freundesliste anzeigen" 
+             			action="#{menueMB.starteFreundesliste}"
+             			style=" width: 200px">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+            <br />
+            <h:commandButton 
+             			value="Abmelden" 
+             			action="#{menueMB.abmelden}"
+             			style=" width: 200px">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+            <br />
+           
+        </h:form>
+    </h:body>
+</html>

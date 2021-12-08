@@ -125,5 +125,6 @@
 
   <modules>
     <module>VideoTikTakToe_ejb_gamecenter</module>
+    <module>VideoTikTakToe-ejb_gamecenter</module>
   </modules>
 </project>

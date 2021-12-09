@@ -8,8 +8,7 @@
         <groupId>com.videotiktaktoe.app</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
-    <artifactId>VideoTikTakToe-ejb_user</artifactId>
+    <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
     <packaging>ejb</packaging>
 
     <name>VideoTikTakToe: EJB User Module</name>

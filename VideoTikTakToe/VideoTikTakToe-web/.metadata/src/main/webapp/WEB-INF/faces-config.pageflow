@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16381944307180" configfile="/VideoTikTakToe-web/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16381944307180" configfile="/VideoTikTakToe-web/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/login.xhtml" x="338" y="178" id="pf16389762552680" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf16389762552731" inlinks="pf16389762552742 pf16389762552743" path="/pages/public/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/public/registrierung.xhtml" x="122" y="178" id="pf16389762552764" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf16389762552742" inlinks="pf16389762552731" path="/pages/public/registrierung.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/protected/hauptmenue.xhtml" x="122" y="946" id="pf16389762552765" referenceLink="//@navigationRule.8/@navigationCase.0/@toViewId|" outlinks="pf16389762552766 pf16389762552767 pf16389762552768 pf16389762552743" inlinks="pf16389762552769 pf163897625527610 pf163897625527611" path="/pages/protected/hauptmenue.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/protected/lobbyErstellen.xhtml" x="338" y="562" id="pf163897625527612" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf16389762552769" inlinks="pf16389762552766" path="/pages/protected/lobbyErstellen.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/protected/lobbyBeitreten.xhtml" x="338" y="946" id="pf163897625527613" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf163897625527610" inlinks="pf16389762552767" path="/pages/protected/lobbyBeitreten.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/protected/freundesliste.xhtml" x="338" y="1330" id="pf163897625527614" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf163897625527611" inlinks="pf16389762552768" path="/pages/protected/freundesliste.xhtml"/>
+  <links id="pf16389762552731" target="pf16389762552764" source="pf16389762552680" outcome="REGISTRIEREN"/>
+  <links id="pf16389762552742" target="pf16389762552680" source="pf16389762552764" outcome="BACK_TO_LOGIN"/>
+  <links id="pf16389762552766" target="pf163897625527612" source="pf16389762552765" outcome="LOBBY_ERSTELLEN"/>
+  <links id="pf16389762552767" target="pf163897625527613" source="pf16389762552765" outcome="LOBBY_BEITRETEN"/>
+  <links id="pf16389762552768" target="pf163897625527614" source="pf16389762552765" outcome="STARTE_FREUNDESLISTE"/>
+  <links id="pf16389762552743" target="pf16389762552680" source="pf16389762552765" outcome="ABMELDEN"/>
+  <links id="pf16389762552769" target="pf16389762552765" source="pf163897625527612" outcome="BACK_TO_HAUPTMENUE"/>
+  <links id="pf163897625527610" target="pf16389762552765" source="pf163897625527613" outcome="BACK_TO_HAUPTMENUE"/>
+  <links id="pf163897625527611" target="pf16389762552765" source="pf163897625527614" outcome="BACK_TO_HAUPTMENUE"/>
+</pageflow:Pageflow>

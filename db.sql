@@ -1,19 +1,9 @@
-Create Table SP_Lobby (
-    LobbyID INT NOT NULL,
-    Lobbyname VARCHAR(20) NOT NULL,
-    Lobbydauer INT NOT NULL,
-    Audioeinstellung NUMBER(1) NOT NULL,
-    Videoeinstellung NUMBER(1) NOT NULL,
-    Constraint PK_Lobby PRIMARY KEY (LobbyID)
-);
+select PASSWORD from VTTT_USER where USERNAME='tounland';
 
-Create Table SP_User (
-    UserID INT NOT NULL,
-    Benutzername VARCHAR(20) NOT NULL,
-    Passwort VARCHAR(30) NOT NULL,
-    email VARCHAR(40),
-    admin NUMBER(1),
-    LobbyID INT,
-    Constraint PK_User PRIMARY KEY (UserID),
-    Constraint FK_Lobby FOREIGN KEY (LobbyID) REFERENCES SP_Lobby(LobbyID)
-);
+create table VTTT_GROUP_USER (
+    username VARCHAR2(255),
+    groupname VARCHAR2(255)
+)
+
+Insert into VTTT_USERGROUP(id, groupname) value(1, 'User');
+Insert into VTTT_GROUP_USER(Username, Groupname) Values(tounland, User);

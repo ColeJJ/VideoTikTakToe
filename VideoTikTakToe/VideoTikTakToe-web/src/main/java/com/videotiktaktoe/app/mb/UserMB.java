@@ -17,7 +17,6 @@ import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
 @Named("userMB")
-@RolesAllowed({"USER"})
 public class UserMB implements Serializable{
 
 	/**
@@ -46,6 +45,7 @@ public class UserMB implements Serializable{
 		return user;
 	}
 	
+	@RolesAllowed({"USER"})
 	public String logOut() throws IOException, ServletException{
 		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -57,6 +57,11 @@ public class UserMB implements Serializable{
 		}
 		System.out.println("Logout; USER: "+securityContext.getCallerPrincipal().getName());
 		return "LOGOUT";
+	}
+	
+	public String starteRegistrierung() {
+		System.out.println("komme hier an");
+		return "REGISTRIEREN";
 	}
 	
 	

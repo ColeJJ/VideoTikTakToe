@@ -1,8 +1,8 @@
-package com.videotiktaktoe.app.VideoTikTakToe.facade;
+package com.videotiktaktoe.app.Spielerverwaltung.facade;
 
 import javax.ejb.Local;
 
-import com.videotiktaktoe.app.VideoTikTakToe.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
 
 @Local
 public interface ISpielerverwaltungFacade {

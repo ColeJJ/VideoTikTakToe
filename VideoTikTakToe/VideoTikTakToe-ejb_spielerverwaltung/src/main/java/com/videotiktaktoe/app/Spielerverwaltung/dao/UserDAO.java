@@ -1,11 +1,11 @@
-package com.videotiktaktoe.app.VideoTikTakToe.dao;
+package com.videotiktaktoe.app.Spielerverwaltung.dao;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import com.videotiktaktoe.app.VideoTikTakToe.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
 
 @Stateless
 public class UserDAO extends GenericDAO<User>{

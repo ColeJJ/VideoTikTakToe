@@ -1,4 +1,4 @@
-package com.videotiktaktoe.app.VideoTikTakToe.dao;
+package com.videotiktaktoe.app.Spielerverwaltung.dao;
 
 import java.util.List;
 import java.util.Map;

@@ -11,8 +11,8 @@ import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
 import javax.servlet.ServletException;
 
-import com.videotiktaktoe.app.VideoTikTakToe.entity.User;
-import com.videotiktaktoe.app.VideoTikTakToe.facade.ISpielerverwaltungFacade;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
 @Named("userMB")

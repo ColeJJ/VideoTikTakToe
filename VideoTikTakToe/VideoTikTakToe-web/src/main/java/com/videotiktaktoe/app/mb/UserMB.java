@@ -3,6 +3,7 @@ package com.videotiktaktoe.app.mb;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -16,6 +17,7 @@ import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
 @Named("userMB")
+@RolesAllowed({"USER"})
 public class UserMB implements Serializable{
 
 	/**
@@ -37,6 +39,7 @@ public class UserMB implements Serializable{
 	public User getUser(){
 		
 		System.out.println("getUser() in UserMB called");
+		System.out.println("User ist kein Admin: "+securityContext.isCallerInRole("USER"));
 		String username = securityContext.getCallerPrincipal().getName();
 		user = spielerverwaltungFacade.findUserByName(username);
 		

@@ -11,7 +11,7 @@
   <links id="pf16389762552766" target="pf163897625527612" source="pf16389762552765" outcome="LOBBY_ERSTELLEN"/>
   <links id="pf16389762552767" target="pf163897625527613" source="pf16389762552765" outcome="LOBBY_BEITRETEN"/>
   <links id="pf16389762552768" target="pf163897625527614" source="pf16389762552765" outcome="STARTE_FREUNDESLISTE"/>
-  <links id="pf16389762552743" target="pf16389762552680" source="pf16389762552765" outcome="ABMELDEN"/>
+  <links id="pf16389762552743" target="pf16389762552680" source="pf16389762552765" outcome="LOGOUT"/>
   <links id="pf16389762552769" target="pf16389762552765" source="pf163897625527612" outcome="BACK_TO_HAUPTMENUE"/>
   <links id="pf163897625527610" target="pf16389762552765" source="pf163897625527613" outcome="BACK_TO_HAUPTMENUE"/>
   <links id="pf163897625527611" target="pf16389762552765" source="pf163897625527614" outcome="BACK_TO_HAUPTMENUE"/>

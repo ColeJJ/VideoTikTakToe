@@ -76,7 +76,7 @@
 	<navigation-rule>
 		<from-view-id>/pages/protected/hauptmenue.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>ABMELDEN</from-outcome>
+			<from-outcome>LOGOUT</from-outcome>
 			<to-view-id>/pages/public/login.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>

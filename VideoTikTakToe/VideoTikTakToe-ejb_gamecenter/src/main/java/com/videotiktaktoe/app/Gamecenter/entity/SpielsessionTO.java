@@ -4,11 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import de.VideoTikTakToe.Gamecenter.entity.impl.Spielsession;
-import de.bank.kunde.entity.Integer;
-import de.bank.kunde.entity.String;
-import de.bank.kunde.entity.impl.Kunde;
-import de.bank.kunde.entity.impl.Privatkunde;
+import com.videotiktaktoe.app.Gamecenter.entity.impl.Spielsession;
+
 
 public class SpielsessionTO implements Serializable {
 
@@ -25,7 +22,7 @@ public class SpielsessionTO implements Serializable {
 		super();
 	}
 	
-	public SpielsessionTO(String sessionID, int anzahlRunde, int lobbyID) {
+	public SpielsessionTO(int sessionID, String anzahlRunde, int lobbyID) {
 		super();
 		this.sessionID = sessionID;
 		this.anzahlRunde = anzahlRunde;
@@ -34,9 +31,9 @@ public class SpielsessionTO implements Serializable {
 	
 	public Spielsession toSpielsession() {
 		Spielsession spielsession = new Spielsession(
-//				this.getSessionID(),
-				this.getAnzahlRunde());
-				this.getLobbyID();
+				this.getSessionID(),
+				this.getAnzahlRunde(),
+				this.getLobbyID());
 				
 		return spielsession;
 	}

@@ -3,6 +3,7 @@ package com.videotiktaktoe.app.Gamecenter.entity.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -20,14 +21,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import de.HA2.Patient.entity.PatientTO;
+import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
+
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Access(AccessType.FIELD)
-@Table(name="T_HA2_Patient")
-@NamedQuery(name="Patient.findPatientByLastAndFirstName", 
-	query="SELECT p from Patient p where p.vorname = :vorname or p.nachname = :nachname")
+@Table(name="VTTT_lobby")
+@NamedQuery(name="Lobby.findLobbyByLobbyName", 
+	query="SELECT l from Lobby l where l.lobbyname = :lobbyname")
 public class Lobby implements Serializable {
 
 	/**
@@ -35,11 +38,12 @@ public class Lobby implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final String FIND_BY_FIRST_AND_LASTNAME = "Patient.findPatientByLastAndFirstName";
+	public static final String FIND_BY_LOBBYNAME = "Lobby.findLobbyByLobbyName";
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="HA2_PATIENT_ID")
-	@SequenceGenerator(name="HA2_PATIENT_ID", sequenceName="HA2_SEQ_PATIENT_ID", allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="HA2_PATIENT_ID")
+	//@SequenceGenerator(name="HA2_PATIENT_ID", sequenceName="HA2_SEQ_PATIENT_ID", allocationSize = 1)
 	private int lobbyID;
 	
 	private String lobbyName;
@@ -129,8 +133,8 @@ public class Lobby implements Serializable {
 		this.user = user;
 	}
 
-	public void addUser(int userID) {
-		this.user.add(Integer.valueOf(userID));
+	public void addUser(List userID) {
+		this.user.add(userID);
 	}
 	
 }

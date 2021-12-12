@@ -3,8 +3,9 @@ package com.videotiktaktoe.app.Gamecenter.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import de.VideoTikTakToe.Gamecenter.entity.impl.Lobby;
+import com.videotiktaktoe.app.Gamecenter.entity.impl.Lobby;
 
 public class LobbyTO implements Serializable {
 
@@ -39,11 +40,10 @@ public class LobbyTO implements Serializable {
 //		this.getLobbyID(),
 		this.getLobbyName(),
 		this.getVideoEinstellung(),
-		this.getAudioEinstellung(),
-		
-		for (List user:this.getUser())
-			lobby.getUser().add(user);
-				
+		this.getAudioEinstellung());
+		for (List user:this.getUser()) 
+		lobby.getUser().add(user);
+			
 		return lobby;
 	}
 	
@@ -83,8 +83,8 @@ public class LobbyTO implements Serializable {
 		this.user = user;
 	}
 
-	public void addUser(int userID) {
-		this.user.add(Integer.valueOf(userID));
+	public void addUser(List userID) {
+		this.user.add(userID);
 	}
 
 	public String toString() {

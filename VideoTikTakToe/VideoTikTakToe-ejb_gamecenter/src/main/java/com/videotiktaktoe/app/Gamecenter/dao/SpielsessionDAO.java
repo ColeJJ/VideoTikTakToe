@@ -6,25 +6,27 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import de.HA2.Patient.entity.impl.Patient;
+import com.videotiktaktoe.app.Gamecenter.entity.impl.Spielsession;
+
+
 
 @Stateless
-public class PatientDAO extends GenericDAO<Patient> {
+public class SpielsessionDAO extends GenericDAO<Spielsession> {
 	
-	public PatientDAO(){
-		super(Patient.class);
+	public SpielsessionDAO(){
+		super(Spielsession.class);
 	}
 	
-	public void delete(Patient aPatient){
-		super.delete(aPatient.getPnr(), Patient.class);
+	public void delete(Spielsession aSpielsession){
+		super.delete(aSpielsession.getSessionID(), Spielsession.class);
 	}
 	
-	public List<Patient> findPatientByFirstAndLastName(String vorname, String nachname){
+	public List<Spielsession> findPatientByFirstAndLastName(String vorname, String nachname){
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("vorname", vorname);
 		parameters.put("nachname", nachname);
 		
-		return super.findListResult(Patient.FIND_BY_FIRST_AND_LASTNAME, parameters);
+		return super.findListResult(Spielsession.FIND_BY_SESSIONID, parameters);
 		
 	}
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.videotiktaktoe.app.VideoTikTakToe.util;
+package com.videotiktaktoe.app.Gamecenter.util;
 
 import java.util.logging.Logger;
 

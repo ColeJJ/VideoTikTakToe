@@ -14,25 +14,26 @@
             
             <h:panelGrid columns="2">
             
-			<h:outputLabel value="Username: " />
-			<input type="text" id="j_username" name="j_username" />
+				<h:outputLabel value="Username: " />
+				<h:inputText value="#{userMB.aUser.username}" />
+				
+				<h:outputLabel value="E-Mail: " />
+				<h:inputText value="#{userMB.aUser.eMailAddress}" />
+				
+				<h:outputLabel value="Passwort: " />
+				<h:inputText value="#{userMB.aUser.password}" />	
+				
+				<h:outputLabel value="Passwort best&auml;tigen: " />
+				<h:inputText value="#{userMB.aUser.password}" />			
 			
-			<h:outputLabel value="E-Mail: " />
-			<input type="text" id="j_email" name="j_email" />
-			
-			<h:outputLabel value="Passwort: " />
-			<input type="text" id="j_passwort" name="j_passwort" />		
-			
-			<h:outputLabel value="Passwort best&auml;tigen: " />
-			<input type="text" id="j_passwortWdh" name="j_passwortWdh" />			
-			
+				<!-- TODO: hier noch die Gruppe auswählen können -->
 			</h:panelGrid>
 			
 			<h:panelGrid columns="2">
 				
 				<h:commandButton 
              			value="Account erstellen"
-             			action="#{verwaltungMB.accountErstellenClicked()}" 						
+             			action="#{userMB.userRegistrieren()}" 						
              			style=" width: 200px">
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>

@@ -1,20 +1,14 @@
 package com.videotiktaktoe.app.Spielerverwaltung.facade;
 
 import javax.ejb.Local;
+import javax.inject.Inject;
 
 import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.usecase.IAccountPflegen;
 
 @Local
 public interface ISpielerverwaltungFacade {
 	
-	//hier andere Schnittstellen definieren, die bereitgestellt werden soll
-	//zb private IUserRegistrieren userRegistrieren;
-	
-	
-	//Methoden (auch hier Aufruf der anderen UseCase Methoden über dessen Schnittstellen)
-	public User findUserByName(String username);
-	/*
-	public void userRegistrieren() {
-		userRegistrieren.meth
-	}*/	
+	public User findUserByName(String username);	
+	public void userRegistrieren(User aUser);
 }

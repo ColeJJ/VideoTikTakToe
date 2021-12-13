@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -24,7 +26,23 @@ public class UserMB implements Serializable{
 	 */
 	private static final long serialVersionUID = -5749427890834102605L;
 	
-	private User user;
+	private User aUser;
+	
+	//Info-Messages
+	private void sendInfoMessageToUser(String message){
+		FacesContext context = getContext();
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+	}
+	
+	private void sendErrorMessageToUser(String message){
+		FacesContext context = getContext();
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+	}
+	
+	private FacesContext getContext() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		return context;
+	}
 	
 	@Inject
 	private ISpielerverwaltungFacade spielerverwaltungFacade;
@@ -35,14 +53,26 @@ public class UserMB implements Serializable{
 	
 	public UserMB() {}
 	
+	public String userRegistrieren() {
+		try {
+			spielerverwaltungFacade.userRegistrieren(this.aUser);
+			sendInfoMessageToUser("User registrieren.");
+			return this.toLogin();
+		} catch (EJBException e) {
+			sendErrorMessageToUser("Kann den User nicht registrieren.");
+			return "";
+		}
+		
+	}
+	
 	public User getUser(){
 		
 		System.out.println("getUser() in UserMB called");
 		System.out.println("User ist kein Admin: "+securityContext.isCallerInRole("USER"));
 		String username = securityContext.getCallerPrincipal().getName();
-		user = spielerverwaltungFacade.findUserByName(username);
+		aUser = spielerverwaltungFacade.findUserByName(username);
 		
-		return user;
+		return aUser;
 	}
 	
 	@RolesAllowed({"USER"})
@@ -59,11 +89,10 @@ public class UserMB implements Serializable{
 		return "LOGOUT";
 	}
 	
-	public String starteRegistrierung() {
-		System.out.println("komme hier an");
-		return "REGISTRIEREN";
+	//Navigation
+	public String toLogin() {
+		return "BACK_TO_LOGIN";
 	}
-	
 	
 	//Getters and Setters
 	public SecurityContext getSecurityContext() {
@@ -75,6 +104,6 @@ public class UserMB implements Serializable{
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.aUser = user;
 	}
 }

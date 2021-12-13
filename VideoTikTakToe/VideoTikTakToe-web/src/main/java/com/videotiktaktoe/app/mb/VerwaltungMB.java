@@ -14,21 +14,8 @@ public class VerwaltungMB implements Serializable {
 	private static final long serialVersionUID = -6183980918040292096L;
 	
 //	Login
-	public String registrierenClicked() {
-		
-		//Implementierung
-		//Klappt irgendwie noch nicht
-		
-		return "REGISTRIEREN";
-	}
-	
-	
-//	Registrierung
-	public String accountErstellenClicked() {
-		
-		//Implementierung
-		
-		return this.toLogin();		//Nach Erstellung eines Accounts wird man zum Login aufgefordert
+	public String starteRegistrierung() {
+		return this.toRegistrierung();
 	}
 	
 	public String regestrierungAbbrechenClicked() {
@@ -79,12 +66,17 @@ public class VerwaltungMB implements Serializable {
 //		return "BACK_TO_LOGIN";
 //	}
 	
+	//Navigation
 	public String toHauptmenue() {
 		return "BACK_TO_HAUPTMENUE";
 	}
 	
 	public String toLogin() {
 		return "BACK_TO_LOGIN";
+	}
+	
+	public String toRegistrierung() {
+		return "REGISTRIEREN";
 	}
 
 }

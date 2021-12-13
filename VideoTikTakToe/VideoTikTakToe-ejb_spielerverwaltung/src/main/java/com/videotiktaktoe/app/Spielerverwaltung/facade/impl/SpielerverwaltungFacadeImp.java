@@ -1,11 +1,11 @@
-package com.videotiktaktoe.app.VideoTikTakToe.facade.impl;
+package com.videotiktaktoe.app.Spielerverwaltung.facade.impl;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import com.videotiktaktoe.app.VideoTikTakToe.dao.UserDAO;
-import com.videotiktaktoe.app.VideoTikTakToe.entity.User;
-import com.videotiktaktoe.app.VideoTikTakToe.facade.ISpielerverwaltungFacade;
+import com.videotiktaktoe.app.Spielerverwaltung.dao.UserDAO;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @Stateless
 public class SpielerverwaltungFacadeImp implements ISpielerverwaltungFacade{

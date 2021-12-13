@@ -24,9 +24,4 @@ public class MenueMB implements Serializable {
 	public String starteFreundesliste() {
 		return "STARTE_FREUNDESLISTE";
 	}
-	
-	public String abmelden() {
-		return "ABMELDEN";
-	}
- 
 }

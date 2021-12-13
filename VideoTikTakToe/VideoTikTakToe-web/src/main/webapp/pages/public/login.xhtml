@@ -20,10 +20,15 @@
 			<h:outputText value="" />
 			<h:panelGrid columns="2">
 				<input type="submit" name="submit" value="Login" />
-				<h:commandButton value="Registration" />
 			</h:panelGrid>
 		</h:panelGrid>
 		<br />
 	</form>
+	<h:form>
+		<h:commandButton 
+			value="Registration" 
+			action="#{userMB.starteRegistrierung()}">
+		</h:commandButton>
+	</h:form>
 </h:body>
 </html>

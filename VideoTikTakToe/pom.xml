@@ -63,6 +63,7 @@
                 <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
+                <scope>provided</scope>
             </dependency>
             
             <!-- Define the version of the WAR so that we don't need to repeat 
@@ -124,9 +125,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
-  <modules>
-    <module>VideoTikTakToe_ejb_gamecenter</module>
-    <module>VideoTikTakToe-ejb_gamecenter</module>
-  </modules>
 </project>

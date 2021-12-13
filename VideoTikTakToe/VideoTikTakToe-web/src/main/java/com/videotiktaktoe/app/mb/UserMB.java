@@ -3,6 +3,7 @@ package com.videotiktaktoe.app.mb;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -11,8 +12,8 @@ import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
 import javax.servlet.ServletException;
 
-import com.videotiktaktoe.app.VideoTikTakToe.entity.User;
-import com.videotiktaktoe.app.VideoTikTakToe.facade.ISpielerverwaltungFacade;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
 @Named("userMB")
@@ -37,12 +38,14 @@ public class UserMB implements Serializable{
 	public User getUser(){
 		
 		System.out.println("getUser() in UserMB called");
+		System.out.println("User ist kein Admin: "+securityContext.isCallerInRole("USER"));
 		String username = securityContext.getCallerPrincipal().getName();
 		user = spielerverwaltungFacade.findUserByName(username);
 		
 		return user;
 	}
 	
+	@RolesAllowed({"USER"})
 	public String logOut() throws IOException, ServletException{
 		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -54,6 +57,11 @@ public class UserMB implements Serializable{
 		}
 		System.out.println("Logout; USER: "+securityContext.getCallerPrincipal().getName());
 		return "LOGOUT";
+	}
+	
+	public String starteRegistrierung() {
+		System.out.println("komme hier an");
+		return "REGISTRIEREN";
 	}
 	
 	

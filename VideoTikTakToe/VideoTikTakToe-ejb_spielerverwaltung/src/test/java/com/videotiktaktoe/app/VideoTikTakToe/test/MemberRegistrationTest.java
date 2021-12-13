@@ -25,14 +25,18 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 
-import com.videotiktaktoe.app.VideoTikTakToe.entity.User;
-import com.videotiktaktoe.app.VideoTikTakToe.util.Resources;
+
+import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.util.Resources;
+
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.videotiktaktoe.app.Spielerverwaltung.util.Resources;
 
 @RunWith(Arquillian.class)
 public class MemberRegistrationTest {

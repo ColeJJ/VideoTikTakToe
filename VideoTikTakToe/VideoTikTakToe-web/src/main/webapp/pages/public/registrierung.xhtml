@@ -11,41 +11,40 @@
         <h:form>
             <h3>TikTakToe - Registrierung</h3>
             <br/>
+            <h:panelGroup id="user">
+            	<h:panelGrid columns="2">
             
-            <h:panelGrid columns="2">
+					<h:outputLabel value="Username: " />
+					<h:inputText value="#{userMB.aUser.username}" />
+					
+					<h:outputLabel value="E-Mail: " />
+					<h:inputText value="#{userMB.aUser.eMailAddress}" />
+					
+					<h:outputLabel value="Passwort: " />
+					<h:inputText value="#{userMB.aUser.password}" />	
+					
+					<h:outputLabel value="Passwort best&auml;tigen: " />
+					<h:inputText value="#{userMB.aUser.password}" />			
+				
+					<!-- TODO: hier noch die Gruppe auswählen können -->
+				</h:panelGrid>
             
-				<h:outputLabel value="Username: " />
-				<h:inputText value="#{userMB.aUser.username}" />
-				
-				<h:outputLabel value="E-Mail: " />
-				<h:inputText value="#{userMB.aUser.eMailAddress}" />
-				
-				<h:outputLabel value="Passwort: " />
-				<h:inputText value="#{userMB.aUser.password}" />	
-				
-				<h:outputLabel value="Passwort best&auml;tigen: " />
-				<h:inputText value="#{userMB.aUser.password}" />			
+            </h:panelGroup>
 			
-				<!-- TODO: hier noch die Gruppe auswählen können -->
-			</h:panelGrid>
-			
-			<h:panelGrid columns="2">
-				
-				<h:commandButton 
-             			value="Account erstellen"
-             			action="#{userMB.userRegistrieren()}" 						
-             			style=" width: 200px">
-                	<f:ajax execute="@form" render="@form" />
-            	</h:commandButton>
+			<br/>
+			<h:commandButton 
+            			value="Account erstellen"
+            			action="#{userMB.userRegistrieren()}" 						
+            			style=" width: 200px">
+           	</h:commandButton>
+           	
+           	<h:commandButton 
+            			value="Abbrechen" 
+            			action="#{verwaltungMB.regestrierungAbbrechenClicked()}"
+            			style=" width: 200px">
+               	<f:ajax execute="@form" render="@form" />
+           	</h:commandButton>
             	
-            	<h:commandButton 
-             			value="Abbrechen" 
-             			action="#{verwaltungMB.regestrierungAbbrechenClicked()}"
-             			style=" width: 200px">
-                	<f:ajax execute="@form" render="@form" />
-            	</h:commandButton>
-            	
-			</h:panelGrid>
 
         </h:form>
     </h:body>

@@ -4,7 +4,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import com.videotiktaktoe.app.Spielerverwaltung.dao.UserDAO;
-import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.impl.User;
 import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 import com.videotiktaktoe.app.Spielerverwaltung.usecase.IAccountPflegen;
 
@@ -15,15 +16,16 @@ public class SpielerverwaltungFacadeImp implements ISpielerverwaltungFacade{
 	private UserDAO userDAO;
 	
 	@Inject
-	private IAccountPflegen accountErstellen;
+	private IAccountPflegen accountPflegen;
 	
-	public User findUserByName(String username) {
-		return userDAO.findUserByName(username);
+	public UserTO findUserByName(String username) {
+		User aUser = userDAO.findUserByName(username);
+		return aUser.toUserTO();
 	}
 
 	@Override
-	public void userRegistrieren(User aUser) {
-		accountErstellen.userRegistrieren(aUser);
+	public void userRegistrieren(UserTO aUser) {
+		accountPflegen.userRegistrieren(aUser);
 	}
 
 }

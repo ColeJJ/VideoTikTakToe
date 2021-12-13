@@ -3,6 +3,7 @@ package com.videotiktaktoe.app.mb;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
@@ -14,19 +15,32 @@ import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
 import javax.servlet.ServletException;
 
-import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
 @Named("userMB")
 public class UserMB implements Serializable{
+	
+	@SuppressWarnings("cdi-ambiguous-dependency")
+	@Inject
+	SecurityContext securityContext;
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5749427890834102605L;
 	
-	private User aUser;
+	private UserTO aUser;
+	
+	//Konstruktor
+	public UserMB() {}
+	
+	//init
+	@PostConstruct
+	public void initBean() {
+		this.aUser = new UserTO();
+	}
 	
 	//Info-Messages
 	private void sendInfoMessageToUser(String message){
@@ -47,14 +61,9 @@ public class UserMB implements Serializable{
 	@Inject
 	private ISpielerverwaltungFacade spielerverwaltungFacade;
 	
-	@SuppressWarnings("cdi-ambiguous-dependency")
-	@Inject
-	SecurityContext securityContext;
-	
-	public UserMB() {}
 	
 	public String userRegistrieren() {
-		try {
+		try {			
 			spielerverwaltungFacade.userRegistrieren(this.aUser);
 			sendInfoMessageToUser("User registrieren.");
 			return this.toLogin();
@@ -63,16 +72,6 @@ public class UserMB implements Serializable{
 			return "";
 		}
 		
-	}
-	
-	public User getUser(){
-		
-		System.out.println("getUser() in UserMB called");
-		System.out.println("User ist kein Admin: "+securityContext.isCallerInRole("USER"));
-		String username = securityContext.getCallerPrincipal().getName();
-		aUser = spielerverwaltungFacade.findUserByName(username);
-		
-		return aUser;
 	}
 	
 	@RolesAllowed({"USER"})
@@ -102,8 +101,30 @@ public class UserMB implements Serializable{
 	public void setSecurityContext(SecurityContext securityContext) {
 		this.securityContext = securityContext;
 	}
+	
+	public UserTO getUser(){
+		
+		System.out.println("getUser() in UserMB called");
+		System.out.println("User ist kein Admin: "+securityContext.isCallerInRole("USER"));
+		String username = securityContext.getCallerPrincipal().getName();
+		aUser = spielerverwaltungFacade.findUserByName(username);
+		
+		return aUser;
+	}
+	
+	public UserTO getaUser() {
+		return aUser;
+	}
 
-	public void setUser(User user) {
-		this.aUser = user;
+	public void setaUser(UserTO aUser) {
+		this.aUser = aUser;
+	}
+
+	public ISpielerverwaltungFacade getSpielerverwaltungFacade() {
+		return spielerverwaltungFacade;
+	}
+
+	public void setSpielerverwaltungFacade(ISpielerverwaltungFacade spielerverwaltungFacade) {
+		this.spielerverwaltungFacade = spielerverwaltungFacade;
 	}
 }

@@ -1,14 +1,12 @@
 package com.videotiktaktoe.app.Spielerverwaltung.facade;
 
 import javax.ejb.Local;
-import javax.inject.Inject;
 
-import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
-import com.videotiktaktoe.app.Spielerverwaltung.usecase.IAccountPflegen;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 @Local
 public interface ISpielerverwaltungFacade {
 	
-	public User findUserByName(String username);	
-	public void userRegistrieren(User aUser);
+	public UserTO findUserByName(String username);	
+	public void userRegistrieren(UserTO aUser);
 }

@@ -54,6 +54,7 @@
             <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
             <version>${project.version}</version>
             <type>ejb</type>
+            <scope>provided</scope>
         </dependency>
    </dependencies>
 

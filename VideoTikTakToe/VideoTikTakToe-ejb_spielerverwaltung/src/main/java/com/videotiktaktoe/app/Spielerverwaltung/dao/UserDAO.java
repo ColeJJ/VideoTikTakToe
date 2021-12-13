@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import com.videotiktaktoe.app.Spielerverwaltung.entity.User;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.impl.User;
 
 @Stateless
 public class UserDAO extends GenericDAO<User>{

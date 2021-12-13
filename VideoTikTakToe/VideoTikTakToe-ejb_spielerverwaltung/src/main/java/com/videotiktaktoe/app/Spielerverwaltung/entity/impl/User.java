@@ -1,4 +1,4 @@
-package com.videotiktaktoe.app.Spielerverwaltung.entity;
+package com.videotiktaktoe.app.Spielerverwaltung.entity.impl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 @Entity
 @Table(name = "VTTT_user")
@@ -32,6 +34,34 @@ public class User {
 	//Contructor
 	public User() {}
 	
+	public User(int id, String username, String password, String eMailAddress, boolean admin) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.eMailAddress = eMailAddress;
+		this.admin = admin;
+	}
+	
+	public User(String username, String password, String eMailAddress, boolean admin) {
+		this.username = username;
+		this.password = password;
+		this.eMailAddress = eMailAddress;
+		this.admin = admin;
+	}
+	
+	public UserTO toUserTO() {	
+		UserTO aUserTO = new UserTO();
+		aUserTO.setId(this.getId());
+		aUserTO.setUsername(this.getUsername());
+		aUserTO.setPassword(this.getPassword());
+		aUserTO.seteMailAddress(this.geteMailAddress());
+		aUserTO.setAdmin(this.isAdmin());
+		return aUserTO;	
+	}
+	
+	public String toString() {
+		return "ID: " + this.getId() +", Username: " + this.getUsername() + ", Password: " + this.getPassword() + ", Mail: " + this.geteMailAddress() + ", Admin: " + this.isAdmin();
+	}
 	
 	//Getters and Setter
 	public int getId() {
@@ -79,7 +109,4 @@ public class User {
 	public int hashCode() {
 		return getId();
 	}
-	
-	
-	
 }

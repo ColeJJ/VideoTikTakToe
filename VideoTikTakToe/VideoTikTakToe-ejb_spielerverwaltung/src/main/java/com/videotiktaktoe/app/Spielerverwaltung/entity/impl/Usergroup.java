@@ -1,4 +1,4 @@
-package com.videotiktaktoe.app.Spielerverwaltung.entity;
+package com.videotiktaktoe.app.Spielerverwaltung.entity.impl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

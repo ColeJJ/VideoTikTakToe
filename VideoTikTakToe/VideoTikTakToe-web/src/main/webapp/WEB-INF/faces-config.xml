@@ -29,6 +29,7 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
+	
 
 	<!-- Login_Dialog -->
 	<navigation-rule>

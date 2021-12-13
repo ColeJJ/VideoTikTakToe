@@ -26,31 +26,13 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
-			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Users/friedupp/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final.jar" sourcepath="/Users/friedupp/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.0.Final/hibernate-jpa-2.1-api-1.0.0.Final-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.hibernate.javax.persistence"/>
-			<attribute name="maven.artifactId" value="hibernate-jpa-2.1-api"/>
-			<attribute name="maven.version" value="1.0.0.Final"/>
-			<attribute name="maven.scope" value="provided"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Users/friedupp/.m2/repository/javax/enterprise/cdi-api/1.2/cdi-api-1.2.jar" sourcepath="/Users/friedupp/.m2/repository/javax/enterprise/cdi-api/1.2/cdi-api-1.2-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="javax.enterprise"/>
-			<attribute name="maven.artifactId" value="cdi-api"/>
-			<attribute name="maven.version" value="1.2"/>
-			<attribute name="maven.scope" value="provided"/>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/Users/friedupp/Downloads/javaee-api-8.0.jar"/>

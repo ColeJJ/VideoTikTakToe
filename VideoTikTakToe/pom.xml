@@ -19,7 +19,7 @@
     	<profile>
         	<modules>
            		<module>VideoTikTakToe-ejb_spielerverwaltung</module>
-        		<module>VideoTikTakToe-web</module>
+           		<module>VideoTikTakToe-ejb_gamecenter</module>
         		<module>VideoTikTakToe-ear</module>          
         	</modules>
     	</profile>
@@ -61,6 +61,14 @@
             <dependency>
                 <groupId>com.videotiktaktoe.app</groupId>
                 <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+                <scope>provided</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.videotiktaktoe.app</groupId>
+                <artifactId>VideoTikTakToe-ejb_gamecenter</artifactId>
                 <version>${project.version}</version>
                 <type>ejb</type>
                 <scope>provided</scope>

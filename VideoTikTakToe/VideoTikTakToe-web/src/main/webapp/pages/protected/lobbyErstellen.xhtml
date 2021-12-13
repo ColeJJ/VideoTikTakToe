@@ -15,7 +15,9 @@
             <h:panelGrid columns="2">
             
 			<h:outputLabel value="Lobby benennen: " />
-			<input type="text" id="j_lobbyname" name="j_lobbyname" />
+			<!--  <input type="text" id="j_lobbyname" name="j_lobbyname" /> -->
+			<h:inputText value="#{lobbyMB.aLobby.lobbyName}" />
+			
 			
 			<h:outputLabel value="Anzahl der Runden: " />
 			

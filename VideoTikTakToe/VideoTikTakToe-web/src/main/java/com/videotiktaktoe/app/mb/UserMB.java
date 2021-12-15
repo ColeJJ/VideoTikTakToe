@@ -2,6 +2,8 @@ package com.videotiktaktoe.app.mb;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
@@ -16,6 +18,7 @@ import javax.security.enterprise.SecurityContext;
 import javax.servlet.ServletException;
 
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UsergroupTO;
 import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
@@ -32,14 +35,20 @@ public class UserMB implements Serializable{
 	private static final long serialVersionUID = -5749427890834102605L;
 	
 	private UserTO aUser;
+	private List<UsergroupTO> usergroups;
 	
 	//Konstruktor
 	public UserMB() {}
+	
+	@Inject
+	private ISpielerverwaltungFacade spielerverwaltungFacade;
 	
 	//init
 	@PostConstruct
 	public void initBean() {
 		this.aUser = new UserTO();
+		this.usergroups = new ArrayList<UsergroupTO>();
+		this.usergroups = spielerverwaltungFacade.getAllGroups();
 	}
 	
 	//Info-Messages
@@ -57,10 +66,6 @@ public class UserMB implements Serializable{
 		FacesContext context = FacesContext.getCurrentInstance();
 		return context;
 	}
-	
-	@Inject
-	private ISpielerverwaltungFacade spielerverwaltungFacade;
-	
 	
 	public String userRegistrieren() {
 		try {			

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UsergroupTO;
+
 @Entity
 @Table(name="VTTT_usergroup")
 public class Usergroup {
@@ -22,6 +24,18 @@ public class Usergroup {
 	
 	//Constructor
 	public Usergroup() {}
+	
+	public Usergroup(int id, String groupname) {
+		this.id = id;
+		this.groupname = groupname;
+	}
+	
+	public UsergroupTO toUsergroupTO() {
+		UsergroupTO aGroupTO = new UsergroupTO();
+		aGroupTO.setId(this.getId());
+		aGroupTO.setGroupname(this.getGroupname());
+		return aGroupTO;	
+	}
 
 	//Getters and Setters
 	public int getId() {

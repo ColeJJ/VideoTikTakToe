@@ -21,17 +21,27 @@
 					<h:inputText value="#{userMB.aUser.eMailAddress}" />
 					
 					<h:outputLabel value="Passwort: " />
-					<h:inputText value="#{userMB.aUser.password}" />	
+					<h:inputSecret value="#{userMB.aUser.password}" required="true" maxlength="10" size="15" requiredMessage="Password is required"/>	
 					
-					<h:outputLabel value="Passwort best&auml;tigen: " />
-					<h:inputText value="#{userMB.aUser.password}" />			
+					<!-- TODO: hier noch password bestätigen-->
+					<!-- <h:outputLabel value="Passwort best&auml;tigen: " />
+					<h:inputText value="#{userMB.aUser.password}" /> -->		
 				
-					<!-- TODO: hier noch die Gruppe auswählen können -->
+					<h:outputLabel value="Usergruppe ausw&auml;hlen: ">
+						<h:selectOneMenu value="#{userMB.aUser.usergroupID}">
+    						<f:selectItems value="#{userMB.usergroups}" var="usergroup" itemValue="#{usegroup.id}" itemLabel="#{usergroup.groupname}" />
+    					</h:selectOneMenu>
+					</h:outputLabel>
 				</h:panelGrid>
             
             </h:panelGroup>
 			
 			<br/>
+			<h:commandButton 
+						value="Refresh" 
+						action="#{userMB.loadUsergroups()}" 
+						style=" width: 200px">
+			</h:commandButton>
 			<h:commandButton 
             			value="Account erstellen"
             			action="#{userMB.userRegistrieren()}" 						

@@ -51,6 +51,11 @@ public class UserMB implements Serializable{
 		this.usergroups = spielerverwaltungFacade.getAllGroups();
 	}
 	
+	public void loadUsergroups() {		
+		System.out.println("Usergruppen werden geladen");
+		this.usergroups = spielerverwaltungFacade.getAllGroups();
+	}
+	
 	//Info-Messages
 	private void sendInfoMessageToUser(String message){
 		FacesContext context = getContext();
@@ -123,6 +128,14 @@ public class UserMB implements Serializable{
 
 	public void setaUser(UserTO aUser) {
 		this.aUser = aUser;
+	}
+
+	public List<UsergroupTO> getUsergroups() {
+		return usergroups;
+	}
+
+	public void setUsergroups(List<UsergroupTO> usergroups) {
+		this.usergroups = usergroups;
 	}
 
 	public ISpielerverwaltungFacade getSpielerverwaltungFacade() {

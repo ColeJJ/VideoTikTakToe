@@ -1,5 +1,7 @@
 package com.videotiktaktoe.app.Spielerverwaltung.entity.impl;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.Table;
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UsergroupTO;
 
 @Entity
+@Access(AccessType.FIELD)
 @Table(name="VTTT_usergroup")
 public class Usergroup {
 

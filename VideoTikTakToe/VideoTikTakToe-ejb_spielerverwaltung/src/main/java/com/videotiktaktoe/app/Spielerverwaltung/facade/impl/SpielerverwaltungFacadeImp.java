@@ -33,8 +33,7 @@ public class SpielerverwaltungFacadeImp implements ISpielerverwaltungFacade{
 
 	@Override
 	public List<UsergroupTO> getAllGroups() {
-		// TODO Auto-generated method stub
-		return null;
+		return accountPflegen.getAllGroups();
 	}
 
 }

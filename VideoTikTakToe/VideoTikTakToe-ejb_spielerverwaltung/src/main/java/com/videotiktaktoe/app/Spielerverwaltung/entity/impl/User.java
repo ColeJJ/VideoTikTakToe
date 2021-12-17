@@ -30,27 +30,27 @@ public class User {
 	private String eMailAddress;
 	private boolean admin;
 	@Column(nullable = false)
-	private int usergroupID;
+	private String usergroup;
 	
 	
 	//Contructor
 	public User() {}
 	
-	public User(int id, String username, String password, String eMailAddress, boolean admin, int usergroupID) {
+	public User(int id, String username, String password, String eMailAddress, boolean admin, String usergroup) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.eMailAddress = eMailAddress;
 		this.admin = admin;
-		this.usergroupID = usergroupID;
+		this.usergroup = usergroup;
 	}
 	
-	public User(String username, String password, String eMailAddress, boolean admin, int usergroupID) {
+	public User(String username, String password, String eMailAddress, boolean admin, String usergroup) {
 		this.username = username;
 		this.password = password;
 		this.eMailAddress = eMailAddress;
 		this.admin = admin;
-		this.usergroupID = usergroupID;
+		this.usergroup = usergroup;
 	}
 	
 	public UserTO toUserTO() {	
@@ -99,12 +99,12 @@ public class User {
 		this.admin = admin;
 	}
 	
-	public int getUsergroupID() {
-		return usergroupID;
+	public String getUsergroup() {
+		return usergroup;
 	}
 
-	public void setUsergroupID(int usergroupID) {
-		this.usergroupID = usergroupID;
+	public void setUsergroup(String usergroup) {
+		this.usergroup = usergroup;
 	}
 
 	@Override

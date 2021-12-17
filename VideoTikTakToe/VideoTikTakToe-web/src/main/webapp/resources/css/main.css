@@ -1,3 +1,8 @@
+.reg_button {
+	background: #BBBBBB;
+	width: 200px;
+}
+
 .table {
 	border-collapse: collapse;
 }

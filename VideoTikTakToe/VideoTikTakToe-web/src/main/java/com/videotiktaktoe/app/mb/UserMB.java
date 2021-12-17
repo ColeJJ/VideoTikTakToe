@@ -73,7 +73,7 @@ public class UserMB implements Serializable{
 	}
 	
 	public String userRegistrieren() {
-		try {			
+		try {	
 			spielerverwaltungFacade.userRegistrieren(this.aUser);
 			sendInfoMessageToUser("User registrieren.");
 			return this.toLogin();

@@ -3,8 +3,10 @@
 <html lang="en"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
+    	<h:outputStylesheet library="css" name="main.css" />
         <title>Registrierung</title>
     </h:head>
     <h:body>
@@ -27,11 +29,10 @@
 					<!-- <h:outputLabel value="Passwort best&auml;tigen: " />
 					<h:inputText value="#{userMB.aUser.password}" /> -->		
 				
-					<h:outputLabel value="Usergruppe ausw&auml;hlen: ">
-						<h:selectOneMenu value="#{userMB.aUser.usergroupID}">
-    						<f:selectItems value="#{userMB.usergroups}" var="usergroup" itemValue="#{usegroup.id}" itemLabel="#{usergroup.groupname}" />
-    					</h:selectOneMenu>
-					</h:outputLabel>
+					<h:outputLabel value="Usergruppe ausw&auml;hlen: " />
+					<h:selectOneMenu value="#{userMB.aUser.usergroup}">
+   						<f:selectItems value="#{userMB.usergroups}" var="usergroup" itemValue="#{usergroup.groupname}" itemLabel="#{usergroup.groupname}" />
+   					</h:selectOneMenu>
 				</h:panelGrid>
             
             </h:panelGroup>

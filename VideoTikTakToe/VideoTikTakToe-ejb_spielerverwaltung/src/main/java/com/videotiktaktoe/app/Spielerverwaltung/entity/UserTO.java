@@ -17,7 +17,7 @@ public class UserTO implements Serializable{
 	private String password;
 	private String eMailAddress;
 	private boolean admin;
-	private int usergroupID;
+	private String usergroup;
 	
 	
 	public UserTO() {
@@ -31,7 +31,7 @@ public class UserTO implements Serializable{
 				this.getPassword(),
 				this.geteMailAddress(),
 				this.isAdmin(),
-				this.getUsergroupID());
+				this.getUsergroup());
 		return aUser;
 	}
 	
@@ -81,11 +81,11 @@ public class UserTO implements Serializable{
 		this.admin = admin;
 	}
 
-	public int getUsergroupID() {
-		return usergroupID;
+	public String getUsergroup() {
+		return usergroup;
 	}
 
-	public void setUsergroupID(int usergroupID) {
-		this.usergroupID = usergroupID;
+	public void setUsergroup(String usergroup) {
+		this.usergroup = usergroup;
 	}
 }

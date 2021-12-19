@@ -21,4 +21,11 @@ public class UserDAO extends GenericDAO<User>{
 		
 		return super.findOneResult(User.FIND_BY_NAME, parameters);
 	}
+
+	public User findUserByID(int userID) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("id", userID);
+		
+		return super.findOneResult(User.FIND_BY_ID, parameters);
+	}
 }

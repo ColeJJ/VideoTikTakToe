@@ -2,9 +2,10 @@ package com.videotiktaktoe.app.Gamecenter.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
-import de.VideoTikTakToe.Gamecenter.entity.impl.Lobby;
+import com.videotiktaktoe.app.Gamecenter.entity.impl.Lobby;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 public class LobbyTO implements Serializable {
 
@@ -13,46 +14,41 @@ public class LobbyTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private int lobbyID;
+	private int id;
 	private String lobbyName;
 	private boolean videoEinstellung;
-	private boolean audioEinstellung;
+	private boolean audioEinstellung;	
+	private String lobbyCode;
+	private List<UserTO> users;
 	
-	private Collection<List> user;
+	public LobbyTO() {}
 	
-	public LobbyTO() {
-		this.user = new ArrayList<List>();
-	}
-	
-	public LobbyTO(int lobbyID, String lobbyName, boolean videoEinstellung, boolean audioEinstellung,
-			Collection<List> user) {
-		super();
-		this.lobbyID = lobbyID;
+	public LobbyTO(int id, String lobbyName, boolean videoEinstellung, boolean audioEinstellung) {
+		this.id = id;
 		this.lobbyName = lobbyName;
 		this.videoEinstellung = videoEinstellung;
 		this.audioEinstellung = audioEinstellung;
-		this.user = user;
+		this.users = new ArrayList<UserTO>();
 	}
 	
 	public Lobby toLobby() {
-		Lobby lobby = new Lobby(
-//		this.getLobbyID(),
-		this.getLobbyName(),
-		this.getVideoEinstellung(),
-		this.getAudioEinstellung(),
-		
-		for (List user:this.getUser())
-			lobby.getUser().add(user);
+		Lobby aLobby = new Lobby(
+			this.getId(),
+			this.getLobbyName(),
+			this.getVideoEinstellung(),
+			this.getAudioEinstellung(),
+			this.getUsers()
+		);
 				
-		return lobby;
+		return aLobby;
 	}
 	
-	public int getLobbyID() {
-		return lobbyID;
+	public int getId() {
+		return this.id;
 	}
 
-	public void setLobbyID(int lobbyID) {
-		this.lobbyID = lobbyID;
+	public void setId(int lobbyID) {
+		this.id = lobbyID;
 	}
 
 	public String getLobbyName() {
@@ -75,20 +71,28 @@ public class LobbyTO implements Serializable {
 		this.videoEinstellung = videoEinstellung;
 	}
 
-	public Collection<List> getUser() {
-		return user;
+	public List<UserTO> getUsers() {
+		return this.users;
 	}
 
-	public void setUser(Collection<List> user) {
-		this.user = user;
+	public void setUsers(List<UserTO> userListe) {
+		this.users = userListe;
 	}
 
-	public void addUser(int userID) {
-		this.user.add(Integer.valueOf(userID));
+	public void addUser(UserTO aUser) {
+		this.users.add(aUser);
+	}
+
+	public String getLobbyCode() {
+		return lobbyCode;
+	}
+
+	public void setLobbyCode(String lobbyCode) {
+		this.lobbyCode = lobbyCode;
 	}
 
 	public String toString() {
-		return this.lobbyID+" "+this.lobbyName;
+		return this.id+" "+this.lobbyName;
 	}
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 public abstract class GenericDAO<T> {
 	
-	private final String UNIT_NAME = "VIDEOTIKTAKTOE_EJB_USER";
+	private final String UNIT_NAME = "VIDEOTIKTAKTOE_EJB_SPIELERVERWALTUNG";
 	
 	@PersistenceContext(unitName=UNIT_NAME)
 	private EntityManager em;

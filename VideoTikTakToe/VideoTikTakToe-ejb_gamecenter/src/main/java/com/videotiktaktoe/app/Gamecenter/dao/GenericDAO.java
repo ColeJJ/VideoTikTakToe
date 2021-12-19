@@ -10,37 +10,35 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 public abstract class GenericDAO<T> {
-
-	private final String UNIT_NAME = "HA2_Patient";
+	
+	private final String UNIT_NAME = "VIDEOTIKTAKTOE_EJB_GAMECENTER";
 	
 	@PersistenceContext(unitName=UNIT_NAME)
 	private EntityManager em;
 	
 	private Class<T> entityClass;
 	
-	public GenericDAO(){}
+	public GenericDAO() {}
 	
-	public GenericDAO(Class<T> entityClass){
+	public GenericDAO(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}
 	
-	public void save(T entity){
-		
+	public void save(T entity) {
 		this.em.persist(entity);
-		
 	}
 	
-	public T update(T entity){
+	public T update(T entity) {
 		return em.merge(entity);
 	}
 	
-	protected boolean delete(Object id, Class<T> classe){
+	protected boolean delete(Object id, Class<T> classe) {
 		T entityToBeRemoved = em.getReference(classe, id);
 		try {
 			em.remove(entityToBeRemoved);
 			return true;
-		} catch (Exception e){
-			System.out.println("Fehler beim Speichern der Id: "+id.toString());
+		} catch (Exception e) {
+			System.out.println("Fehler beim Speichern der Id: " + id.toString());
 			return false;
 		}
 	}
@@ -50,7 +48,7 @@ public abstract class GenericDAO<T> {
 	}
 	
 	@SuppressWarnings({"unchecked","rawtypes"})
-	public List<T> findAll(){
+	public List<T> findAll() {
 		CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
 		cq.select(cq.from(entityClass));
 		return em.createQuery(cq).getResultList();
@@ -89,7 +87,6 @@ public abstract class GenericDAO<T> {
 		}
 		return result;
 	}
-	
 	
 	private void populateQueryParameters(Query query, Map<String, Object> parameters){
 		for (Entry<String, Object> entry : parameters.entrySet()){

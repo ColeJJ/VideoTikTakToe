@@ -11,7 +11,7 @@
     <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
     <packaging>ejb</packaging>
 
-    <name>VideoTikTakToe: EJB User Module</name>
+    <name>VideoTikTakToe: EJB Spielerverwaltung Module</name>
 
     <url>http://wildfly.org</url>
     <licenses>

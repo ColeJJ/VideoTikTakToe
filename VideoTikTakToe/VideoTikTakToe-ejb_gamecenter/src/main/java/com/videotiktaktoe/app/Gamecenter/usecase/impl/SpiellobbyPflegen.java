@@ -17,11 +17,13 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 	UserDAO userDAO;
 	
 	@Override
-	public void SpiellobbyErstellen(LobbyTO aLobby, int userID) {
+	public void spiellobbyErstellen(LobbyTO aLobby, String userName) {
+		System.out.println("Code beim erstellen TO: "+aLobby.getLobbyCode());
+		System.out.println("Code beim erstellen: "+aLobby.toLobby().getLobbyCode());
 		lobbyDAO.save(aLobby.toLobby());
-		User aUser = userDAO.findUserByID(userID);
+		User aUser = userDAO.findUserByName(userName);
 		aUser.setAdmin(true);
-		userDAO.save(aUser);
+		userDAO.update(aUser);
 	}
 
 }

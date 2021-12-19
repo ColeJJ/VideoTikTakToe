@@ -37,6 +37,7 @@ public class LobbyTO implements Serializable {
 			this.getLobbyName(),
 			this.getVideoEinstellung(),
 			this.getAudioEinstellung(),
+			this.getLobbyCode(),
 			this.getUsers()
 		);
 				

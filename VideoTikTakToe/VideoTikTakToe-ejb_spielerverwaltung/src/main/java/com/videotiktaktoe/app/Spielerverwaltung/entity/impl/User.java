@@ -12,7 +12,7 @@ import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 @Entity
 @Table(name = "VTTT_user")
-@NamedQuery(name="User.findUserByID", query="select u from User u where u.id = :id")
+@NamedQuery(name="User.findUserByName", query="select u from User u where u.username = :username")
 public class User {
 	
 	public static final String FIND_BY_NAME = "User.findUserByName";

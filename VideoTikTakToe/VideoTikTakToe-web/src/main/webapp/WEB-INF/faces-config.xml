@@ -10,6 +10,12 @@
     	<managed-bean-class>com.videotiktaktoe.app.mb.UserMB</managed-bean-class>
     	<managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    	
+	<managed-bean>
+		<managed-bean-name>lobbyMB</managed-bean-name>
+		<managed-bean-class>com.videotiktaktoe.app.mb.LobbyMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
    
     <managed-bean>
     	<managed-bean-name>applicationSecurityConfig</managed-bean-name>
@@ -28,7 +34,6 @@
 		<managed-bean-class>com.videotiktaktoe.app.mb.VerwaltungMB</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
-
 
 	<!-- Login_Dialog -->
 	<navigation-rule>
@@ -53,7 +58,7 @@
 		<from-view-id>/pages/protected/hauptmenue.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>LOBBY_ERSTELLEN</from-outcome>
-			<to-view-id>/pages/protected/lobbyErstellen.xhtml</to-view-id>
+			<to-view-id>/pages/protected/gamecenter/lobbyErstellen.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -61,7 +66,7 @@
 		<from-view-id>/pages/protected/hauptmenue.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>LOBBY_BEITRETEN</from-outcome>
-			<to-view-id>/pages/protected/lobbyBeitreten.xhtml</to-view-id>
+			<to-view-id>/pages/protected/gamecenter/lobbyBeitreten.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

@@ -7,62 +7,65 @@ import java.util.Random;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 
-
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Access(AccessType.FIELD)
 @Table(name="VTTT_lobby")
-@NamedQuery(name="Lobby.findLobbyByLobbyName", 
-	query="SELECT l from Lobby l where l.lobbyName = :lobbyname")
+@NamedQuery(name="Lobby.findLobbyByLobbyName", query="SELECT l from Lobby l where l.lobbyName = :lobbyname")
 public class Lobby implements Serializable {
-
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 8045990893766366556L;
+
 	public static final String FIND_BY_LOBBYNAME = "Lobby.findLobbyByLobbyName";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
+	@Column(unique=true, nullable=false)
 	private String lobbyName;
 	private boolean videoEinstellung;
 	private boolean audioEinstellung;
+	@Column(unique=true)
 	private String lobbyCode;
+	
+	@Transient
 	private List<UserTO> users;
 	
 	
 	//Konstruktor
 	public Lobby() {}
 	
-	public Lobby(int id, String lobbyName, boolean videoEinstellung, boolean audioEinstellung) {
+	public Lobby(int id, String lobbyName, boolean videoEinstellung, boolean audioEinstellung, String lobbyCode) {
 		this.id = id;
 		this.lobbyName = lobbyName;
 		this.videoEinstellung = videoEinstellung;
 		this.audioEinstellung = audioEinstellung;
+		this.lobbyCode = lobbyCode;
 		this.users = new ArrayList<UserTO>();
 	}
 	
-	public Lobby(int id, String lobbyName, boolean videoEinstellung, boolean audioEinstellung, List<UserTO> userListe) {
+	public Lobby(int id, String lobbyName, boolean videoEinstellung, boolean audioEinstellung, String lobbyCode, List<UserTO> userListe) {
 		this.id = id;
 		this.lobbyName = lobbyName;
 		this.videoEinstellung = videoEinstellung;
 		this.audioEinstellung = audioEinstellung;
+		this.lobbyCode = lobbyCode;
 		this.users = userListe;
 	}
 	
@@ -73,6 +76,7 @@ public class Lobby implements Serializable {
 		lobbyTO.setLobbyName(this.getLobbyName());
 		lobbyTO.setVideoEinstellung(this.getVideoEinstellung());
 		lobbyTO.setAudioEinstellung(this.getAudioEinstellung());
+		lobbyTO.setLobbyCode(this.getLobbyCode());
 		lobbyTO.setUsers(this.getUsers());;
 		
 		return lobbyTO;

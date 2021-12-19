@@ -15,32 +15,32 @@
             <h:panelGrid columns="2">
             
 			<h:outputLabel value="Lobby benennen: " />
-			<input type="text" id="j_lobbyname" name="j_lobbyname" />
+			<h:inputText type="text" value="#{lobbyMB.aLobby.lobbyName}" />				
 			
-			<h:outputLabel value="Anzahl der Runden: " />
-			
-			<select name="j_rundenAnzahl" id="j_rundenanzahl">
-   				<option>Best of 3</option>
-   				<option>Best of 5</option>
-			</select>					
-			
-			<h:selectOneRadio>
-				<f:selectItem itemValue="audioEin" itemLabel="Audio ein"/>
-				<f:selectItem itemValue="audioAus" itemLabel="Audio aus"/>
+			<h:selectOneRadio value="#{lobbyMB.aLobby.audioEinstellung}">
+				<f:selectItem itemValue="#{true}" itemLabel="Audio ein"/>
+				<f:selectItem itemValue="#{false}" itemLabel="Audio aus"/>
 			</h:selectOneRadio>		
 			
-			<h:selectOneRadio>
-				<f:selectItem itemValue="videoEin" itemLabel="Video ein"/>
-				<f:selectItem itemValue="videoAus" itemLabel="Video aus"/>
-			</h:selectOneRadio>		
+			<h:selectOneRadio value="#{lobbyMB.aLobby.videoEinstellung}">
+				<f:selectItem itemValue="#{true}" itemLabel="Video ein"/>
+				<f:selectItem itemValue="#{false}" itemLabel="Video aus"/>
+			</h:selectOneRadio>	
+			
+			<h:commandButton
+				value="Code generieren"
+				action="#{lobbyMB.generateCode()}"
+				style=" width: 200px">
+			</h:commandButton>
+			<h:outputText value="Code: #{lobbyMB.aLobby.lobbyCode}"></h:outputText>
 			
 			</h:panelGrid>
-			
+
 			<h:panelGrid columns="2">
 				
 				<h:commandButton 
              			value="Lobby erstellen"	
-             			action="#{verwaltungMB.lobbyErstellenClicked()}"				
+             			action="#{lobbyMB.lobbyErstellenClicked()}"				
              			style=" width: 200px">
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
@@ -53,7 +53,6 @@
             	</h:commandButton>
             	
 			</h:panelGrid>
-
         </h:form>
     </h:body>
 </html>

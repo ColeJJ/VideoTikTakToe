@@ -56,6 +56,13 @@
             <type>ejb</type>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.videotiktaktoe.app</groupId>
+            <artifactId>VideoTikTakToe-ejb_gamecenter</artifactId>
+            <version>${project.version}</version>
+            <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
    </dependencies>
 
    <build>

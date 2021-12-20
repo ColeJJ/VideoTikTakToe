@@ -88,16 +88,24 @@
 	
 	<!-- Lobby_Erstellen_Dialog -->
 	<navigation-rule>	
-		<from-view-id>/pages/protected/lobbyErstellen.xhtml</from-view-id>
+		<from-view-id>/pages/protected/gamecenter/lobbyErstellen.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
 	
+	<navigation-rule>	
+		<from-view-id>/pages/protected/gamecenter/lobbyErstellen.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>LOBBY_ANZEIGEN</from-outcome>
+			<to-view-id>/pages/protected/gamecenter/lobbyAnzeigen.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+	
 	<!-- Lobby_Beitreten_Dialog -->
 	<navigation-rule>	
-		<from-view-id>/pages/protected/lobbyBeitreten.xhtml</from-view-id>
+		<from-view-id>/pages/protected/gamecenter/lobbyBeitreten.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>

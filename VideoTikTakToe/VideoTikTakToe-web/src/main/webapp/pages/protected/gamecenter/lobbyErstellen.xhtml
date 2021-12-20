@@ -27,21 +27,17 @@
 				<f:selectItem itemValue="#{false}" itemLabel="Video aus"/>
 			</h:selectOneRadio>	
 			
-			<h:commandButton
-				value="Code generieren"
-				action="#{lobbyMB.generateCode()}"
-				style=" width: 200px">
-			</h:commandButton>
-			<h:outputText value="Code: #{lobbyMB.aLobby.lobbyCode}"></h:outputText>
-			
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">
+			
+				<h:inputHidden value="#{lobbyMB.aLobby.id}" />
 				
 				<h:commandButton 
              			value="Lobby erstellen"	
              			action="#{lobbyMB.lobbyErstellenClicked()}"				
              			style=" width: 200px">
+             		<f:setPropertyActionListener target="#{lobbyMB.aLobby}" value="#{lobbyMB.aLobby}"  /> 
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
             	

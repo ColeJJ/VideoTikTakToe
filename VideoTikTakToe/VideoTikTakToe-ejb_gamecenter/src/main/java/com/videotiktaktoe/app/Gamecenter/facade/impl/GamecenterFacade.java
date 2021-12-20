@@ -14,8 +14,13 @@ public class GamecenterFacade implements IGamecenterFacade{
 	ISpiellobbyPflegen spiellobbyPflegen;
 	
 	@Override
-	public void lobbyErstellen(LobbyTO aLobby, String userName) {
-		spiellobbyPflegen.spiellobbyErstellen(aLobby, userName);
+	public LobbyTO lobbyErstellen(LobbyTO aLobby, String userName) {
+		return spiellobbyPflegen.spiellobbyErstellen(aLobby, userName);
+	}
+
+	@Override
+	public String generateCode(LobbyTO aLobbyTO) {
+		return spiellobbyPflegen.generateCode(aLobbyTO);
 	}
 
 }

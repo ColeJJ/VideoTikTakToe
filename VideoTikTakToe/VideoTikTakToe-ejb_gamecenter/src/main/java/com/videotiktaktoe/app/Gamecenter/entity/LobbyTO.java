@@ -21,7 +21,9 @@ public class LobbyTO implements Serializable {
 	private String lobbyCode;
 	private List<UserTO> users;
 	
-	public LobbyTO() {}
+	public LobbyTO() {
+		this.users = new ArrayList<UserTO>();
+	}
 	
 	public LobbyTO(int id, String lobbyName, boolean videoEinstellung, boolean audioEinstellung) {
 		this.id = id;

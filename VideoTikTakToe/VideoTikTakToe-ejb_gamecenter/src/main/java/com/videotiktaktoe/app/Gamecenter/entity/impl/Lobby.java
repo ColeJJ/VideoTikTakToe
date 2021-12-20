@@ -3,8 +3,8 @@ package com.videotiktaktoe.app.Gamecenter.entity.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+import javax.inject.Inject;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -17,13 +17,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
+import com.videotiktaktoe.app.Gamecenter.usecase.ISpiellobbyPflegen;
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 
 @Entity
 @Access(AccessType.FIELD)
 @Table(name="VTTT_lobby")
-@NamedQuery(name="Lobby.findLobbyByLobbyName", query="SELECT l from Lobby l where l.lobbyName = :lobbyname")
+@NamedQuery(name="Lobby.findLobbyByLobbyName", query="SELECT l from Lobby l where l.lobbyName = :lobbyName")
 public class Lobby implements Serializable {
 	
 	/**
@@ -47,6 +48,9 @@ public class Lobby implements Serializable {
 	@Transient
 	private List<UserTO> users;
 	
+	@Transient
+	@Inject
+	ISpiellobbyPflegen spiellobbyPflegen;
 	
 	//Konstruktor
 	public Lobby() {}
@@ -81,37 +85,6 @@ public class Lobby implements Serializable {
 		
 		return lobbyTO;
 		
-	}
-	
-	public void generateCode() {
-	    // create a string of all characters
-	    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-	    // create random string builder
-	    StringBuilder sb = new StringBuilder();
-
-	    // create an object of Random class
-	    Random random = new Random();
-
-	    // specify length of random string
-	    int length = 7;
-
-	    for(int i = 0; i < length; i++) {
-
-	      // generate random index number
-	      int index = random.nextInt(alphabet.length());
-
-	      // get character specified by index
-	      // from the string
-	      char randomChar = alphabet.charAt(index);
-
-	      // append the character to string builder
-	      sb.append(randomChar);
-	    }
-
-	    String randomString = sb.toString();
-	    this.setLobbyCode(randomString);
-	    System.out.println("LobbyCode is: " + randomString);
 	}
 	
 	//TODO: Spiellobby beitreten

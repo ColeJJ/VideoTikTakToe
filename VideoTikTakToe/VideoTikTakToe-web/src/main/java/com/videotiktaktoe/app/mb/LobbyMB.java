@@ -61,29 +61,33 @@ public class LobbyMB implements Serializable{
 	
 	public String lobbyErstellenClicked() {
 		try {
-			System.out.println("FE LobbyCODE: " +this.aLobby.getLobbyCode());
-			gamecenterFacade.lobbyErstellen(this.aLobby, securityContext.getCallerPrincipal().getName());
+			this.aLobby = gamecenterFacade.lobbyErstellen(this.aLobby, securityContext.getCallerPrincipal().getName());
 			sendInfoMessageToUser("Lobby erstellen.");
+			return this.toLobbyAnzeigen();
 		} catch(EJBException e) {
 			sendErrorMessageToUser("Kann die Lobby nicht erstellen.");
 			return "";
 		}
-		
-		return this.toLogin();
 	}
 	
 	public void generateCode() {
-		Lobby lobby = this.aLobby.toLobby();
-		lobby.generateCode();
-		this.aLobby.setLobbyCode(lobby.getLobbyCode());
-		System.out.println("FE LobbyCODE: " +this.aLobby.getLobbyCode());
+		this.aLobby.setLobbyCode(gamecenterFacade.generateCode(this.aLobby));
+	}
+	
+	public String getLobbygroesse() {
+		return "Lobbygroesse: " + this.aLobby.getUsers().size() + "/2";
 	}
 	
 	//Navigation
 	public String toLogin() {
 		return "BACK_TO_LOGIN";
 	}
-
+	
+	public String toLobbyAnzeigen() {
+		return "LOBBY_ANZEIGEN";
+	}
+	
+	//Getters and Setters
 	public LobbyTO getaLobby() {
 		return aLobby;
 	}

@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!--  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -33,3 +33,48 @@
 	</h:form>
 </h:body>
 </html>
+-->
+
+<!-- NEUES DESIGN -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+
+  <h:head>
+   <h:outputStylesheet name="css/login.css" />
+    <title>Login Video TikTakToe</title>
+  </h:head>
+  <body>
+    <div class="center">
+      <h1>Login</h1>
+      <form method="post" action="j_security_check">
+        <div class="txt_field">
+          <input type="text" id="j_username" name="j_username"/>
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" id="j_password" name="j_password" />
+          <span></span>
+         <label>Password</label>
+        </div>
+        <input type="submit" name= "submit" value="Login"/>
+		</form>
+		<h:form>
+		<h:commandButton 
+			class="reg_button"
+			value="Registrieren" 
+			action="#{verwaltungMB.starteRegistrierung()}">
+		</h:commandButton>
+	</h:form>
+      
+    </div>
+    
+
+  </body>
+</html>
+

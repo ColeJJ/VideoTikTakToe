@@ -9,4 +9,5 @@ public interface IAccountPflegen {
 
 	public void userRegistrieren(UserTO aUser);
 	public List<UsergroupTO> getAllGroups();
+	public List<UserTO> getAllUsersInSameLobby(int lobbyID);
 }

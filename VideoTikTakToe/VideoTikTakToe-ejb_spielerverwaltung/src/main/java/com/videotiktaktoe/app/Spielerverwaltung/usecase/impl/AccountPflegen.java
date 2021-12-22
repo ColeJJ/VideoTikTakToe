@@ -36,4 +36,14 @@ public class AccountPflegen implements IAccountPflegen{
 		}
 		return groupTOListe;
 	}
+
+	@Override
+	public List<UserTO> getAllUsersInSameLobby(int lobbyID) {
+		List<UserTO> userTOListe = new ArrayList<UserTO>();
+		List<User> userListe = userDAO.findAllUsersByLobbyID(lobbyID);
+		for(User aUser:userListe) {
+			userTOListe.add(aUser.toUserTO());
+		}
+		return userTOListe;
+	}
 }

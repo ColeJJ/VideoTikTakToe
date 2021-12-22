@@ -3,7 +3,8 @@
 <html lang="en"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Hauptmen&uuml;</title>
     </h:head>
@@ -13,21 +14,23 @@
             <br/>
             <h:commandButton 
             			value="Lobby erstellen" 
-            			action="#{menueMB.starteLobbyErstellen}"
+            			action="#{naviMB.starteLobbyErstellen}"
             			style=" width: 200px">
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
             <br />
+            <!-- TODO: statt inputField ein popup öffnen -->
              <h:commandButton 
              			value="Lobby beitreten" 
-             			action="#{menueMB.starteLobbyBeitreten}"
+             			action="#{lobbyMB.lobbyBeitreten()}"
              			style=" width: 200px">
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
+            <h:inputText value="#{lobbyMB.aLobby.lobbyCode}"></h:inputText>
             <br />
             <h:commandButton 
              			value="Freundesliste anzeigen" 
-             			action="#{menueMB.starteFreundesliste}"
+             			action="#{naviMB.starteFreundesliste}"
              			style=" width: 200px">
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
@@ -39,7 +42,6 @@
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
             <br />
-           
         </h:form>
     </h:body>
 </html>

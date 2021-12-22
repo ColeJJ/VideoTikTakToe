@@ -7,6 +7,7 @@ import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 @Local
 public interface IGamecenterFacade {
 	
-	public LobbyTO lobbyErstellen (LobbyTO aLobby, String userName);
+	public LobbyTO lobbyErstellen (LobbyTO aLobbyTO, String userName);
 	public String generateCode (LobbyTO aLobbyTO);
+	public LobbyTO lobbyBeitreten(String lobbyCode);
 }

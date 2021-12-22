@@ -1,6 +1,7 @@
 package com.videotiktaktoe.app.Spielerverwaltung.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Stateless;
@@ -16,7 +17,6 @@ public class UserDAO extends GenericDAO<User>{
 	
 	public User findUserByName(String username) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		System.out.println("Username: "+username);
 		parameters.put("username", username);
 		
 		return super.findOneResult(User.FIND_BY_NAME, parameters);
@@ -27,5 +27,12 @@ public class UserDAO extends GenericDAO<User>{
 		parameters.put("id", userID);
 		
 		return super.findOneResult(User.FIND_BY_ID, parameters);
+	}
+	
+	public List<User> findAllUsersByLobbyID(int lobbyID){
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("lobbyID", lobbyID);
+		
+		return super.findListResult(User.FIND_BY_LOBBYID, parameters);
 	}
 }

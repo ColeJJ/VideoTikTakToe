@@ -4,7 +4,7 @@ import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 
 public interface ISpiellobbyPflegen {
 	
-	public LobbyTO spiellobbyErstellen(LobbyTO aLobby, String userName);
+	public LobbyTO spiellobbyErstellen(LobbyTO aLobbyTO, String userName);
 	public String generateCode(LobbyTO aLobbyTO);
 
 }

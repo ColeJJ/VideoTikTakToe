@@ -13,4 +13,5 @@ public interface ISpielerverwaltungFacade {
 	public UserTO findUserByName(String username);	
 	public void userRegistrieren(UserTO aUser);
 	public List<UsergroupTO> getAllGroups();
+	public List<UserTO> getAllUsersInSameLobby(int lobbyID);
 }

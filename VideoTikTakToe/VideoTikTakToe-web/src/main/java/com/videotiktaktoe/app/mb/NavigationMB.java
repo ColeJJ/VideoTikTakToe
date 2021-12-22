@@ -4,9 +4,9 @@ import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
-@Named("verwaltungMB")
+@Named("naviMB")
 @RequestScoped
-public class VerwaltungMB implements Serializable {
+public class NavigationMB implements Serializable {
 
 	/**
 	 * 
@@ -22,28 +22,21 @@ public class VerwaltungMB implements Serializable {
 		return this.toLogin();
 	}
 	
+	//Menue
+	public String starteLobbyErstellen() {
+		return this.toLobbyErstellen();	
+	}
 	
-//	Lobby erstellen
-	public String lobbyErstellenClicked() {
-		
-		//Implementierung
-		//Nicht in faces-config implementiert
-		
-		return "LOBBY_ERSTELLEN";
+	public String starteLobbyBeitreten() {
+		return this.toLobbyBeitreten();
+	}
+	
+	public String starteFreundesliste() {
+		return this.toStarteFreundesliste();
 	}
 	
 	public String lobbyErstellenAbbrechenClicked() {
 		return this.toHauptmenue();
-	}
-	
-	
-//	Lobby beitreten
-	public String lobbyBeitretenClicked() {
-		
-		//Implementierung
-		//Nicht in faces-config implementiert
-		
-		return "LOBBY_BEITRETEN";
 	}
 	
 	public String lobbyBeitretenAbbrechenClicked() {
@@ -77,6 +70,18 @@ public class VerwaltungMB implements Serializable {
 	
 	public String toRegistrierung() {
 		return "REGISTRIEREN";
+	}
+	
+	public String toLobbyErstellen() {
+		return "LOBBY_ERSTELLEN";
+	}
+	
+	public String toLobbyBeitreten() {
+		return "LOBBY_BEITRETEN";
+	}
+	
+	public String toStarteFreundesliste() {
+		return "STARTE_FREUNDESLISTE";
 	}
 
 }

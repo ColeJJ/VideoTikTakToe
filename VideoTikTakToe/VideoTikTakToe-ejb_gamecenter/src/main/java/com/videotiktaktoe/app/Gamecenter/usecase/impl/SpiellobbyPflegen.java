@@ -20,17 +20,20 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 	UserDAO userDAO;
 	
 	@Override
-	public LobbyTO spiellobbyErstellen(LobbyTO aLobby, String userName) {
-		lobbyDAO.save(aLobby.toLobby());
+	public LobbyTO spiellobbyErstellen(LobbyTO aLobbyTO, String userName) {
+		lobbyDAO.save(aLobbyTO.toLobby());
+		Lobby aLobby = lobbyDAO.findLobbyByName(aLobbyTO.getLobbyName());
 		
-		//User admin bool auf true setzen
+		//User admin bool auf true setzen und FK setzen
 		User aUser = userDAO.findUserByName(userName);
 		aUser.setAdmin(true);
+		aUser.setLobbyID(aLobby.getId());
 		userDAO.update(aUser);
 		
-		//aktueller logged User in die user Liste der Lobby adden
-		aLobby.addUser(aUser.toUserTO());
-		return aLobby;
+		//admin als User der Userliste hinzufügen
+		aLobbyTO.addUser(aUser.toUserTO());
+		
+		return aLobbyTO;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -24,7 +25,10 @@ import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 @Entity
 @Access(AccessType.FIELD)
 @Table(name="VTTT_lobby")
-@NamedQuery(name="Lobby.findLobbyByLobbyName", query="SELECT l from Lobby l where l.lobbyName = :lobbyName")
+@NamedQueries({
+	@NamedQuery(name="Lobby.findLobbyByLobbyName", query="SELECT l from Lobby l where l.lobbyName = :lobbyName"),
+	@NamedQuery(name="Lobby.findLobbyByLobbyCode", query="SELECT l from Lobby l where l.lobbyCode = :lobbyCode")
+})
 public class Lobby implements Serializable {
 	
 	/**
@@ -33,6 +37,7 @@ public class Lobby implements Serializable {
 	private static final long serialVersionUID = 8045990893766366556L;
 
 	public static final String FIND_BY_LOBBYNAME = "Lobby.findLobbyByLobbyName";
+	public static final String FIND_BY_LOBBYCODE = "Lobby.findLobbyByLobbyCode";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -87,9 +92,8 @@ public class Lobby implements Serializable {
 		
 	}
 	
-	//TODO: Spiellobby beitreten
-	public void addUserToLobby(UserTO aUser) {
-		this.users.add(aUser);
+	public void addUserToLobby(UserTO aUserTO) {
+		this.users.add(aUserTO);
 	}
 	
 	//Getters and Setters

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -12,11 +13,16 @@ import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 @Entity
 @Table(name = "VTTT_user")
-@NamedQuery(name="User.findUserByName", query="select u from User u where u.username = :username")
+@NamedQueries({
+	@NamedQuery(name="User.findUserByName", query="select u from User u where u.username = :username"),
+	@NamedQuery(name="User.findUserByID", query="select u from User u where u.id = :id"),
+	@NamedQuery(name="User.findByLobbyID", query="select u from User u where u.lobbyID = :lobbyID")
+})
 public class User {
 	
 	public static final String FIND_BY_NAME = "User.findUserByName";
 	public static final String FIND_BY_ID = "User.findUserByID";
+	public static final String FIND_BY_LOBBYID = "User.findByLobbyID";
 	
 	//PK
 	@Id
@@ -32,26 +38,29 @@ public class User {
 	private boolean admin;
 	@Column(nullable = false)
 	private String usergroup;
+	private int lobbyID;
 	
 	
 	//Contructor
 	public User() {}
 	
-	public User(int id, String username, String password, String eMailAddress, boolean admin, String usergroup) {
+	public User(int id, String username, String password, String eMailAddress, boolean admin, String usergroup, int lobbyID) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.eMailAddress = eMailAddress;
 		this.admin = admin;
 		this.usergroup = usergroup;
+		this.lobbyID = lobbyID;
 	}
 	
-	public User(String username, String password, String eMailAddress, boolean admin, String usergroup) {
+	public User(String username, String password, String eMailAddress, boolean admin, String usergroup, int lobbyID) {
 		this.username = username;
 		this.password = password;
 		this.eMailAddress = eMailAddress;
 		this.admin = admin;
 		this.usergroup = usergroup;
+		this.lobbyID = lobbyID;
 	}
 	
 	public UserTO toUserTO() {	
@@ -61,6 +70,7 @@ public class User {
 		aUserTO.setPassword(this.getPassword());
 		aUserTO.seteMailAddress(this.geteMailAddress());
 		aUserTO.setAdmin(this.isAdmin());
+		aUserTO.setLobbyID(this.getLobbyID());
 		return aUserTO;	
 	}
 	
@@ -106,6 +116,14 @@ public class User {
 
 	public void setUsergroup(String usergroup) {
 		this.usergroup = usergroup;
+	}
+
+	public int getLobbyID() {
+		return lobbyID;
+	}
+
+	public void setLobbyID(int lobbyID) {
+		this.lobbyID = lobbyID;
 	}
 
 	@Override

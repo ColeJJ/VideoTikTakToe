@@ -22,16 +22,10 @@
     	<managed-bean-class>com.videotiktaktoe.app.mb.ApplicationSecurityConfig</managed-bean-class>
     	<managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
-    
-	<managed-bean>
-		<managed-bean-name>menueMB</managed-bean-name>
-		<managed-bean-class>com.videotiktaktoe.app.mb.MenueMB</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
 	
 	<managed-bean>
-		<managed-bean-name>verwaltungMB</managed-bean-name>
-		<managed-bean-class>com.videotiktaktoe.app.mb.VerwaltungMB</managed-bean-class>
+		<managed-bean-name>naviMB</managed-bean-name>
+		<managed-bean-class>com.videotiktaktoe.app.mb.NavigationMB</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
@@ -65,8 +59,8 @@
 	<navigation-rule>
 		<from-view-id>/pages/protected/hauptmenue.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>LOBBY_BEITRETEN</from-outcome>
-			<to-view-id>/pages/protected/gamecenter/lobbyBeitreten.xhtml</to-view-id>
+			<from-outcome>LOBBY_ANZEIGEN</from-outcome>
+			<to-view-id>/pages/protected/gamecenter/lobbyAnzeigen.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

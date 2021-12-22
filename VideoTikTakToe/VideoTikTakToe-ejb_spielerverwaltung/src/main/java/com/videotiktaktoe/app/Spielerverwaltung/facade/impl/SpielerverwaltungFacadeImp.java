@@ -36,4 +36,8 @@ public class SpielerverwaltungFacadeImp implements ISpielerverwaltungFacade{
 		return accountPflegen.getAllGroups();
 	}
 
+	@Override
+	public List<UserTO> getAllUsersInSameLobby(int lobbyID) {
+		return accountPflegen.getAllUsersInSameLobby(lobbyID);
+	}
 }

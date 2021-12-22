@@ -18,6 +18,7 @@ public class UserTO implements Serializable{
 	private String eMailAddress;
 	private boolean admin;
 	private String usergroup;
+	private int lobbyID;
 	
 	
 	public UserTO() {
@@ -31,7 +32,8 @@ public class UserTO implements Serializable{
 				this.getPassword(),
 				this.geteMailAddress(),
 				this.isAdmin(),
-				this.getUsergroup());
+				this.getUsergroup(),
+				this.getLobbyID());
 		return aUser;
 	}
 	
@@ -87,5 +89,13 @@ public class UserTO implements Serializable{
 
 	public void setUsergroup(String usergroup) {
 		this.usergroup = usergroup;
+	}
+
+	public int getLobbyID() {
+		return lobbyID;
+	}
+
+	public void setLobbyID(int lobbyID) {
+		this.lobbyID = lobbyID;
 	}
 }

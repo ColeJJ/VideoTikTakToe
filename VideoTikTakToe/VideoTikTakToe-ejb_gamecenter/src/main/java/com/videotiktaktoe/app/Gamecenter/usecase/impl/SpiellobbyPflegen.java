@@ -8,8 +8,8 @@ import com.videotiktaktoe.app.Gamecenter.dao.LobbyDAO;
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 import com.videotiktaktoe.app.Gamecenter.entity.impl.Lobby;
 import com.videotiktaktoe.app.Gamecenter.usecase.ISpiellobbyPflegen;
-import com.videotiktaktoe.app.Spielerverwaltung.dao.UserDAO;
-import com.videotiktaktoe.app.Spielerverwaltung.entity.impl.User;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
+import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 
@@ -17,7 +17,7 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 	LobbyDAO lobbyDAO;
 	
 	@Inject
-	UserDAO userDAO;
+	ISpielerverwaltungFacade spielerverwaltungFacade;
 	
 	@Override
 	public LobbyTO spiellobbyErstellen(LobbyTO aLobbyTO, String userName) {
@@ -25,13 +25,13 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 		Lobby aLobby = lobbyDAO.findLobbyByName(aLobbyTO.getLobbyName());
 		
 		//User admin bool auf true setzen und FK setzen
-		User aUser = userDAO.findUserByName(userName);
-		aUser.setAdmin(true);
-		aUser.setLobbyID(aLobby.getId());
-		userDAO.update(aUser);
+		UserTO aUserTO = spielerverwaltungFacade.findUserByName(userName);
+		aUserTO.setAdmin(true);
+		aUserTO.setLobbyID(aLobby.getId());
+		spielerverwaltungFacade.userSichern(aUserTO);
 		
 		//admin als User der Userliste hinzufügen
-		aLobbyTO.addUser(aUser.toUserTO());
+		aLobbyTO.addUser(aUserTO);
 		
 		return aLobbyTO;
 	}

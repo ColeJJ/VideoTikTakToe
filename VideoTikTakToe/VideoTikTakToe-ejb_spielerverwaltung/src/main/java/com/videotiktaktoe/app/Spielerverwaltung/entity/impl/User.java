@@ -70,6 +70,7 @@ public class User {
 		aUserTO.setPassword(this.getPassword());
 		aUserTO.seteMailAddress(this.geteMailAddress());
 		aUserTO.setAdmin(this.isAdmin());
+		aUserTO.setUsergroup(this.getUsergroup());
 		aUserTO.setLobbyID(this.getLobbyID());
 		return aUserTO;	
 	}

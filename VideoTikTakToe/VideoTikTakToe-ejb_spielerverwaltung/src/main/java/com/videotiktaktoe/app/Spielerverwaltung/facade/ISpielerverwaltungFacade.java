@@ -10,7 +10,8 @@ import com.videotiktaktoe.app.Spielerverwaltung.entity.UsergroupTO;
 @Local
 public interface ISpielerverwaltungFacade {
 	
-	public UserTO findUserByName(String username);	
+	public UserTO findUserByName(String username);
+	public void userSichern(UserTO aUserTO);
 	public void userRegistrieren(UserTO aUser);
 	public List<UsergroupTO> getAllGroups();
 	public List<UserTO> getAllUsersInSameLobby(int lobbyID);

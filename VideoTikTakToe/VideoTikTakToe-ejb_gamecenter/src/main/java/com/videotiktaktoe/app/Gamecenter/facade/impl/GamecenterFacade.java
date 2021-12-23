@@ -28,8 +28,8 @@ public class GamecenterFacade implements IGamecenterFacade{
 	}
 
 	@Override
-	public LobbyTO lobbyBeitreten(String lobbyCode) {
-		return spiellobbyVerwalten.lobbyBeitreten(lobbyCode);
+	public LobbyTO lobbyBeitreten(String lobbyCode, String username) {
+		return spiellobbyVerwalten.lobbyBeitreten(lobbyCode, username);
 	}
 
 }

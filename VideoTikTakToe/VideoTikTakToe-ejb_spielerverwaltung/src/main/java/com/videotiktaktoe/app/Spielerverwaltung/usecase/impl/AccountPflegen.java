@@ -46,4 +46,15 @@ public class AccountPflegen implements IAccountPflegen{
 		}
 		return userTOListe;
 	}
+
+	@Override
+	public UserTO findUserByName(String username) {
+		User aUser = userDAO.findUserByName(username);
+		return aUser.toUserTO();
+	}
+
+	@Override
+	public void userSichern(UserTO aUserTO) {
+		userDAO.update(aUserTO.toUser());
+	}
 }

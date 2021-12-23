@@ -87,8 +87,7 @@ public class LobbyMB implements Serializable{
 	
 	public String lobbyBeitreten() {
 		try {
-			System.out.println("LobbyBeitren starten");
-			this.aLobby = gamecenterFacade.lobbyBeitreten(this.aLobby.getLobbyCode());
+			this.aLobby = gamecenterFacade.lobbyBeitreten(this.aLobby.getLobbyCode(), securityContext.getCallerPrincipal().getName());
 			if(this.aLobby.getLobbyCode() == null) {
 				//TODO: hier ne Message im Dialogfenster anzeigen
 				sendErrorMessageToUser("Der Lobbycode ist ungültig.");

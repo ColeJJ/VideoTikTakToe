@@ -100,6 +100,15 @@ public class LobbyMB implements Serializable{
 		}
 	}
 	
+	public String lobbyVerlassen() {
+		try {
+			gamecenterFacade.lobbyVerlassen(securityContext.getCallerPrincipal().getName());
+		} catch (EJBException e) {
+			sendErrorMessageToUser("Lobby verlassen hat nicht funktioniert.");
+			return this.stayAtSide();
+		}
+	}
+	
 	//Navigation
 	public String toLogin() {
 		return "BACK_TO_LOGIN";

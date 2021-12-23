@@ -10,4 +10,5 @@ public interface IGamecenterFacade {
 	public LobbyTO lobbyErstellen (LobbyTO aLobbyTO, String userName);
 	public String generateCode (LobbyTO aLobbyTO);
 	public LobbyTO lobbyBeitreten(String lobbyCode, String username);
+	public void lobbyVerlassen(String username);
 }

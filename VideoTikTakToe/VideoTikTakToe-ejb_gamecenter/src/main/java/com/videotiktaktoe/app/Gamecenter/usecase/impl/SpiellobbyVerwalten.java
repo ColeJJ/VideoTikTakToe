@@ -35,4 +35,11 @@ public class SpiellobbyVerwalten implements ISpiellobbyVerwalten {
 		return aLobbyTO;
 	}
 
+	@Override
+	public void lobbyVerlassen(String username) {
+		UserTO aUserTO = spielerverwaltungFacade.findUserByName(username);
+		aUserTO.setLobbyID(0);
+		spielerverwaltungFacade.userSichern(aUserTO);
+	}
+
 }

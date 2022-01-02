@@ -32,4 +32,9 @@ public class GamecenterFacade implements IGamecenterFacade{
 		return spiellobbyVerwalten.lobbyBeitreten(lobbyCode, username);
 	}
 
+	@Override
+	public void lobbyVerlassen(String username) {
+		spiellobbyVerwalten.lobbyVerlassen(username);
+	}
+
 }

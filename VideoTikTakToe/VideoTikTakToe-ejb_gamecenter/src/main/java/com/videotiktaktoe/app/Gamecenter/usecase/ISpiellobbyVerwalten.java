@@ -5,5 +5,6 @@ import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 public interface ISpiellobbyVerwalten {
 
 	public LobbyTO lobbyBeitreten(String lobbyCode, String username);
+	public void lobbyVerlassen(String username);
 	
 }

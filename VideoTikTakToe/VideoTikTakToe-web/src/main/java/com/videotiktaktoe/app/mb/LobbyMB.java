@@ -103,6 +103,8 @@ public class LobbyMB implements Serializable{
 	public String lobbyVerlassen() {
 		try {
 			gamecenterFacade.lobbyVerlassen(securityContext.getCallerPrincipal().getName());
+			sendInfoMessageToUser("Lobby verlassen.");
+			return this.toHauptmenue();
 		} catch (EJBException e) {
 			sendErrorMessageToUser("Lobby verlassen hat nicht funktioniert.");
 			return this.stayAtSide();
@@ -120,6 +122,10 @@ public class LobbyMB implements Serializable{
 	
 	public String stayAtSide() {
 		return "";
+	}
+	
+	public String toHauptmenue() {
+		return "BACK_TO_HAUPTMENUE";
 	}
 	
 	//Getters and Setters

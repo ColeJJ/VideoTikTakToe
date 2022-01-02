@@ -27,4 +27,8 @@ public class LobbyDAO extends GenericDAO<Lobby> {
 		
 		return super.findOneResult(Lobby.FIND_BY_LOBBYCODE, parameters);
 	}
+	
+	public boolean deleteLobby(int lobbyID) {
+		return this.delete(lobbyID, Lobby.class);
+	}
 }

@@ -37,4 +37,9 @@ public class GamecenterFacade implements IGamecenterFacade{
 		spiellobbyVerwalten.lobbyVerlassen(username);
 	}
 
+	@Override
+	public boolean lobbyLoeschen(String username, String lobbyName) {
+		return spiellobbyVerwalten.lobbyLoeschen(username, lobbyName);
+	}
+
 }

@@ -50,6 +50,10 @@ public class LobbyMB implements Serializable{
 		}
 	}
 	
+	public void reinitBean() {
+		this.aLobby = new LobbyTO();
+	}
+	
 	//Info-Messages
 	private void sendInfoMessageToUser(String message){
 		FacesContext context = getContext();
@@ -104,9 +108,22 @@ public class LobbyMB implements Serializable{
 		try {
 			gamecenterFacade.lobbyVerlassen(securityContext.getCallerPrincipal().getName());
 			sendInfoMessageToUser("Lobby verlassen.");
+			this.reinitBean();
 			return this.toHauptmenue();
 		} catch (EJBException e) {
 			sendErrorMessageToUser("Lobby verlassen hat nicht funktioniert.");
+			return this.stayAtSide();
+		}
+	}
+	
+	public String lobbyLoeschen() {
+		
+		if(gamecenterFacade.lobbyLoeschen(securityContext.getCallerPrincipal().getName(), this.aLobby.getLobbyName())) {
+			sendInfoMessageToUser("Lobby geloescht.");
+			this.reinitBean();
+			return this.toHauptmenue();
+		} else {
+			sendErrorMessageToUser("Lobby loeschen hat nicht funktioniert.");
 			return this.stayAtSide();
 		}
 	}

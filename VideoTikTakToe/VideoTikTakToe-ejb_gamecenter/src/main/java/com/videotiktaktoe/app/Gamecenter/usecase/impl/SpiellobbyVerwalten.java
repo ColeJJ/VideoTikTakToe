@@ -1,5 +1,7 @@
 package com.videotiktaktoe.app.Gamecenter.usecase.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.videotiktaktoe.app.Gamecenter.dao.LobbyDAO;
@@ -40,6 +42,22 @@ public class SpiellobbyVerwalten implements ISpiellobbyVerwalten {
 		UserTO aUserTO = spielerverwaltungFacade.findUserByName(username);
 		aUserTO.setLobbyID(0);
 		spielerverwaltungFacade.userSichern(aUserTO);
+	}
+
+	@Override
+	public boolean lobbyLoeschen(String username, String lobbyName) {
+		//Alle User aus der Lobby nehmen
+		Lobby aLobby = lobbyDAO.findLobbyByName(lobbyName);
+		List<UserTO> userTOListe = spielerverwaltungFacade.getAllUsersInSameLobby(aLobby.getId());
+		for(UserTO aUserTO:userTOListe) {
+			aUserTO.setLobbyID(0);
+			if(aUserTO.isAdmin()) {
+				aUserTO.setAdmin(false);
+			}
+			spielerverwaltungFacade.userSichern(aUserTO);
+		}
+		
+		return lobbyDAO.deleteLobby(aLobby.getId());
 	}
 
 }

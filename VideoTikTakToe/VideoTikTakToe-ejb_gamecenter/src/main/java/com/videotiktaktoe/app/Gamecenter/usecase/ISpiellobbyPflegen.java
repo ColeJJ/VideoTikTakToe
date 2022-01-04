@@ -6,5 +6,6 @@ public interface ISpiellobbyPflegen {
 	
 	public LobbyTO spiellobbyErstellen(LobbyTO aLobbyTO, String userName);
 	public String generateCode(LobbyTO aLobbyTO);
+	public LobbyTO lobbySuchen(int lobbyID);
 
 }

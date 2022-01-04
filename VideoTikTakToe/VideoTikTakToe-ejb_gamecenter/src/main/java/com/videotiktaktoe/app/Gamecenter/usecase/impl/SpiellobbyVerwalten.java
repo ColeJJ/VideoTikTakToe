@@ -22,14 +22,12 @@ public class SpiellobbyVerwalten implements ISpiellobbyVerwalten {
 	
 	@Override
 	public LobbyTO lobbyBeitreten(String lobbyCode, String username) {
-		Lobby aLobby = lobbyDAO.findLobbyByCode(lobbyCode);
+		LobbyTO aLobbyTO = lobbyDAO.findLobbyByCode(lobbyCode).toLobbyTO();
 		UserTO aUserTO = spielerverwaltungFacade.findUserByName(username);
-		LobbyTO aLobbyTO = new LobbyTO();
-		if(aLobby != null) {
-			aUserTO.setLobbyID(aLobby.getId());
+		if(aLobbyTO != null) {
+			aUserTO.setLobbyID(aLobbyTO.getId());
 			spielerverwaltungFacade.userSichern(aUserTO);
-			aLobby.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(aLobby.getId()));
-			aLobbyTO = aLobby.toLobbyTO();
+			aLobbyTO.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(aLobbyTO.getId()));
 		}
 
 		//TODO: vllt gibts hier in Java auch Möglichkeiten Exceptions zu werfen, die dann im FE abgefangen werden.. 
@@ -59,5 +57,4 @@ public class SpiellobbyVerwalten implements ISpiellobbyVerwalten {
 		
 		return lobbyDAO.deleteLobby(aLobby.getId());
 	}
-
 }

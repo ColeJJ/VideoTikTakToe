@@ -3,6 +3,7 @@
 	<persistence-unit name="VIDEOTIKTAKTOE_EJB_SPIELERVERWALTUNG">
 		<jta-data-source>java:/OracleDS</jta-data-source> 
 		<class>com.videotiktaktoe.app.Spielerverwaltung.entity.impl.User</class>
+		<class>com.videotiktaktoe.app.Spielerverwaltung.entity.impl.Wertung</class>
 		<properties>
 			<property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>

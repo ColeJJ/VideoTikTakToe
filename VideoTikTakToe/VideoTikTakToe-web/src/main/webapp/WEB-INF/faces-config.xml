@@ -28,6 +28,13 @@
 		<managed-bean-class>com.videotiktaktoe.app.mb.NavigationMB</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>spielsessionMB</managed-bean-name>
+		<managed-bean-class>com.videotiktaktoe.app.mb.SpielsessionMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
 
 	<!-- Login_Dialog -->
 	<navigation-rule>
@@ -112,6 +119,14 @@
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/pages/protected/gamecenter/lobbyAnzeigen.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>TO_GAME</from-outcome>
+			<to-view-id>/pages/protected/gamecenter/game.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

@@ -1,8 +1,6 @@
 package com.videotiktaktoe.app.mb;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJBException;
@@ -13,9 +11,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
 
-import org.primefaces.PrimeFaces;
-
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
+import com.videotiktaktoe.app.Gamecenter.entity.SpielsessionTO;
 import com.videotiktaktoe.app.Gamecenter.facade.IGamecenterFacade;
 import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 

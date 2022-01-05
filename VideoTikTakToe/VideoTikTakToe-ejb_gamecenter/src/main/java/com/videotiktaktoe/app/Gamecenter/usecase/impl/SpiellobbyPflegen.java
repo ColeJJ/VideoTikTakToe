@@ -22,18 +22,18 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 	@Override
 	public LobbyTO spiellobbyErstellen(LobbyTO aLobbyTO, String userName) {
 		lobbyDAO.save(aLobbyTO.toLobby());
-		Lobby aLobby = lobbyDAO.findLobbyByName(aLobbyTO.getLobbyName());
+		LobbyTO savedLobbyTO = lobbyDAO.findLobbyByName(aLobbyTO.getLobbyName()).toLobbyTO();
 		
 		//User admin bool auf true setzen und FK setzen
 		UserTO aUserTO = spielerverwaltungFacade.findUserByName(userName);
 		aUserTO.setAdmin(true);
-		aUserTO.setLobbyID(aLobby.getId());
+		aUserTO.setLobbyID(savedLobbyTO.getId());
 		spielerverwaltungFacade.userSichern(aUserTO);
 		
 		//admin als User der Userliste hinzufügen
-		aLobbyTO.addUser(aUserTO);
+		savedLobbyTO.addUser(aUserTO);
 		
-		return aLobbyTO;
+		return savedLobbyTO;
 	}
 
 	@Override
@@ -71,6 +71,12 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 	    //TODO: Lobby Code auf Einmaligkeit prüfen, bevor es gespeichert wird 
 		lobbyDAO.update(aLobby);
 		return aLobby.getLobbyCode();
+	}
+
+	@Override
+	public LobbyTO lobbySuchen(int lobbyID) {
+		Lobby aLobby = lobbyDAO.find(lobbyID);
+		return aLobby.toLobbyTO();
 	}
 
 

@@ -28,7 +28,7 @@
 		<dependency>
 		    <groupId>javax.faces</groupId>
 		    <artifactId>javax.faces-api</artifactId>
-		    <version>2.3</version>
+		    <version>2.2</version>
 		    <scope>provided</scope>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
@@ -49,11 +49,6 @@
 	        <version>8.0.0</version>
 	        <scope>provided</scope>
 	    </dependency>
-	    <dependency>
-		    <groupId>org.primefaces</groupId>
-		    <artifactId>primefaces</artifactId>
-		    <version>7.0</version>
-		</dependency>
 	    <dependency>
             <groupId>com.videotiktaktoe.app</groupId>
             <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>

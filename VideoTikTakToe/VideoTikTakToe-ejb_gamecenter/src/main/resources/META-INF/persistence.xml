@@ -3,6 +3,7 @@
 	<persistence-unit name="VIDEOTIKTAKTOE_EJB_GAMECENTER">
 		<jta-data-source>java:/OracleDS</jta-data-source> 
 		<class>com.videotiktaktoe.app.Gamecenter.entity.impl.Lobby</class>
+		<class>com.videotiktaktoe.app.Gamecenter.entity.impl.Spielsession</class>
 		<properties>
 			<property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>

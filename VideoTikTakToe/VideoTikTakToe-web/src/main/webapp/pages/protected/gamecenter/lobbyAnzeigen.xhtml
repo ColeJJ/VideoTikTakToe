@@ -34,14 +34,22 @@
 			</h:commandButton>
 			<h:outputText value="Code: #{lobbyMB.aLobby.lobbyCode}"></h:outputText>
 			
+			<h:outputLabel value="Rundenanzahl: " />
+			<h:selectOneMenu value="#{spielsessionMB.aSessionTO.rundenAnzahl}">
+ 				<f:selectItems value="#{spielsessionMB.bestOfs}" var="rundenAnzahl" itemValue="#{rundenAnzahl}" itemLabel="#{rundenAnzahl}" />
+ 			</h:selectOneMenu>
+			
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">
+			
+				<h:inputHidden value="#{lobbyMB.aLobby.id}" />
 				
 				<h:commandButton 
              			value="Spiel starten"	
-             			action="#{lobbyMB.getLobbygroesse()}"				
+             			action="#{spielsessionMB.spielStarten()}"				
              			style=" width: 200px">
+             		<f:setPropertyActionListener target="#{spielsessionMB.aLobbyTO}" value="#{lobbyMB.aLobby}"  /> 
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
            		 

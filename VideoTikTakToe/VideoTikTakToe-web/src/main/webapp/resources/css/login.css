@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -36,7 +36,7 @@ body{
 form .txt_field{
   position: relative;
   border-bottom: 2px solid #adadad;
-  margin: 30px 0;
+  margin: 10px 0;
 }
 .txt_field input{
   width: 100%;
@@ -48,7 +48,6 @@ form .txt_field{
   outline: none;
 }
 .txt_field label{
-  position: absolute;
   top: 50%;
   left: 5px;
   color: #adadad;
@@ -100,4 +99,80 @@ input[type="submit"]:hover{
   border-color: #2691d9;
   transition: .5s;
 }
+*/
+body{
+  margin: 0;
+  padding: 0;
+  background: #DEDEDE;
+  height: 100vh;
+  overflow: hidden;
+}
 
+h1{
+	text-align: center;
+	font-family:monospace;
+}
+
+.center{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+
+.center .button_reg{
+	font-family: monospace;
+	border-style: none;
+	background: white;
+  border: 1px solid;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  margin: -10px auto;
+  
+}
+
+.center .button_login{
+	font-family: monospace;
+	border-style: none;
+	background: white;
+  border: 1px solid;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  margin: 10px auto;
+}
+
+.label {
+	font-family: monospace;
+}
+
+.center .input_field {
+	font-family: monospace;
+	border-style: none;
+	margin-top: 14px;
+	padding: 1% 30%;
+  text-align: center;
+}
+
+.select_field {
+	font-family: monospace;
+	border-style: none;
+	margin-top: 14px;
+	padding: 0px 20px; 
+	
+}
+.center .message{
+  font-family: monospace;
+  margin: 0px auto;
+}

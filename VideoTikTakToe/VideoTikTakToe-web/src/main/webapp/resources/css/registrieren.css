@@ -1,3 +1,62 @@
+body{
+  margin: 0;
+  padding: 0;
+  background: #DEDEDE;
+  height: 100vh;
+  overflow: hidden;
+}
+
+h1{
+	text-align: center;
+	font-family:monospace;
+}
+
+.center{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+.center .button{
+	transform: translate(50%, 50%);
+}
 .button {
-	background-color:red;
+	font-family: monospace;
+	border-style: none;
+	background: white;
+	margin-top: 8px;
+  border: 1px solid;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+.label {
+	font-family: monospace;
+}
+
+.center .input_field {
+	font-family: monospace;
+	border-style: none;
+	margin-top: 14px;
+	padding: 1% 30%;
+  text-align: center;
+}
+
+.select_field {
+	font-family: monospace;
+	border-style: none;
+	margin-top: 14px;
+	padding: 0px 20px; 
+	
+}
+.center .message{
+  font-family: monospace;
+  margin: 0px auto;
 }

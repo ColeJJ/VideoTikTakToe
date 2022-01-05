@@ -1,6 +1,11 @@
 package com.videotiktaktoe.app.mb;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJBException;
@@ -10,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
+import javax.swing.JOptionPane;
 
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 import com.videotiktaktoe.app.Gamecenter.entity.SpielsessionTO;
@@ -67,15 +73,36 @@ public class LobbyMB implements Serializable{
 		return context;
 	}
 	
+	private void test(){
+		FacesContext context = getContext();
+		context.addMessage("error_msgs",new FacesMessage(FacesMessage.SEVERITY_INFO,"Name is Required","Keine Ahnung"));;
+	}
+	 
+	
 	public String lobbyErstellenClicked() {
-		try {
+		//this.aLobby = gamecenterFacade.lobbyNameSuchen(this.aLobby.getLobbyName());
+		if (this.aLobby.getLobbyName()== null || this.aLobby.getLobbyName().isEmpty()) {
+			sendInfoMessageToUser("Bitte geben Sie einen Lobbynamen an.");
+	         return null;
+	     }
+		 Pattern p = Pattern.compile("[^A-Za-z0-9]");
+	     Matcher m = p.matcher(this.aLobby.getLobbyName());
+	    // boolean b = m.matches();
+	     boolean b = m.find();
+	     if (b == true) {
+	    	 sendErrorMessageToUser("Kann die Lobby nicht erstellen.");
+	    	 return this.stayAtSide();
+	     }else {
+	    	try {
 			this.aLobby = gamecenterFacade.lobbyErstellen(this.aLobby, securityContext.getCallerPrincipal().getName());
-			sendInfoMessageToUser("Lobby erstellen.");
+			sendInfoMessageToUser("Lobby wurde erstellt.");
 			return this.toLobbyAnzeigen();
-		} catch(EJBException e) {
-			sendErrorMessageToUser("Kann die Lobby nicht erstellen.");
-			return this.stayAtSide();
+	    	}catch(EJBException e) {
+	    		sendInfoMessageToUser("Lobbyname existiert bereits.");
+				return this.stayAtSide();
+	    	}
 		}
+	  
 	}
 	
 	public void generateCode() {
@@ -87,14 +114,21 @@ public class LobbyMB implements Serializable{
 	}
 	
 	public String lobbyBeitreten() {
+		if (this.aLobby.getLobbyCode()== null || this.aLobby.getLobbyCode().isEmpty()) {
+			sendInfoMessageToUser("Bitte geben Sie einen Lobbynamen an.");
+	        return null;
+	     }
 		try {
 			this.aLobby = gamecenterFacade.lobbyBeitreten(this.aLobby.getLobbyCode(), securityContext.getCallerPrincipal().getName());
-			if(this.aLobby.getLobbyCode() == null) {
+			if(this.aLobby.getLobbyCode() == null ) {
 				//TODO: hier ne Message im Dialogfenster anzeigen
 				sendErrorMessageToUser("Der Lobbycode ist ungültig.");
 				return this.stayAtSide();
 			}
-			return this.toLobbyAnzeigen();
+			else {
+				sendErrorMessageToUser("Lobby erfolgreich beigetreten");
+				return this.toLobbyAnzeigen();
+			}
 		} catch(EJBException e) {
 			sendErrorMessageToUser("Der Lobbycode ist ungültig.");
 			return this.stayAtSide();

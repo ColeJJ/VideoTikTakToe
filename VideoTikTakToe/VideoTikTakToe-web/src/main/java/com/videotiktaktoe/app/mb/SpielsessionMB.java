@@ -114,4 +114,12 @@ public class SpielsessionMB implements Serializable{
 	public void setBestOfs(int[] bestOfs) {
 		this.bestOfs = bestOfs;
 	}
+
+	public IGamecenterFacade getGamecenterFacade() {
+		return gamecenterFacade;
+	}
+
+	public void setGamecenterFacade(IGamecenterFacade gamecenterFacade) {
+		this.gamecenterFacade = gamecenterFacade;
+	}
 }

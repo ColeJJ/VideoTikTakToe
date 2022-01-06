@@ -11,6 +11,29 @@
     <title>TikTakToe</title>
   </h:head>
   <h:body>
+  	<h3>TikTakToe - Game</h3>
+    <br/>
+    <!-- Mit inputHidden kann js auf MB Values zugreifen -->
+   	<h:inputHidden value="#{spielsessionMB.aSessionTO.rundenAnzahl}"/>
+   	<h:inputHidden value="#{spielsessionMB.aWertungTOSpieler1.punktestand}"/>
+   	<h:inputHidden value="#{spielsessionMB.aWertungTOSpieler2.punktestand}"/>
+   	
+   	<h:panelGroup id="scoreboard">
+	   	<h:panelGrid columns="2">
+			<h:outputLabel value="Lobby Spieler1: #{lobbyMB.aLobby.users[0].username}" />	
+			<h:outputLabel value="Lobby Spieler2: #{lobbyMB.aLobby.users[1].username}" />
+			<h:outputLabel value="Best of: ">
+				<h:outputLabel id="bestof" value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
+			</h:outputLabel>
+			<h:outputLabel value="Punktestand: ">
+				<h:outputLabel id="scoreSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.punktestand}" />
+					<h:outputLabel value=":" />
+				<h:outputLabel id="scoreSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.punktestand}" />
+			</h:outputLabel>
+		</h:panelGrid>
+	</h:panelGroup>
+	
+	<!-- TikTakToe -->
   	<h:panelGroup class="board" id="board">
 	    <h:panelGroup class="cell"></h:panelGroup>
 	    <h:panelGroup class="cell"></h:panelGroup>
@@ -23,8 +46,8 @@
 	    <h:panelGroup class="cell"></h:panelGroup>
     </h:panelGroup>
     <h:panelGroup class="winning-message" id="winningMessage">
-    	<h:panelGroup id="data-winning-message-text"></h:panelGroup>
-   	 	<h:commandButton value="Restart" id="restartButton" styleClass="restartButton"></h:commandButton>
+    	<h:panelGroup class="data-winning-message-text" id="data-winning-message-text"></h:panelGroup>
+   	 	<h:commandButton value="Restart" id="restartButton" styleClass="restartButton"><f:ajax render="scoreboard"/></h:commandButton>
     </h:panelGroup>
   </h:body>
 </html>

@@ -18,7 +18,11 @@ public class WertungTO implements Serializable{
 	private int userID;
 	
 	//Konstruktor
-	public WertungTO() {}
+	public WertungTO() {
+		this.punktestand = 0;
+		this.siege = 0;
+		this.niederlagen = 0;
+	}
 	
 	public WertungTO(int id, int punktestand, int siege, int niederlagen, int userID) {
 		this.id = id;

@@ -36,7 +36,7 @@
 			
 			<h:outputLabel value="Rundenanzahl: " />
 			<h:selectOneMenu value="#{spielsessionMB.aSessionTO.rundenAnzahl}">
- 				<f:selectItems value="#{spielsessionMB.bestOfs}" var="rundenAnzahl" itemValue="#{rundenAnzahl}" itemLabel="#{rundenAnzahl}" />
+ 				<f:selectItems value="#{spielsessionMB.bestOfs}" var="bestOf" itemValue="#{bestOf}" itemLabel="#{bestOf}" />
  			</h:selectOneMenu>
 			
 			</h:panelGrid>
@@ -49,7 +49,7 @@
              			value="Spiel starten"	
              			action="#{spielsessionMB.spielStarten()}"				
              			style=" width: 200px">
-             		<f:setPropertyActionListener target="#{spielsessionMB.aLobbyTO}" value="#{lobbyMB.aLobby}"  /> 
+             		<f:setPropertyActionListener target="#{spielsessionMB.aSessionTO.lobbyID}" value="#{lobbyMB.aLobby.id}"  /> 
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
            		 

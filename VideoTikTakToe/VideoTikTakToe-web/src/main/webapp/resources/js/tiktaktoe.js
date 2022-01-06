@@ -62,10 +62,10 @@ function endGame(draw) {
     winningMessageTextElement.innerText = "Draw!";
   } else {
 	if(circleTurn) {
-		scoreSpieler2.outerText = "1";
+		scoreSpieler2.outerText = "${scoreSpieler2}";
 		winningMessageTextElement.innerText = "O'sWins!";
 	} else {
-		scoreSpieler1.outerText = "1";
+		scoreSpieler1.outerText = "${scoreSpieler1}";
 		winningMessageTextElement.innerText = "X'sWins!";
 	}
     //winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`;

@@ -38,9 +38,6 @@ public class SpielsessionMB implements Serializable{
 		if(this.aSessionTO == null) {
 			this.aSessionTO = new SpielsessionTO();
 		}
-		
-		//Theorie: Wird aus LobbyAnsicht übergeben.. sonst muss die hier noch iwie gesetzt werden
-		//this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
 	}
 	
 	public void reinitBean() {

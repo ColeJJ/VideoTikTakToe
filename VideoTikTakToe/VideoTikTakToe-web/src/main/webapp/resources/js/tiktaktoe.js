@@ -67,12 +67,12 @@ function endGame(draw) {
     winningMessageTextElement.innerText = "Draw!";
   } else {
 	if(circleTurn) {
-		scoreSpieler2.value = 1;
+		scoreSpieler2.value++;
 		score2++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
 		winningMessageTextElement.innerText = "O'sWins!";
 	} else {
-		scoreSpieler1.value = 1;
+		scoreSpieler1.value++;
 		score1++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
 		winningMessageTextElement.innerText = "X'sWins!";

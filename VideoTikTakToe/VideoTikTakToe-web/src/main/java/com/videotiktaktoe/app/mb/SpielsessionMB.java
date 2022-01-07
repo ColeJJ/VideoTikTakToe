@@ -9,11 +9,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.enterprise.SecurityContext;
 
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 import com.videotiktaktoe.app.Gamecenter.entity.SpielsessionTO;
 import com.videotiktaktoe.app.Gamecenter.facade.IGamecenterFacade;
 import com.videotiktaktoe.app.Spielerverwaltung.entity.WertungTO;
+import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @Named("spielsessionMB")
 @SessionScoped
@@ -35,6 +37,12 @@ public class SpielsessionMB implements Serializable{
 	
 	@Inject
 	IGamecenterFacade gamecenterFacade;
+	
+	@Inject
+	ISpielerverwaltungFacade spielerverwaltungFacade;
+	
+	@Inject
+	SecurityContext securityContext;
 	
 	@PostConstruct
 	public void initBean() {
@@ -67,9 +75,13 @@ public class SpielsessionMB implements Serializable{
 	
 	public String spielStarten() {
 		try {
-			this.aSessionTO = gamecenterFacade.spielStarten(this.aSessionTO.getRundenAnzahl(), this.aSessionTO.getLobbyID());
+			this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
+			this.aLobbyTO.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(this.aLobbyTO.getId()));
+			this.aSessionTO = gamecenterFacade.spielStarten(this.aSessionTO.getRundenAnzahl(), this.aLobbyTO.getId(), this.aLobbyTO.getUsers());
+			this.aWertungTOSpieler1 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(0).getId());
+			this.aWertungTOSpieler2 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(1).getId());
 			sendInfoMessageToUser("Spiel wurde gestartet.");
-			return this.toGame();
+			return this.stayAtSide();
 		} catch(EJBException e) {
 			sendErrorMessageToUser("Spiel konnte nicht gestartet werden.");
 			return this.stayAtSide();

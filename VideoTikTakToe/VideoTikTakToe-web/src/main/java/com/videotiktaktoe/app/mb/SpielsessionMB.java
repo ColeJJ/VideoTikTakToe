@@ -49,10 +49,12 @@ public class SpielsessionMB implements Serializable{
 		if(this.aSessionTO == null) {
 			this.aSessionTO = new SpielsessionTO();
 		}
+		this.aLobbyTO = new LobbyTO();
+		this.aWertungTOSpieler1 = new WertungTO();
+		this.aWertungTOSpieler2 = new WertungTO();
 	}
 	
 	public void refreshBean() {
-		this.aSessionTO = null;
 		this.aLobbyTO = null;
 		this.aWertungTOSpieler1 = null;
 		this.aWertungTOSpieler2 = null;
@@ -93,7 +95,6 @@ public class SpielsessionMB implements Serializable{
 		try {
 			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
 			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);
-			this.refreshBean();
 			sendInfoMessageToUser("Spiel wurde beendet.");
 			return this.toLobby();
 		} catch(EJBException e) {

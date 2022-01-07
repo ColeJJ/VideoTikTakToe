@@ -37,7 +37,7 @@ restartButton.addEventListener("click", manageGame);
 
 function manageGame() {
   if(endBestOf){
-	remoteSpielBeenden();
+	//
   }
   circleTurn = false;
   cellElements.forEach((cell) => {

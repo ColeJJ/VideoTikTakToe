@@ -51,10 +51,11 @@ public class SpielsessionMB implements Serializable{
 		}
 	}
 	
-	public void reinitBean() {
-		if(this.aSessionTO != null) {
-			this.aSessionTO = gamecenterFacade.getSessionByLobbyID(this.aLobbyTO.getId());
-		}
+	public void refreshBean() {
+		this.aSessionTO = null;
+		this.aLobbyTO = null;
+		this.aWertungTOSpieler1 = null;
+		this.aWertungTOSpieler2 = null;
 	}
 	
 	//Info-Messages
@@ -88,6 +89,30 @@ public class SpielsessionMB implements Serializable{
 		}
 	}
 	
+	public String spielBeenden() {
+		try {
+			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
+			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);
+			this.refreshBean();
+			sendInfoMessageToUser("Spiel wurde beendet.");
+			return this.toLobby();
+		} catch(EJBException e) {
+			sendErrorMessageToUser("Spiel konnte nicht beendet werden.");
+			return this.stayAtSide();
+		}
+	}
+	
+	public String spielVerlassen() {
+		try {
+			this.refreshBean();
+			sendInfoMessageToUser("Spiel wurde verlassen.");
+			return this.toLobby();
+		} catch(EJBException e) {
+			sendErrorMessageToUser("Spiel konnte nicht verlassen werden.");
+			return this.stayAtSide();
+		}
+	}
+	
 	//Navigation
 	public String toLogin() {
 		return "BACK_TO_LOGIN";
@@ -103,6 +128,10 @@ public class SpielsessionMB implements Serializable{
 	
 	public String toHauptmenue() {
 		return "BACK_TO_HAUPTMENUE";
+	}
+	
+	public String toLobby() {
+		return "LOBBY_ANZEIGEN";
 	}
 		
 	//Getters and Setters

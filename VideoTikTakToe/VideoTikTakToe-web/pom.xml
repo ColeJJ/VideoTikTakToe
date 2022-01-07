@@ -50,6 +50,10 @@
 	        <scope>provided</scope>
 	    </dependency>
 	    <dependency>
+		    <groupId>org.primefaces</groupId>
+		    <artifactId>primefaces</artifactId>
+		</dependency>
+	    <dependency>
             <groupId>com.videotiktaktoe.app</groupId>
             <artifactId>VideoTikTakToe-ejb_spielerverwaltung</artifactId>
             <type>ejb</type>

@@ -4,6 +4,7 @@
   xmlns:f="http://java.sun.com/jsf/core"
   xmlns:h="http://java.sun.com/jsf/html"
   xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui"
 >
   <h:head>
     <h:outputStylesheet name="css/game.css" />
@@ -16,6 +17,7 @@
      	
    	<h:panelGroup id="scoreboard">
    		<!-- Mit inputHidden kann js auf MB Values zugreifen -->
+   		<h:inputHidden id="bestof" value="#{spielsessionMB.aSessionTO.rundenAnzahl}"/>
 	   	<h:inputHidden id="scoreSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.punktestand}"/>
 	   	<h:inputHidden id="scoreSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.punktestand}"/>
 	   	
@@ -23,9 +25,10 @@
 			<h:outputLabel value="Lobby Spieler1: #{spielsessionMB.aLobbyTO.users[0].username}" />	
 			<h:outputLabel value="Lobby Spieler2: #{spielsessionMB.aLobbyTO.users[1].username}" />
 			<h:outputLabel value="Best of: ">
-				<h:outputLabel id="bestof" value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
+				<h:outputLabel value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
 			</h:outputLabel>			
 		</h:panelGrid>
+		<h:commandButton value="Spiel verlassen" action="#{spielsessionMB.spielVerlassen()}" style=" width: 200px"></h:commandButton>
 	</h:panelGroup>
 	
 	<!-- TikTakToe -->
@@ -44,6 +47,7 @@
     	<h:panelGroup class="data-winning-message-text" id="data-winning-message-score"></h:panelGroup>
     	<h:panelGroup class="data-winning-message-text" id="data-winning-message-text"></h:panelGroup>
    	 	<h:commandButton value="Restart" id="restartButton" styleClass="restartButton"><f:ajax render="scoreboard"/></h:commandButton>
+   	 	<p:remoteCommand name="remoteSpielBeenden" actionListener="#{spielsessionMB.spielBeenden()}"/>
     </h:panelGroup>
   </h:body>
 </html>

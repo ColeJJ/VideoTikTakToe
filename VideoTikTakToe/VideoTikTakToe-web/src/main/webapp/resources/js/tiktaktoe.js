@@ -21,6 +21,12 @@ const restartButton = document.getElementById("restartButton");
 const winningMessageTextElement = document.querySelector("[id='data-winning-message-text']");
 let circleTurn;
 
+//SP - Variablen
+var rundenAnzahl = document.getElementById('bestof');
+var scoreSpieler1 = document.getElementById('scoreSpieler1');
+var scoreSpieler2 = document.getElementById('scoreSpieler2');
+ 
+
 startGame();
 
 restartButton.addEventListener("click", startGame);
@@ -55,7 +61,14 @@ function endGame(draw) {
   if (draw) {
     winningMessageTextElement.innerText = "Draw!";
   } else {
-    winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`;
+	if(circleTurn) {
+		scoreSpieler2.outerText = "${scoreSpieler2}";
+		winningMessageTextElement.innerText = "O'sWins!";
+	} else {
+		scoreSpieler1.outerText = "${scoreSpieler1}";
+		winningMessageTextElement.innerText = "X'sWins!";
+	}
+    //winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`;
   }
   winningMessageElement.classList.add("show");
 }

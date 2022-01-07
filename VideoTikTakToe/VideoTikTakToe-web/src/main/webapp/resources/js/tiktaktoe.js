@@ -19,6 +19,9 @@ const board = document.getElementById("board");
 const winningMessageElement = document.getElementById("winningMessage");
 const restartButton = document.getElementById("restartButton");
 const winningMessageTextElement = document.querySelector("[id='data-winning-message-text']");
+const winningMessageScoreElement = document.querySelector("[id='data-winning-message-score']");
+var score1 = 0;
+var score2 = 0;
 let circleTurn;
 
 //SP - Variablen
@@ -32,6 +35,7 @@ startGame();
 restartButton.addEventListener("click", startGame);
 
 function startGame() {
+  checkEndBestOf();
   circleTurn = false;
   cellElements.forEach((cell) => {
     cell.classList.remove(X_CLASS);
@@ -59,18 +63,26 @@ function handleClick(e) {
 
 function endGame(draw) {
   if (draw) {
+	winningMessageScoreElement.innerText = score1 + ":" + score2;
     winningMessageTextElement.innerText = "Draw!";
   } else {
 	if(circleTurn) {
-		scoreSpieler2.outerText = "${scoreSpieler2}";
+		scoreSpieler2.value = 1;
+		score2++;
+		winningMessageScoreElement.innerText = score1 + ":" + score2;
 		winningMessageTextElement.innerText = "O'sWins!";
 	} else {
-		scoreSpieler1.outerText = "${scoreSpieler1}";
+		scoreSpieler1.value = 1;
+		score1++;
+		winningMessageScoreElement.innerText = score1 + ":" + score2;
 		winningMessageTextElement.innerText = "X'sWins!";
 	}
-    //winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`;
   }
   winningMessageElement.classList.add("show");
+}
+
+function checkEndBestOf(){
+	
 }
 
 function isDraw() {

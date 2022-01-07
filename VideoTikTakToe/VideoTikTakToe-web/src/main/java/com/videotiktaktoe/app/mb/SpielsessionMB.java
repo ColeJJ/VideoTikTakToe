@@ -81,7 +81,7 @@ public class SpielsessionMB implements Serializable{
 			this.aWertungTOSpieler1 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(0).getId());
 			this.aWertungTOSpieler2 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(1).getId());
 			sendInfoMessageToUser("Spiel wurde gestartet.");
-			return this.stayAtSide();
+			return this.toGame();
 		} catch(EJBException e) {
 			sendErrorMessageToUser("Spiel konnte nicht gestartet werden.");
 			return this.stayAtSide();

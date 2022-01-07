@@ -13,10 +13,15 @@ public class WertungDAO extends GenericDAO<Wertung>{
 	}
 	
 	public Wertung findWertungByUserID(int userID) {
+		Wertung aWertung = new Wertung();
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("userID", userID);
 		
-		Wertung aWertung = super.findOneResult(Wertung.FIND_BY_USERID, parameters);
+		try {
+			aWertung = super.findOneResult(Wertung.FIND_BY_USERID, parameters);
+		} catch (Exception e) {
+			aWertung = null;
+		}
 		return aWertung != null ? aWertung : null;
 	}
 }

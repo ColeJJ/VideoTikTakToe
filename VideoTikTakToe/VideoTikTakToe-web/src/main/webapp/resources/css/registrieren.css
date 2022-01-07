@@ -1,3 +1,35 @@
+body{
+  margin: 0;
+  padding: 0;
+  background: #DEDEDE;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .button {
-	background-color:red;
+	font-family: monospace;
+	margin-left: 500px;
+	border-style: none;
+	background: white;
+	margin-top: 8px;
+}
+
+.txt_field {
+	font-family: monospace;
+	margin-left: center;
+}
+
+.input_field {
+	font-family: monospace;
+	border-style: none;
+	margin-top: 14px;
+	padding: 0px 20px;
+}
+
+.select_field {
+	font-family: monospace;
+	border-style: none;
+	margin-top: 14px;
+	padding: 0px 20px; 
+	
 }

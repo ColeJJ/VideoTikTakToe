@@ -11,46 +11,47 @@
     </h:head>
     <h:body>
         <h:form>
-            <h3>TikTakToe - Registrierung</h3>
+            <h1>TikTakToe - Registrierung</h1>
             <br/>
             <h:panelGroup id="user">
-            	<h:panelGrid columns="2">
             
-					<h:outputLabel value="Username: " />
-					<h:inputText value="#{userMB.aUser.username}" />
-					
-					<h:outputLabel value="E-Mail: " />
-					<h:inputText value="#{userMB.aUser.eMailAddress}" />
-					
-					<h:outputLabel value="Passwort: " />
-					<h:inputSecret value="#{userMB.aUser.password}" maxlength="10" size="15" requiredMessage="Password is required"/>	
-					
+					<h:outputLabel styleClass="txt_field" value="Username: " />
+					<h:inputText styleClass="input_field" value="#{userMB.aUser.username}" />
+					<br />
+					<h:outputLabel styleClass="txt_field" value="E-Mail: " />
+					<h:inputText styleClass="input_field" value="#{userMB.aUser.eMailAddress}" />
+					<br />
+					<h:outputLabel styleClass="txt_field" value="Passwort: " />
+					<h:inputSecret styleClass="input_field" value="#{userMB.aUser.password}" maxlength="10" size="15" requiredMessage="Password is required"/>	
+					<br />
 					<!-- TODO: hier noch password bestätigen-->
 					<!-- <h:outputLabel value="Passwort best&auml;tigen: " />
 					<h:inputText value="#{userMB.aUser.password}" /> -->		
 					
-					<h:outputLabel value="Usergruppe ausw&auml;hlen: " />
-					<h:selectOneMenu value="#{userMB.aUser.usergroup}">
+					<h:outputLabel styleClass="txt_field" value="Usergruppe ausw&auml;hlen: " />
+					<h:selectOneMenu styleClass="select_field" value="#{userMB.aUser.usergroup}">
    						<f:selectItems value="#{userMB.usergroups}" var="usergroup" itemValue="#{usergroup.groupname}" itemLabel="#{usergroup.groupname}" />
    					</h:selectOneMenu>
-				</h:panelGrid>
             
             </h:panelGroup>
 			
 			<br/>
 			<h:commandButton 
+						styleClass="button"
 						value="Refresh" 
 						action="#{userMB.loadUsergroups()}" 
 						style=" width: 200px">
 			</h:commandButton>
+			<br />
 			<h:commandButton 
-						class="button"
+						styleClass="button"
             			value="Account erstellen"
             			action="#{userMB.userRegistrieren()}" 						
             			style=" width: 200px">
            	</h:commandButton>
-           	
+           	<br />
            	<h:commandButton 
+           				styleClass="button"
             			value="Abbrechen" 
             			action="#{naviMB.regestrierungAbbrechenClicked()}"
             			style=" width: 200px">

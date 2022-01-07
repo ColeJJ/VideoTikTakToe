@@ -13,6 +13,7 @@ import javax.inject.Named;
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 import com.videotiktaktoe.app.Gamecenter.entity.SpielsessionTO;
 import com.videotiktaktoe.app.Gamecenter.facade.IGamecenterFacade;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.WertungTO;
 
 @Named("spielsessionMB")
 @SessionScoped
@@ -25,6 +26,8 @@ public class SpielsessionMB implements Serializable{
 
 	private SpielsessionTO aSessionTO;
 	private LobbyTO aLobbyTO;
+	private WertungTO aWertungTOSpieler1;
+	private WertungTO aWertungTOSpieler2;
 	private int[] bestOfs = {3,5};
 	
 	//Konstruktor
@@ -38,9 +41,6 @@ public class SpielsessionMB implements Serializable{
 		if(this.aSessionTO == null) {
 			this.aSessionTO = new SpielsessionTO();
 		}
-		
-		//Theorie: Wird aus LobbyAnsicht übergeben.. sonst muss die hier noch iwie gesetzt werden
-		//this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
 	}
 	
 	public void reinitBean() {
@@ -113,5 +113,29 @@ public class SpielsessionMB implements Serializable{
 
 	public void setBestOfs(int[] bestOfs) {
 		this.bestOfs = bestOfs;
+	}
+
+	public IGamecenterFacade getGamecenterFacade() {
+		return gamecenterFacade;
+	}
+
+	public void setGamecenterFacade(IGamecenterFacade gamecenterFacade) {
+		this.gamecenterFacade = gamecenterFacade;
+	}
+
+	public WertungTO getaWertungTOSpieler1() {
+		return aWertungTOSpieler1;
+	}
+
+	public void setaWertungTOSpieler1(WertungTO aWertungTOSpieler1) {
+		this.aWertungTOSpieler1 = aWertungTOSpieler1;
+	}
+
+	public WertungTO getaWertungTOSpieler2() {
+		return aWertungTOSpieler2;
+	}
+
+	public void setaWertungTOSpieler2(WertungTO aWertungTOSpieler2) {
+		this.aWertungTOSpieler2 = aWertungTOSpieler2;
 	}
 }

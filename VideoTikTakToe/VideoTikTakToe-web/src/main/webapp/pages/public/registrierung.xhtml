@@ -29,11 +29,31 @@
 					<h:inputText value="#{userMB.aUser.password}" /> -->		
 					
 					<h:outputLabel styleClass="txt_field" value="Usergruppe ausw&auml;hlen: " />
+            
+            <br/>
+            <h:panelGroup id="user" styleClass="center">
+            <h1>TikTakToe - Registrierung</h1>
+             <h:messages styleClass ="message" layout="table" errorStyle="background: #AFEEEE;"
+			infoStyle="background: #AFEEEE;" globalOnly="true" />
+					<h:outputLabel styleClass="label" value="Username: " />
+					<h:inputText styleClass="input_field" value="#{userMB.aUser.username}" />
+					<br />
+					<h:outputLabel styleClass="label" value="E-Mail: " />
+					<h:inputText styleClass="input_field" value="#{userMB.aUser.eMailAddress}" />
+					<br />
+					<h:outputLabel styleClass="label" value="Passwort: " />
+					<h:inputSecret styleClass="input_field" value="#{userMB.aUser.password}" requiredMessage="Password is required"/>
+					<!--maxlength="10" size="15"-->	
+					<br />
+					<h:outputLabel styleClass="label" value="Passwort best&auml;tigen: " />
+					<h:inputText styleClass="input_field" value="#{userMB.confirmPassword}" /> 		
+					<br />
+					<h:outputLabel styleClass="label" value="Usergruppe ausw&auml;hlen: " />
 					<h:selectOneMenu styleClass="select_field" value="#{userMB.aUser.usergroup}">
    						<f:selectItems value="#{userMB.usergroups}" var="usergroup" itemValue="#{usergroup.groupname}" itemLabel="#{usergroup.groupname}" />
    					</h:selectOneMenu>
             
-            </h:panelGroup>
+            
 			
 			<br/>
 			<h:commandButton 
@@ -57,8 +77,8 @@
             			style=" width: 200px">
                	<f:ajax execute="@form" render="@form" />
            	</h:commandButton>
-            	
-
+            </h:panelGroup>
+			
         </h:form>
     </h:body>
 </html>

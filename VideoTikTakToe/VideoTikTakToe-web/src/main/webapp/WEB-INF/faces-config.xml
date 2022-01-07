@@ -42,6 +42,7 @@
 		<navigation-case>
 			<from-outcome>REGISTRIEREN</from-outcome>
 			<to-view-id>/pages/public/registrierung.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
@@ -51,6 +52,7 @@
 		<navigation-case>
 			<from-outcome>BACK_TO_LOGIN</from-outcome>
 			<to-view-id>/pages/public/login.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 
@@ -60,6 +62,7 @@
 		<navigation-case>
 			<from-outcome>LOBBY_ERSTELLEN</from-outcome>
 			<to-view-id>/pages/protected/gamecenter/lobbyErstellen.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
@@ -68,6 +71,7 @@
 		<navigation-case>
 			<from-outcome>LOBBY_ANZEIGEN</from-outcome>
 			<to-view-id>/pages/protected/gamecenter/lobbyAnzeigen.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
@@ -76,6 +80,7 @@
 		<navigation-case>
 			<from-outcome>STARTE_FREUNDESLISTE</from-outcome>
 			<to-view-id>/pages/protected/freundesliste.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>	
 	
@@ -84,6 +89,7 @@
 		<navigation-case>
 			<from-outcome>LOGOUT</from-outcome>
 			<to-view-id>/pages/public/login.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
@@ -93,6 +99,7 @@
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>		
 	
@@ -101,6 +108,7 @@
 		<navigation-case>
 			<from-outcome>LOBBY_ANZEIGEN</from-outcome>
 			<to-view-id>/pages/protected/gamecenter/lobbyAnzeigen.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>		
 	
@@ -110,6 +118,7 @@
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
@@ -119,6 +128,7 @@
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
@@ -127,6 +137,7 @@
 		<navigation-case>
 			<from-outcome>TO_GAME</from-outcome>
 			<to-view-id>/pages/protected/gamecenter/game.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
@@ -136,6 +147,7 @@
 		<navigation-case>
 			<from-outcome>BACK_TO_HAUPTMENUE</from-outcome>
 			<to-view-id>/pages/protected/hauptmenue.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>    
 

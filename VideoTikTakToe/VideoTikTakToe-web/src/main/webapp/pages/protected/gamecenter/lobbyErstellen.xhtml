@@ -43,12 +43,14 @@
             	
             	<h:commandButton 
              			value="Abbrechen" 
-             			action="#{verwaltungMB.lobbyErstellenAbbrechenClicked()}"
+             			action="#{naviMB.lobbyErstellenAbbrechenClicked()}"
              			style=" width: 200px">
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
             	
 			</h:panelGrid>
+			<h:messages layout="table" errorStyle="background: #AFEEEE;"
+				infoStyle="background: #AFEEEE;" globalOnly="true" />
         </h:form>
     </h:body>
 </html>

@@ -31,6 +31,7 @@ public class SpielsessionMB implements Serializable{
 	private WertungTO aWertungTOSpieler1;
 	private WertungTO aWertungTOSpieler2;
 	private int[] bestOfs = {3,5};
+	private boolean endGame = false;
 	
 	//Konstruktor
 	public SpielsessionMB() {}
@@ -76,6 +77,11 @@ public class SpielsessionMB implements Serializable{
 		return context;
 	}
 	
+	public void setzeWertungen() {
+		this.aWertungTOSpieler1.setPunktestand(0);
+		this.aWertungTOSpieler1.setPunktestand(0);
+	}
+	
 	public String spielStarten() {
 		try {
 			this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
@@ -95,6 +101,7 @@ public class SpielsessionMB implements Serializable{
 		try {
 			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
 			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);
+			//Session noch löschen
 			sendInfoMessageToUser("Spiel wurde beendet.");
 			return this.toLobby();
 		} catch(EJBException e) {
@@ -179,5 +186,13 @@ public class SpielsessionMB implements Serializable{
 
 	public void setaWertungTOSpieler2(WertungTO aWertungTOSpieler2) {
 		this.aWertungTOSpieler2 = aWertungTOSpieler2;
+	}
+
+	public boolean isEndGame() {
+		return endGame;
+	}
+
+	public void setEndGame(boolean endGame) {
+		this.endGame = endGame;
 	}
 }

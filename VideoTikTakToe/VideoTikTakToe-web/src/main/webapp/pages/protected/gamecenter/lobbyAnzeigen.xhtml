@@ -4,7 +4,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui">
+    >
     <h:head>
         <title>Lobby anzeigen</title>
     </h:head>
@@ -52,26 +52,13 @@
              		<f:setPropertyActionListener target="#{spielsessionMB.aSessionTO.lobbyID}" value="#{lobbyMB.aLobby.id}"  /> 
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
-           		 
             	<h:commandButton 
              			value="Lobby löschen"	
              			action="#{lobbyMB.lobbyLoeschen()}"				
              			style=" width: 200px"
-             			rendered="#{false}">
-                	<f:ajax execute="@form" render="@form" />
+             			>
+                	<f:ajax execute="@form" render="@form"/>
             	</h:commandButton>
-            	
-            	<p:commandButton value="Lobby löschen" id="btn" onclick="PF('dlg').show();">
-
-        		<p:dialog id="dlg_id" widgetVar="dlg">
-        			<h:outputLabel
-        			value="Wirklich loeschen?">
-        			</h:outputLabel>
-        			<br></br>
-            		<h:commandButton value="OK" action="#{lobbyMB.lobbyLoeschen()}"/>
-            
-       			</p:dialog>
-            	</p:commandButton>
             	<h:commandButton 
              			value="Lobby verlassen" 
              			action="#{lobbyMB.lobbyVerlassen()}"

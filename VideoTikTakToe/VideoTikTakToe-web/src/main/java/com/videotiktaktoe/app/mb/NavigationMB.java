@@ -1,18 +1,43 @@
 package com.videotiktaktoe.app.mb;
 import java.io.Serializable;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import javax.security.enterprise.SecurityContext;
 
 @Named("naviMB")
 @RequestScoped
+@RolesAllowed({"USER","ADMIN"})
 public class NavigationMB implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6183980918040292096L;
+	@Inject
+	SecurityContext securityContext;
 	
+//Info-Messages
+		private void sendInfoMessageToUser(String message){
+			FacesContext context = getContext();
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+		}
+		
+		private void sendErrorMessageToUser(String message){
+			FacesContext context = getContext();
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+		}
+		
+		private FacesContext getContext() {
+			FacesContext context = FacesContext.getCurrentInstance();
+			return context;
+		}
+		
 //	Login
 	public String starteRegistrierung() {
 		return this.toRegistrierung();
@@ -22,9 +47,16 @@ public class NavigationMB implements Serializable {
 		return this.toLogin();
 	}
 	
-	//Menue
+//Menue
+	@RolesAllowed({"ADMIN"})
 	public String starteLobbyErstellen() {
-		return this.toLobbyErstellen();	
+		if (securityContext.isCallerInRole("ADMIN")) {
+			return this.toLobbyErstellen();
+		}
+		else {
+				sendInfoMessageToUser("Keine Rechte um Lobby zu erstellen.");
+				return "";	
+			}
 	}
 	
 	public String starteLobbyBeitreten() {

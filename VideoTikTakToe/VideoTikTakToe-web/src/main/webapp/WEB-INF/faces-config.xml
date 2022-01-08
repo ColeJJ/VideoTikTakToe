@@ -141,6 +141,17 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	 <!-- game -->
+	<navigation-rule>
+		<from-view-id>/pages/protected/gamecenter/game.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>LOBBY_ANZEIGEN</from-outcome>
+			<to-view-id>/pages/protected/gamecenter/lobbyAnzeigen.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	
 	<!-- Freundesliste_Dialog -->
 	<navigation-rule>	
 		<from-view-id>/pages/protected/freundesliste.xhtml</from-view-id>

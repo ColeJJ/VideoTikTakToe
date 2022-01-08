@@ -6,14 +6,6 @@ body{
   overflow: hidden;
 }
 
-.button {
-	font-family: monospace;
-	margin-left: 500px;
-	border-style: none;
-	background: white;
-	margin-top: 8px;
-}
-
 .txt_field {
 	font-family: monospace;
 	margin-left: center;
@@ -24,6 +16,7 @@ body{
 	border-style: none;
 	margin-top: 14px;
 	padding: 0px 20px;
+}
 
 h1{
 	text-align: center;

@@ -60,7 +60,7 @@ public class LobbyMB implements Serializable{
 	//Info-Messages
 	private void sendInfoMessageToUser(String message){
 		FacesContext context = getContext();
-		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));	
 	}
 	
 	private void sendErrorMessageToUser(String message){

@@ -17,7 +17,7 @@ import javax.security.enterprise.identitystore.DatabaseIdentityStoreDefinition;
 
 		dataSourceLookup = "java:/OracleDS",
 		callerQuery = "select PASSWORD from VTTT_USER where USERNAME=?",
-		groupsQuery = "select usergroup as GROUPNAME from VTTT_USER where USERNAME = ?",
+		groupsQuery = "select USERGROUP as GROUPNAME from VTTT_USER where USERNAME = ?",
 		//groupsQuery = "select VTTT_USERGROUP.GROUPNAME from VTTT_USERGROUP left join VTTT_USER on VTTT_USERGROUP.ID=VTTT_USER.USERGROUPID where VTTT_USER.USERNAME=?",
 		//groupsQuery = "select GROUPNAME from VTTT_GROUP_USER where USERNAME=?",
 		//hashAlgorithm = PlainSHA512PasswordHash.class

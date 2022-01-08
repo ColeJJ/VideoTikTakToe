@@ -51,14 +51,13 @@
              		<f:setPropertyActionListener target="#{spielsessionMB.aSessionTO.lobbyID}" value="#{lobbyMB.aLobby.id}"  /> 
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
-           		 
             	<h:commandButton 
              			value="Lobby löschen"	
-             			action="#{lobbyMB.lobbyLoeschen()}"				
+             			action="#{lobbyMB.lobbyLoeschen()}"	
              			style=" width: 200px">
                 	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
-            	
+       
             	<h:commandButton 
              			value="Lobby verlassen" 
              			action="#{lobbyMB.lobbyVerlassen()}"

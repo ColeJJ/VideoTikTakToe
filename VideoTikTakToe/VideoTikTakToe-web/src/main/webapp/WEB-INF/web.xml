@@ -29,6 +29,7 @@
     </web-resource-collection>
     <auth-constraint>
       <role-name>USER</role-name>
+      <role-name>ADMIN</role-name>
     </auth-constraint>
     <user-data-constraint>
    		<transport-guarantee>NONE</transport-guarantee>
@@ -38,5 +39,8 @@
   
    <security-role>
   	<role-name>USER</role-name>
+  </security-role>
+  <security-role>
+  	<role-name>ADMIN</role-name>
   </security-role>
 </web-app>

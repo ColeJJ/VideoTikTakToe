@@ -8,7 +8,9 @@ import java.util.regex.Pattern;
 
 
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBException;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -24,6 +26,7 @@ import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @Named("lobbyMB")
 @SessionScoped
+@RolesAllowed({"USER","ADMIN"})
 public class LobbyMB implements Serializable{
 
 	/**
@@ -72,13 +75,8 @@ public class LobbyMB implements Serializable{
 		FacesContext context = FacesContext.getCurrentInstance();
 		return context;
 	}
-	
-	private void test(){
-		FacesContext context = getContext();
-		context.addMessage("error_msgs",new FacesMessage(FacesMessage.SEVERITY_INFO,"Name is Required","Keine Ahnung"));;
-	}
 	 
-	
+	@RolesAllowed({"USER"})
 	public String lobbyErstellenClicked() {
 		//this.aLobby = gamecenterFacade.lobbyNameSuchen(this.aLobby.getLobbyName());
 		if (this.aLobby.getLobbyName()== null || this.aLobby.getLobbyName().isEmpty()) {
@@ -134,21 +132,26 @@ public class LobbyMB implements Serializable{
 			return this.stayAtSide();
 		}
 	}
-	
+	@RolesAllowed({"USER"})
 	public String lobbyVerlassen() {
+		if (securityContext.isCallerInRole("USER")) {
 		try {
 			gamecenterFacade.lobbyVerlassen(securityContext.getCallerPrincipal().getName());
-			sendInfoMessageToUser("Lobby verlassen.");
 			this.reinitBean();
+			sendErrorMessageToUser("Lobby verlassen.");
 			return this.toHauptmenue();
 		} catch (EJBException e) {
 			sendErrorMessageToUser("Lobby verlassen hat nicht funktioniert.");
 			return this.stayAtSide();
 		}
+		}else {
+			sendInfoMessageToUser("Keine Rechte um die Lobby zu verlassen.");
+			return "";	
+		}
 	}
-	
+	@RolesAllowed({"ADMIN"})
 	public String lobbyLoeschen() {
-		
+		if (securityContext.isCallerInRole("ADMIN")) {
 		if(gamecenterFacade.lobbyLoeschen(securityContext.getCallerPrincipal().getName(), this.aLobby.getLobbyName())) {
 			sendInfoMessageToUser("Lobby geloescht.");
 			this.reinitBean();
@@ -156,6 +159,10 @@ public class LobbyMB implements Serializable{
 		} else {
 			sendErrorMessageToUser("Lobby loeschen hat nicht funktioniert.");
 			return this.stayAtSide();
+		}
+		}else {
+			sendInfoMessageToUser("Keine Rechte um die Lobby zu loeschen.");
+			return "";	
 		}
 	}
 	

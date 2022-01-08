@@ -28,6 +28,7 @@ import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
 @Named("userMB")
+
 public class UserMB implements Serializable{
 	
 	@SuppressWarnings("cdi-ambiguous-dependency")
@@ -110,7 +111,7 @@ public class UserMB implements Serializable{
 		
 	}
 	
-	@RolesAllowed({"USER"})
+	
 	public String logOut() throws IOException, ServletException{
 		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();

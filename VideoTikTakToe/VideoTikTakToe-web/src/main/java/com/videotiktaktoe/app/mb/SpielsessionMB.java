@@ -100,11 +100,16 @@ public class SpielsessionMB implements Serializable{
 		try {
 			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
 			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);
-			//Session noch löschen
+		} catch(EJBException e) {
+			sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
+			return this.stayAtSide();
+		}
+
+		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
 			sendInfoMessageToUser("Spiel wurde beendet.");
 			return this.toLobby();
-		} catch(EJBException e) {
-			sendErrorMessageToUser("Spiel konnte nicht beendet werden.");
+		} else {
+			sendErrorMessageToUser("Spiel konnte nicht beendet werden, weil es nicht gelöscht werden konnte.");
 			return this.stayAtSide();
 		}
 	}

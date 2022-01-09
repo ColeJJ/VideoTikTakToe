@@ -23,13 +23,16 @@ const winningMessageTextElement = document.querySelector("[id='game:data-winning
 const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
 var score1 = 0;
 var score2 = 0;
-var endBestOf = false;
 let circleTurn;
 
 //SP - Variablen
 var rundenAnzahl = document.getElementById('game:bestof').value;
 var scoreSpieler1 = document.getElementById('game:scoreSpieler1');
+var siegeSpieler1 = document.getElementById('game:siegeSpieler1');
+var niederlagenSpieler1 = document.getElementById('game:niederlagenSpieler1');
 var scoreSpieler2 = document.getElementById('game:scoreSpieler2');
+var siegeSpieler2 = document.getElementById('game:siegeSpieler2');
+var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
  
 //init
 rundenAnzahl = parseInt(rundenAnzahl);
@@ -88,13 +91,15 @@ function endGame(draw) {
 
 function checkEndBestOf(){
 	if(score1 == rundenAnzahl) {
-		endBestOf = true;
+		siegeSpieler1.value++;
+		niederlagenSpieler2.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 1 won the best of!";
     	restartButton.style.display = "none";
 		exitButton.style.display = "block";
 	} else if (score2 == rundenAnzahl){
-		endBestOf = true;
+		siegeSpieler2.value++;
+		niederlagenSpieler1.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 2 won the best of!";
     	restartButton.style.display = "none";

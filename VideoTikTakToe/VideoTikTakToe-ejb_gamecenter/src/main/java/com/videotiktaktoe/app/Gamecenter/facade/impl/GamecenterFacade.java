@@ -66,4 +66,9 @@ public class GamecenterFacade implements IGamecenterFacade{
 	public SpielsessionTO getSessionByLobbyID(int lobbyID) {
 		return spielVerwalten.getSessioByLobbyID(lobbyID);
 	}
+
+	@Override
+	public boolean sessionLoeschen(int sessionID) {
+		return spielVerwalten.sessionLoeschen(sessionID);
+	}
 }

@@ -114,13 +114,12 @@ public class SpielsessionMB implements Serializable{
 		}
 	}
 	
-	public String spielVerlassen() {
-		try {
-			this.refreshBean();
-			sendInfoMessageToUser("Spiel wurde verlassen.");
+	public String spielAbbrechen() {
+		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+			sendInfoMessageToUser("Spiel wurde abgebrochen.");
 			return this.toLobby();
-		} catch(EJBException e) {
-			sendErrorMessageToUser("Spiel konnte nicht verlassen werden.");
+		} else {
+			sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");
 			return this.stayAtSide();
 		}
 	}

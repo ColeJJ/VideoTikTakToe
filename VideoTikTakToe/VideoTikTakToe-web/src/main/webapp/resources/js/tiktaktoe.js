@@ -18,6 +18,7 @@ const cellElements = document.querySelectorAll('.cell');
 const board = document.getElementById("game:board");
 const winningMessageElement = document.getElementById("game:winningMessage");
 const restartButton = document.getElementById("game:restartButton");
+const exitButton = document.getElementById("game:exitButton");
 const winningMessageTextElement = document.querySelector("[id='game:data-winning-message-text']");
 const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
 var score1 = 0;
@@ -27,19 +28,16 @@ let circleTurn;
 
 //SP - Variablen
 var rundenAnzahl = document.getElementById('game:bestof').value;
-rundenAnzahl = parseInt(rundenAnzahl);
 var scoreSpieler1 = document.getElementById('game:scoreSpieler1');
 var scoreSpieler2 = document.getElementById('game:scoreSpieler2');
-var endGameOk = document.getElementById('game:endGame');
  
+//init
+rundenAnzahl = parseInt(rundenAnzahl);
+exitButton.style.display = "none";
 manageGame();
-
 restartButton.addEventListener("click", manageGame);
 
 function manageGame() {
-  if(endBestOf){
-		endGameOk.value = true;
-  }
   circleTurn = false;
   cellElements.forEach((cell) => {
     cell.classList.remove(X_CLASS);
@@ -93,12 +91,14 @@ function checkEndBestOf(){
 		endBestOf = true;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 1 won the best of!";
-    	restartButton.value = "Leave Game";
+    	restartButton.style.display = "none";
+		exitButton.style.display = "block";
 	} else if (score2 == rundenAnzahl){
 		endBestOf = true;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 2 won the best of!";
-    	restartButton.value = "Leave Game";
+    	restartButton.style.display = "none";
+		exitButton.style.display = "block";
 	}
 }
 

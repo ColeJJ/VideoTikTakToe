@@ -31,7 +31,6 @@ public class SpielsessionMB implements Serializable{
 	private WertungTO aWertungTOSpieler1;
 	private WertungTO aWertungTOSpieler2;
 	private int[] bestOfs = {3,5};
-	private boolean endGame = false;
 	
 	//Konstruktor
 	public SpielsessionMB() {}
@@ -186,13 +185,5 @@ public class SpielsessionMB implements Serializable{
 
 	public void setaWertungTOSpieler2(WertungTO aWertungTOSpieler2) {
 		this.aWertungTOSpieler2 = aWertungTOSpieler2;
-	}
-
-	public boolean isEndGame() {
-		return endGame;
-	}
-
-	public void setEndGame(boolean endGame) {
-		this.endGame = endGame;
 	}
 }

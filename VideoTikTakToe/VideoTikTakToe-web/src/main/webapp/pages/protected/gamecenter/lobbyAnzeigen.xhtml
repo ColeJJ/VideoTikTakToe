@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+    	<h:outputStylesheet name="css/lobbyAnzeigen.css" />
+        <title>Lobby anzeigen</title>
+    </h:head>
+    <h:body>
+        <h:form styleClass="form">
+            <h:outputLabel styleClass="header" value="Lobby Name: #{lobbyMB.aLobby.lobbyName}" />
+            <br/>
+            <h:panelGroup class="board" id="board">		
+			<h:panelGroup class="cell">
+				<!-- Spieler1 , erster Spieler aus der Liste-->
+				<h:outputLabel styleClass="label" value="Spieler 1: " readonly="true"/>
+				<h:outputLabel styleClass="label_playername" value="#{lobbyMB.aLobby.users[0].username}" readonly="true"/>
+			</h:panelGroup>
+			<h:panelGroup class="cell">
+				<!--  Lobbygröße = User List größe -->
+				<h:outputLabel styleClass="label" value="#{lobbyMB.getLobbygroesse()}" readonly="true"/>
+			</h:panelGroup>
+			<h:panelGroup class="cell">
+				<!-- Spieler2, noch leer, zweiter Spieler aus der Liste-->
+				<h:outputLabel styleClass="label" value="Spieler 2: " readonly="true"/>
+				<h:outputLabel styleClass="label_playername" value="#{lobbyMB.aLobby.users[1].username}" readonly="true"/>
+			</h:panelGroup>
+			<h:panelGroup class="cell"></h:panelGroup>
+			<h:panelGroup class="cell">
+				<h:outputLabel styleClass="label" value="Rundenanzahl: " />
+				<h:selectOneMenu styleClass="select_field" value="#{spielsessionMB.aSessionTO.rundenAnzahl}">
+ 				<f:selectItems value="#{spielsessionMB.bestOfs}" var="bestOf" itemValue="#{bestOf}" itemLabel="#{bestOf}" />
+ 				</h:selectOneMenu>
+ 			</h:panelGroup>
+ 			<h:panelGroup class="cell"></h:panelGroup>
+ 			<h:panelGroup class="cell">
+ 				<h:commandButton 
+             			value="Spiel starten"	
+             			action="#{spielsessionMB.spielStarten()}"				
+             			styleClass="button">
+             		<f:setPropertyActionListener target="#{spielsessionMB.aSessionTO.lobbyID}" value="#{lobbyMB.aLobby.id}"  /> 
+                	<f:ajax execute="@form" render="@form" />
+            	</h:commandButton>
+ 			</h:panelGroup>
+ 			<h:panelGroup class="cell">
+ 				<h:commandButton 
+             			value="Lobby verlassen" 
+             			action="#{lobbyMB.lobbyVerlassen()}"
+             			styleClass="button">
+                	<f:ajax execute="@form" render="@form" />
+            	</h:commandButton>
+ 			</h:panelGroup>
+ 			<h:panelGroup class="cell">
+ 				<h:commandButton 
+             			value="Lobby löschen"	
+             			action="#{lobbyMB.lobbyLoeschen()}"	
+             			styleClass="button">
+                	<f:ajax execute="@form" render="@form" />
+            	</h:commandButton>
+ 			</h:panelGroup>
+			</h:panelGroup>
+			<h:commandButton
+				value="Einladungscode generieren"
+				action="#{lobbyMB.generateCode()}"
+				styleClass="button_friends">
+			</h:commandButton>
+			<br/>
+			<h:outputText styleClass="code" value="#{lobbyMB.aLobby.lobbyCode}"></h:outputText>
+			 <h:messages layout="table" errorStyle="background: #AFEEEE;"
+				infoStyle="background: #AFEEEE;" globalOnly="true" />
+				<h:inputHidden value="#{lobbyMB.aLobby.id}" />	
+        </h:form>
+    </h:body>
+</html>

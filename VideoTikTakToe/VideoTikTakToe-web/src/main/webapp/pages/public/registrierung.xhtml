@@ -11,8 +11,6 @@
     </h:head>
     <h:body>
         <h:form>
-            
-            <br/>
             <h:panelGroup id="user" styleClass="center">
             <h1>TikTakToe - Registrierung</h1>
              <h:messages styleClass ="message" layout="table" errorStyle="background: #AFEEEE;"
@@ -34,9 +32,6 @@
 					<h:selectOneMenu styleClass="select_field" value="#{userMB.aUser.usergroup}">
    						<f:selectItems value="#{userMB.usergroups}" var="usergroup" itemValue="#{usergroup.groupname}" itemLabel="#{usergroup.groupname}" />
    					</h:selectOneMenu>
-            
-            
-			
 			<br/>
 			<h:commandButton 
 						styleClass="button"
@@ -59,8 +54,7 @@
             			style=" width: 200px">
                	<f:ajax execute="@form" render="@form" />
            	</h:commandButton>
-            </h:panelGroup>
-			
+			</h:panelGroup>
         </h:form>
     </h:body>
 </html>

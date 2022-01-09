@@ -6,6 +6,18 @@ body{
   overflow: hidden;
 }
 
+.txt_field {
+	font-family: monospace;
+	margin-left: center;
+}
+
+.input_field {
+	font-family: monospace;
+	border-style: none;
+	margin-top: 14px;
+	padding: 0px 20px;
+}
+
 h1{
 	text-align: center;
 	font-family:monospace;

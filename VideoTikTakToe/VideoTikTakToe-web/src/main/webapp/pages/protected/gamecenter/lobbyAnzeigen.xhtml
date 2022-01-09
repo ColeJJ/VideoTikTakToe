@@ -3,8 +3,7 @@
 <html lang="en"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    >
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Lobby anzeigen</title>
     </h:head>
@@ -54,11 +53,11 @@
             	</h:commandButton>
             	<h:commandButton 
              			value="Lobby löschen"	
-             			action="#{lobbyMB.lobbyLoeschen()}"				
-             			style=" width: 200px"
-             			>
-                	<f:ajax execute="@form" render="@form"/>
+             			action="#{lobbyMB.lobbyLoeschen()}"	
+             			style=" width: 200px">
+                	<f:ajax execute="@form" render="@form" />
             	</h:commandButton>
+       
             	<h:commandButton 
              			value="Lobby verlassen" 
              			action="#{lobbyMB.lobbyVerlassen()}"

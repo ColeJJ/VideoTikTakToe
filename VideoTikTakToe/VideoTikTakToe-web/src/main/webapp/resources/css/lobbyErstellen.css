@@ -1,0 +1,85 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --cell-size-height: 100px;
+  --cell-size-width: 350px;
+  --mark-size: calc(var(--cell-size) * .9);
+}
+
+body {
+  margin: 0;
+  background: #DEDEDE;
+}
+
+h1{
+  text-align: center;
+  font-family: monospace;
+}
+
+.board {
+  width: 100vw;
+  height: 70vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto)
+}
+
+.cell {
+  width: var(--cell-size-width);
+  height: var(--cell-size-height);
+  border: 1px solid black;
+  display:  grid;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.cell:nth-child(3n + 3) {
+  border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+  border-bottom: none;
+}
+
+.button{
+  width: 200px;
+  height: 60px;
+  font-family: monospace;
+}
+.label{
+  font-family: monospace;
+  font-weight: 700;
+  font-size:  large;
+  text-align: center;
+}
+
+.input_field {
+	font-family: monospace;
+	border-style: none;
+	width: 80%;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.select_field {
+	font-family: monospace;
+	border-style: none;
+}

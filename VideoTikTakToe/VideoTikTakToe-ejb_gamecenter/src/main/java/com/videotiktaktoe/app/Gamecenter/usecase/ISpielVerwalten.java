@@ -10,4 +10,5 @@ public interface ISpielVerwalten {
 
 	public SpielsessionTO spielStarten(int anzahlRunden, int lobbyID, List<UserTO> users);
 	public SpielsessionTO getSessioByLobbyID(int lobbyID);
+	public boolean sessionLoeschen(int sessionID);
 }

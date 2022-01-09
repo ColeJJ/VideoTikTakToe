@@ -76,6 +76,11 @@ public class SpielsessionMB implements Serializable{
 		return context;
 	}
 	
+	public void setzeWertungen() {
+		this.aWertungTOSpieler1.setPunktestand(0);
+		this.aWertungTOSpieler1.setPunktestand(0);
+	}
+	
 	public String spielStarten() {
 		try {
 			this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
@@ -95,10 +100,16 @@ public class SpielsessionMB implements Serializable{
 		try {
 			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
 			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);
+		} catch(EJBException e) {
+			sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
+			return this.stayAtSide();
+		}
+
+		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
 			sendInfoMessageToUser("Spiel wurde beendet.");
 			return this.toLobby();
-		} catch(EJBException e) {
-			sendErrorMessageToUser("Spiel konnte nicht beendet werden.");
+		} else {
+			sendErrorMessageToUser("Spiel konnte nicht beendet werden, weil es nicht gelöscht werden konnte.");
 			return this.stayAtSide();
 		}
 	}

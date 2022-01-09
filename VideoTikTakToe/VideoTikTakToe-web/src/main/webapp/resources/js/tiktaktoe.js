@@ -15,42 +15,32 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6],
 ];
 const cellElements = document.querySelectorAll('.cell');
-const board = document.getElementById("board");
-const winningMessageElement = document.getElementById("winningMessage");
-const restartButton = document.getElementById("restartButton");
-const winningMessageTextElement = document.querySelector("[id='data-winning-message-text']");
-const winningMessageScoreElement = document.querySelector("[id='data-winning-message-score']");
+const board = document.getElementById("game:board");
+const winningMessageElement = document.getElementById("game:winningMessage");
+const restartButton = document.getElementById("game:restartButton");
+const exitButton = document.getElementById("game:exitButton");
+const winningMessageTextElement = document.querySelector("[id='game:data-winning-message-text']");
+const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
 var score1 = 0;
 var score2 = 0;
-var endBestOf = false;
 let circleTurn;
 
 //SP - Variablen
-var rundenAnzahl = document.getElementById('bestof').value;
-rundenAnzahl = parseInt(rundenAnzahl);
-var scoreSpieler1 = document.getElementById('scoreSpieler1');
-var scoreSpieler2 = document.getElementById('scoreSpieler2');
+var rundenAnzahl = document.getElementById('game:bestof').value;
+var scoreSpieler1 = document.getElementById('game:scoreSpieler1');
+var siegeSpieler1 = document.getElementById('game:siegeSpieler1');
+var niederlagenSpieler1 = document.getElementById('game:niederlagenSpieler1');
+var scoreSpieler2 = document.getElementById('game:scoreSpieler2');
+var siegeSpieler2 = document.getElementById('game:siegeSpieler2');
+var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
  
+//init
+rundenAnzahl = parseInt(rundenAnzahl);
+exitButton.style.display = "none";
 manageGame();
-
 restartButton.addEventListener("click", manageGame);
 
 function manageGame() {
-  if(endBestOf){
-	//
-  }
-  circleTurn = false;
-  cellElements.forEach((cell) => {
-    cell.classList.remove(X_CLASS);
-    cell.classList.remove(CIRCLE_CLASS);
-    cell.removeEventListener("click", handleClick);
-    cell.addEventListener("click", handleClick, { once: true });
-  });
-  setBoardHoverClass();
-  winningMessageElement.classList.remove("show");
-}
-
-function endBestOf() {
   circleTurn = false;
   cellElements.forEach((cell) => {
     cell.classList.remove(X_CLASS);
@@ -101,15 +91,19 @@ function endGame(draw) {
 
 function checkEndBestOf(){
 	if(score1 == rundenAnzahl) {
-		endBestOf = true;
+		siegeSpieler1.value++;
+		niederlagenSpieler2.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 1 won the best of!";
-    	restartButton.value = "Leave Game";
+    	restartButton.style.display = "none";
+		exitButton.style.display = "block";
 	} else if (score2 == rundenAnzahl){
-		endBestOf = true;
+		siegeSpieler2.value++;
+		niederlagenSpieler1.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 2 won the best of!";
-    	restartButton.value = "Leave Game";
+    	restartButton.style.display = "none";
+		exitButton.style.display = "block";
 	}
 }
 

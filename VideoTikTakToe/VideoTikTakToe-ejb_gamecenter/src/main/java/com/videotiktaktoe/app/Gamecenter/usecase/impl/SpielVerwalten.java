@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.videotiktaktoe.app.Gamecenter.dao.LobbyDAO;
 import com.videotiktaktoe.app.Gamecenter.dao.SpielsessionDAO;
 import com.videotiktaktoe.app.Gamecenter.entity.SpielsessionTO;
 import com.videotiktaktoe.app.Gamecenter.entity.impl.Spielsession;
@@ -43,5 +44,10 @@ public class SpielVerwalten implements ISpielVerwalten{
 	public SpielsessionTO getSessioByLobbyID(int lobbyID) {
 		Spielsession aSession = sessionDAO.findSessionByLobbyID(lobbyID);
 		return aSession.toSessionTO();
+	}
+
+	@Override
+	public boolean sessionLoeschen(int sessionID) {
+		return sessionDAO.deleteLobby(sessionID);
 	}
 }

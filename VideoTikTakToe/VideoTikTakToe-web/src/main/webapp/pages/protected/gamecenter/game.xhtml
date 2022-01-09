@@ -12,19 +12,24 @@
     <title>TikTakToe</title>
   </h:head>
   <h:body>
+  <h:form id="game">
   	<h3>TikTakToe - Game</h3>
     <br/>
    	<h:panelGroup id="scoreboard">
    		<!-- Mit inputHidden kann js auf MB Values zugreifen -->
    		<h:inputHidden id="bestof" value="#{spielsessionMB.aSessionTO.rundenAnzahl}"/>
-	   	<h:inputHidden id="scoreSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.punktestand}"/>
+	   	<h:inputHidden id="scoreSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.punktestand}"/>   	
+	   	<h:inputHidden id="siegeSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.siege}"/>
+	   	<h:inputHidden id="niederlagenSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.niederlagen}"/>
 	   	<h:inputHidden id="scoreSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.punktestand}"/>
+	   	<h:inputHidden id="siegeSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.siege}"/>
+	   	<h:inputHidden id="niederlagenSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.niederlagen}"/>
 	   	
 	   	<h:panelGrid columns="2">
 			<h:outputLabel value="Lobby Spieler1: #{spielsessionMB.aLobbyTO.users[0].username}" />	
 			<h:outputLabel value="Lobby Spieler2: #{spielsessionMB.aLobbyTO.users[1].username}" />
 			<h:outputLabel value="Best of: ">
-				<h:outputLabel value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
+				<h:outputLabel id="test" value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
 			</h:outputLabel>			
 		</h:panelGrid>
 	</h:panelGroup>
@@ -45,9 +50,10 @@
     	<h:panelGroup class="data-winning-message-text" id="data-winning-message-score"></h:panelGroup>
     	<h:panelGroup class="data-winning-message-text" id="data-winning-message-text"></h:panelGroup>
    	 	<h:commandButton value="Restart" id="restartButton" styleClass="restartButton">
-   	 		<f:ajax render="scoreboard" />
+   	 		<f:ajax execute="@form" />   	 	
    	 	</h:commandButton>
-   	 	<h:commandButton value="Exit" action="#{spielsessionMB.spielBeenden()}" styleClass="restartButton" />
+   	 	<h:commandButton value="Exit" id="exitButton" action="#{spielsessionMB.spielBeenden()}" styleClass="restartButton" />
     </h:panelGroup>
+   </h:form>
   </h:body>
 </html>

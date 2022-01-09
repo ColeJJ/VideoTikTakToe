@@ -20,4 +20,5 @@ public interface IGamecenterFacade {
 	//TODO:brauchen wir die?
 	public LobbyTO lobbySuchen(int lobbyID);
 	public SpielsessionTO getSessionByLobbyID(int lobbyID);
+	public boolean sessionLoeschen(int sessionID);
 }

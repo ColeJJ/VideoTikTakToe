@@ -35,6 +35,6 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/friedupp/Downloads/javaee-api-8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/julia/OneDrive/Desktop/Studium/5. Semester/Softwareprojekt/workspace/javaee-api-8.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

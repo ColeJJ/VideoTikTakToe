@@ -1,5 +1,7 @@
 package com.videotiktaktoe.app.Gamecenter.facade.impl;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -9,6 +11,7 @@ import com.videotiktaktoe.app.Gamecenter.facade.IGamecenterFacade;
 import com.videotiktaktoe.app.Gamecenter.usecase.ISpielVerwalten;
 import com.videotiktaktoe.app.Gamecenter.usecase.ISpiellobbyPflegen;
 import com.videotiktaktoe.app.Gamecenter.usecase.ISpiellobbyVerwalten;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 @Stateless
 public class GamecenterFacade implements IGamecenterFacade{
@@ -54,8 +57,8 @@ public class GamecenterFacade implements IGamecenterFacade{
 
 	//Spielsession
 	@Override
-	public SpielsessionTO spielStarten(int anzahlRunden, int lobbyID) {
-		return spielVerwalten.spielStarten(anzahlRunden, lobbyID);
+	public SpielsessionTO spielStarten(int anzahlRunden, int lobbyID, List<UserTO> users) {
+		return spielVerwalten.spielStarten(anzahlRunden, lobbyID, users);
 	}
 
 
@@ -64,4 +67,8 @@ public class GamecenterFacade implements IGamecenterFacade{
 		return spielVerwalten.getSessioByLobbyID(lobbyID);
 	}
 
+	@Override
+	public boolean sessionLoeschen(int sessionID) {
+		return spielVerwalten.sessionLoeschen(sessionID);
+	}
 }

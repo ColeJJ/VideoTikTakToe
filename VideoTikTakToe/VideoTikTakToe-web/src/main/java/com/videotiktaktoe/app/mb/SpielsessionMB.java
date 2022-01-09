@@ -9,11 +9,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.enterprise.SecurityContext;
 
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 import com.videotiktaktoe.app.Gamecenter.entity.SpielsessionTO;
 import com.videotiktaktoe.app.Gamecenter.facade.IGamecenterFacade;
 import com.videotiktaktoe.app.Spielerverwaltung.entity.WertungTO;
+import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @Named("spielsessionMB")
 @SessionScoped
@@ -36,17 +38,26 @@ public class SpielsessionMB implements Serializable{
 	@Inject
 	IGamecenterFacade gamecenterFacade;
 	
+	@Inject
+	ISpielerverwaltungFacade spielerverwaltungFacade;
+	
+	@Inject
+	SecurityContext securityContext;
+	
 	@PostConstruct
 	public void initBean() {
 		if(this.aSessionTO == null) {
 			this.aSessionTO = new SpielsessionTO();
 		}
+		this.aLobbyTO = new LobbyTO();
+		this.aWertungTOSpieler1 = new WertungTO();
+		this.aWertungTOSpieler2 = new WertungTO();
 	}
 	
-	public void reinitBean() {
-		if(this.aSessionTO != null) {
-			this.aSessionTO = gamecenterFacade.getSessionByLobbyID(this.aLobbyTO.getId());
-		}
+	public void refreshBean() {
+		this.aLobbyTO = null;
+		this.aWertungTOSpieler1 = null;
+		this.aWertungTOSpieler2 = null;
 	}
 	
 	//Info-Messages
@@ -65,13 +76,50 @@ public class SpielsessionMB implements Serializable{
 		return context;
 	}
 	
+	public void setzeWertungen() {
+		this.aWertungTOSpieler1.setPunktestand(0);
+		this.aWertungTOSpieler1.setPunktestand(0);
+	}
+	
 	public String spielStarten() {
 		try {
-			this.aSessionTO = gamecenterFacade.spielStarten(this.aSessionTO.getRundenAnzahl(), this.aSessionTO.getLobbyID());
+			this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
+			this.aLobbyTO.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(this.aLobbyTO.getId()));
+			this.aSessionTO = gamecenterFacade.spielStarten(this.aSessionTO.getRundenAnzahl(), this.aLobbyTO.getId(), this.aLobbyTO.getUsers());
+			this.aWertungTOSpieler1 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(0).getId());
+			this.aWertungTOSpieler2 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(1).getId());
 			sendInfoMessageToUser("Spiel wurde gestartet.");
 			return this.toGame();
 		} catch(EJBException e) {
 			sendErrorMessageToUser("Spiel konnte nicht gestartet werden.");
+			return this.stayAtSide();
+		}
+	}
+	
+	public String spielBeenden() {
+		try {
+			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
+			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);
+		} catch(EJBException e) {
+			sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
+			return this.stayAtSide();
+		}
+
+		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+			sendInfoMessageToUser("Spiel wurde beendet.");
+			return this.toLobby();
+		} else {
+			sendErrorMessageToUser("Spiel konnte nicht beendet werden, weil es nicht gelöscht werden konnte.");
+			return this.stayAtSide();
+		}
+	}
+	
+	public String spielAbbrechen() {
+		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+			sendInfoMessageToUser("Spiel wurde abgebrochen.");
+			return this.toLobby();
+		} else {
+			sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");
 			return this.stayAtSide();
 		}
 	}
@@ -91,6 +139,10 @@ public class SpielsessionMB implements Serializable{
 	
 	public String toHauptmenue() {
 		return "BACK_TO_HAUPTMENUE";
+	}
+	
+	public String toLobby() {
+		return "LOBBY_ANZEIGEN";
 	}
 		
 	//Getters and Setters

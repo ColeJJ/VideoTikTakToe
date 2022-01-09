@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UsergroupTO;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.WertungTO;
 import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 import com.videotiktaktoe.app.Spielerverwaltung.usecase.IAccountPflegen;
 
@@ -21,8 +22,18 @@ public class SpielerverwaltungFacadeImp implements ISpielerverwaltungFacade{
 	}
 	
 	@Override
+	public WertungTO findWertungByUserID(int userID) {
+		return accountPflegen.findWertungByUserID(userID);
+	}
+	
+	@Override
 	public void userSichern(UserTO aUserTO) {
 		accountPflegen.userSichern(aUserTO);
+	}
+	
+	@Override
+	public void wertungSichern(WertungTO aWertungTO) {
+		accountPflegen.wertungSichern(aWertungTO);
 	}
 
 	@Override
@@ -38,5 +49,10 @@ public class SpielerverwaltungFacadeImp implements ISpielerverwaltungFacade{
 	@Override
 	public List<UserTO> getAllUsersInSameLobby(int lobbyID) {
 		return accountPflegen.getAllUsersInSameLobby(lobbyID);
+	}
+
+	@Override
+	public boolean checkWertungenExists(int userID) {
+		return accountPflegen.checkWertungenExists(userID);
 	}
 }

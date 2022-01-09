@@ -6,8 +6,8 @@
   <nodes xsi:type="pageflow:PFPage" name="pages/protected/freundesliste.xhtml" x="554" y="562" id="pf163897625527614" referenceLink="//@navigationRule.11/@fromViewId|" outlinks="pf16409624670471" inlinks="pf16389762552768" path="/pages/protected/freundesliste.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/protected/gamecenter/lobbyErstellen.xhtml" x="122" y="946" id="pf16399231968281" referenceLink="//@navigationRule.7/@fromViewId|" outlinks="pf16399959122652 pf16399959240175" inlinks="pf16399231968260" path="/pages/protected/gamecenter/lobbyErstellen.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/protected/gamecenter/lobbyBeitreten.xhtml" x="122" y="562" id="pf16399232029523" referenceLink="//@navigationRule.8/@fromViewId|" outlinks="pf16399959308436" path="/pages/protected/gamecenter/lobbyBeitreten.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/protected/gamecenter/lobbyAnzeigen.xhtml" x="554" y="946" id="pf16399959122663" referenceLink="//@navigationRule.10/@fromViewId|" outlinks="pf16409625603082 pf16413109125070" inlinks="pf16399959122652 pf16409624670460" path="/pages/protected/gamecenter/lobbyAnzeigen.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/protected/gamecenter/game.xhtml" x="770" y="946" id="pf16413109125081" referenceLink="//@navigationRule.10/@navigationCase.0/@toViewId|" inlinks="pf16413109125070" path="/pages/protected/gamecenter/game.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/protected/gamecenter/lobbyAnzeigen.xhtml" x="554" y="946" id="pf16399959122663" referenceLink="//@navigationRule.11/@navigationCase.0/@toViewId|" outlinks="pf16409625603082 pf16413109125070" inlinks="pf16399959122652 pf16409624670460 pf16415784517220" path="/pages/protected/gamecenter/lobbyAnzeigen.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/protected/gamecenter/game.xhtml" x="770" y="946" id="pf16413109125081" referenceLink="//@navigationRule.11/@fromViewId|" outlinks="pf16415784517220" inlinks="pf16413109125070" path="/pages/protected/gamecenter/game.xhtml"/>
   <links id="pf16389762552731" target="pf16389762552764" source="pf16389762552680" outcome="REGISTRIEREN" redirect="true"/>
   <links id="pf16389762552742" target="pf16389762552680" source="pf16389762552764" outcome="BACK_TO_LOGIN" redirect="true"/>
   <links id="pf16389762552768" target="pf163897625527614" source="pf16389762552765" outcome="STARTE_FREUNDESLISTE" redirect="true"/>
@@ -20,4 +20,5 @@
   <links id="pf16409624670471" target="pf16389762552765" source="pf163897625527614" outcome="BACK_TO_HAUPTMENUE" redirect="true"/>
   <links id="pf16409625603082" target="pf16389762552765" source="pf16399959122663" outcome="BACK_TO_HAUPTMENUE" redirect="true"/>
   <links id="pf16413109125070" target="pf16413109125081" source="pf16399959122663" outcome="TO_GAME" redirect="true"/>
+  <links id="pf16415784517220" target="pf16399959122663" source="pf16413109125081" outcome="LOBBY_ANZEIGEN" redirect="true"/>
 </pageflow:Pageflow>

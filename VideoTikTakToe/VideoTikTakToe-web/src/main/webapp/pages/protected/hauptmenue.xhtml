@@ -1,50 +1,62 @@
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
-  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-<html lang="en"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Hauptmen&uuml;</title>
-    </h:head>
-    <h:body>
-        <h:form>
-            <h3>TikTakToe - Hauptmen&uuml;</h3>
-            <br/>
-            <h:commandButton 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+  <h:head>
+    <h:outputStylesheet name="css/hauptmenue.css" />
+    <title>TikTakToe</title>
+  </h:head>
+  <h:body>
+  <h:form id="form">
+  	<h1>TikTakToe - Hauptmen&uuml;</h1>
+  	<h:panelGroup class="board" id="board">
+	    <h:panelGroup class="cell">
+	    <h:commandButton 
             			value="Lobby erstellen" 
             			action="#{naviMB.starteLobbyErstellen}"
-            			style=" width: 200px">
+            			styleClass="button">
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
-            <br />
-            <!-- TODO: statt inputField ein popup öffnen -->
-             <h:commandButton 
+	    </h:panelGroup>
+	    <h:panelGroup class="cell"></h:panelGroup>
+	    <h:panelGroup class="cell">
+	    	<h:commandButton 
              			value="Lobby beitreten" 
              			action="#{lobbyMB.lobbyBeitreten()}"
-             			style=" width: 200px">
+             			styleClass="button">
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
-            <h:inputText value="#{lobbyMB.aLobby.lobbyCode}"></h:inputText>
-            <br />
-            <h:commandButton 
+            <br />  
+	    </h:panelGroup>
+	    <h:panelGroup class="cell"></h:panelGroup>
+	    <h:panelGroup class="cell">
+	    <h:outputLabel styleClass ="label" value= "Code zum Lobby beitreten:"></h:outputLabel>
+	    <h:inputText value="#{lobbyMB.aLobby.lobbyCode}"></h:inputText>
+	    </h:panelGroup>
+	    <h:panelGroup class="cell"></h:panelGroup>
+	    <h:panelGroup class="cell">
+	    <h:commandButton 
              			value="Freundesliste anzeigen" 
              			action="#{naviMB.starteFreundesliste}"
-             			style=" width: 200px">
+             			styleClass="button">
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
-            <br />
-            <h:commandButton 
+	    </h:panelGroup>
+	    <h:panelGroup class="cell"></h:panelGroup>
+	    <h:panelGroup class="cell">
+	    <h:commandButton 
              			value="Abmelden" 
              			action="#{userMB.logOut()}"
-             			style=" width: 200px">
+             			styleClass="button">
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
-
-            <br />
-            <h:messages layout="table" errorStyle="background: #AFEEEE;"
+	    </h:panelGroup>
+	    <h:messages layout="table" errorStyle="background: #AFEEEE;"
 				infoStyle="background: #AFEEEE;" globalOnly="true" />
-        </h:form>
-    </h:body>
+    </h:panelGroup>
+    </h:form>
+  </h:body>
 </html>

@@ -144,3 +144,7 @@ body {
 .winning-message.show {
   display: flex;
 }
+
+html, body, #jaas-container { 
+	height: 100%; width: 75%; 
+}

@@ -33,11 +33,17 @@ public class SpielVerwalten implements ISpielVerwalten{
 		}
 
 		//Spielsession erstellen
-		Spielsession aSession = new Spielsession(anzahlRunden, lobbyID);
-		sessionDAO.save(aSession);
-		SpielsessionTO aSessionTO = sessionDAO.findSessionByLobbyID(lobbyID).toSessionTO();
+		Spielsession aSession = sessionDAO.findSessionByLobbyID(lobbyID);
+		if(aSession == null) {
+			aSession = new Spielsession(anzahlRunden, lobbyID);
+			sessionDAO.save(aSession);
+			//um die LobbyID noch zu bekommen
+			aSession = sessionDAO.findSessionByLobbyID(lobbyID);
+		}
 		
-		return aSessionTO;
+		
+		
+		return aSession != null ? aSession.toSessionTO() : null;
 	}
 
 	@Override

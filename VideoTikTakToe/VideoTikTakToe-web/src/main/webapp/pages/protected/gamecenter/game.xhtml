@@ -30,8 +30,8 @@
 	   
 	   <!-- Scoreboard -->
 	  	<h:panelGroup id="scoreboard">
-	  		<!-- Mit inputHidden kann js auf MB Values zugreifen -->
-	  		<h:inputHidden id="bestof" value="#{spielsessionMB.aSessionTO.rundenAnzahl}"/>
+	  	<!-- Mit inputHidden kann js auf MB Values zugreifen -->
+	  	<h:inputHidden id="bestof" value="#{spielsessionMB.aSessionTO.rundenAnzahl}"/>
 	   	<h:inputHidden id="scoreSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.punktestand}"/>   	
 	   	<h:inputHidden id="siegeSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.siege}"/>
 	   	<h:inputHidden id="niederlagenSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.niederlagen}"/>
@@ -51,7 +51,7 @@
 		</h:panelGroup>
 	
 		<!-- TikTakToe -->
-	 	<h:panelGroup class="board" id="board">
+	   <h:panelGroup class="board" id="board">
 	    <h:panelGroup class="cell"></h:panelGroup>
 	    <h:panelGroup class="cell"></h:panelGroup>
 	    <h:panelGroup class="cell"></h:panelGroup>

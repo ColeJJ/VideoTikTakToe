@@ -13,14 +13,11 @@ body {
   background: #DEDEDE;
 }
 
-h1{
-  text-align: center;
-  font-family: monospace;
-}
+
 
 .board {
   width: 100vw;
-  height: 70vh;
+  height: 65vh;
   display: grid;
   justify-content: center;
   align-content: center;
@@ -83,4 +80,26 @@ h1{
 .select_field {
 	font-family: monospace;
 	border-style: none;
+}
+.form{
+  text-align: center;
+}
+.header{
+  font-family: monospace;
+  font-size: 230%;
+  margin: 0 auto;
+}
+.label_playername{
+  font-family: monospace;
+  font-size: 120%;
+}
+.button_friends{
+  width: 210px;
+  height: 30px;
+  transform: translate(-0%, -60%);
+  font-family: monospace;
+}
+.code{
+  font-family: monospace;
+  font-size: 120%;
 }

@@ -76,7 +76,7 @@ public class LobbyMB implements Serializable{
 		return context;
 	}
 	 
-	@RolesAllowed({"USER"})
+//	@RolesAllowed({"USER"})
 	public String lobbyErstellenClicked() {
 		//this.aLobby = gamecenterFacade.lobbyNameSuchen(this.aLobby.getLobbyName());
 		if (this.aLobby.getLobbyName()== null || this.aLobby.getLobbyName().isEmpty()) {
@@ -132,9 +132,9 @@ public class LobbyMB implements Serializable{
 			return this.stayAtSide();
 		}
 	}
-	@RolesAllowed({"USER"})
+//	@RolesAllowed({"USER"})
 	public String lobbyVerlassen() {
-		if (securityContext.isCallerInRole("USER")) {
+//		if (securityContext.isCallerInRole("USER")) {
 		try {
 			gamecenterFacade.lobbyVerlassen(securityContext.getCallerPrincipal().getName());
 			this.reinitBean();
@@ -144,14 +144,14 @@ public class LobbyMB implements Serializable{
 			sendErrorMessageToUser("Lobby verlassen hat nicht funktioniert.");
 			return this.stayAtSide();
 		}
-		}else {
-			sendInfoMessageToUser("Keine Rechte um die Lobby zu verlassen.");
-			return "";	
-		}
+//		}else {
+//			sendInfoMessageToUser("Keine Rechte um die Lobby zu verlassen.");
+//			return "";	
+//		}
 	}
-	@RolesAllowed({"ADMIN"})
+//	@RolesAllowed({"ADMIN"})
 	public String lobbyLoeschen() {
-		if (securityContext.isCallerInRole("ADMIN")) {
+//		if (securityContext.isCallerInRole("ADMIN")) {
 		if(gamecenterFacade.lobbyLoeschen(securityContext.getCallerPrincipal().getName(), this.aLobby.getLobbyName())) {
 			sendInfoMessageToUser("Lobby geloescht.");
 			this.reinitBean();
@@ -160,10 +160,10 @@ public class LobbyMB implements Serializable{
 			sendErrorMessageToUser("Lobby loeschen hat nicht funktioniert.");
 			return this.stayAtSide();
 		}
-		}else {
-			sendInfoMessageToUser("Keine Rechte um die Lobby zu loeschen.");
-			return "";	
-		}
+//		}else {
+//			sendInfoMessageToUser("Keine Rechte um die Lobby zu loeschen.");
+//			return "";	
+//		}
 	}
 	
 	//Navigation

@@ -48,15 +48,15 @@ public class NavigationMB implements Serializable {
 	}
 	
 //Menue
-	@RolesAllowed({"ADMIN"})
+//	@RolesAllowed({"ADMIN"})
 	public String starteLobbyErstellen() {
-		if (securityContext.isCallerInRole("ADMIN")) {
+//		if (securityContext.isCallerInRole("ADMIN")) {
 			return this.toLobbyErstellen();
-		}
-		else {
-				sendInfoMessageToUser("Keine Rechte um Lobby zu erstellen.");
-				return "";	
-			}
+//		}
+//		else {
+//				sendInfoMessageToUser("Keine Rechte um Lobby zu erstellen.");
+//				return "";	
+//			}
 	}
 	
 	public String starteLobbyBeitreten() {

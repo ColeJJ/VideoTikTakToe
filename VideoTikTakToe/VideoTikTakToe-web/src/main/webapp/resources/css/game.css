@@ -13,13 +13,15 @@ body {
 
 .board {
   width: 100vw;
-  height: 100vh;
+  height: 0vh;
   display: grid;
   justify-content: center;
   align-content: center;
   justify-items: center;
   align-items: center;
+  transform: translate(0px, -200px);
   grid-template-columns: repeat(3, auto)
+  
 }
 
 .cell {
@@ -145,6 +147,13 @@ body {
   display: flex;
 }
 
-html, body, #jaas-container { 
-	height: 100%; width: 75%; 
+
+form{
+  height: 100%;
+  width: 100%;
+}
+form .jitsi{
+  width: 300px;
+  height: 500px;
+  float: right;
 }

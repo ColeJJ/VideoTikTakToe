@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
 import com.videotiktaktoe.app.Gamecenter.entity.SpielsessionTO;
 import com.videotiktaktoe.app.Gamecenter.facade.IGamecenterFacade;
+import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @Named("lobbyMB")
@@ -35,6 +36,7 @@ public class LobbyMB implements Serializable{
 	private static final long serialVersionUID = -3071715294950111471L;
 	
 	private LobbyTO aLobby;
+	private UserTO aUser;
 	
 	//Konstruktor
 	public LobbyMB() {}
@@ -83,6 +85,7 @@ public class LobbyMB implements Serializable{
 			sendInfoMessageToUser("Bitte geben Sie einen Lobbynamen an.");
 	         return null;
 	     }
+			
 		 Pattern p = Pattern.compile("[^A-Za-z0-9]");
 	     Matcher m = p.matcher(this.aLobby.getLobbyName());
 	    // boolean b = m.matches();
@@ -93,6 +96,8 @@ public class LobbyMB implements Serializable{
 	     }else {
 	    	try {
 			this.aLobby = gamecenterFacade.lobbyErstellen(this.aLobby, securityContext.getCallerPrincipal().getName());
+			String username = securityContext.getCallerPrincipal().getName();
+			aUser = spielerverwaltungFacade.findUserByName(username);
 			sendInfoMessageToUser("Lobby wurde erstellt.");
 			return this.toLobbyAnzeigen();
 	    	}catch(EJBException e) {
@@ -101,6 +106,11 @@ public class LobbyMB implements Serializable{
 	    	}
 		}
 	  
+	}
+	public UserTO updateUser(){
+		String username = securityContext.getCallerPrincipal().getName();
+		aUser = spielerverwaltungFacade.findUserByName(username);
+		return aUser;
 	}
 	
 	public void generateCode() {
@@ -125,6 +135,8 @@ public class LobbyMB implements Serializable{
 			}
 			else {
 				sendErrorMessageToUser("Lobby erfolgreich beigetreten");
+				String username = securityContext.getCallerPrincipal().getName();
+				aUser = spielerverwaltungFacade.findUserByName(username);
 				return this.toLobbyAnzeigen();
 			}
 		} catch(EJBException e) {
@@ -198,5 +210,13 @@ public class LobbyMB implements Serializable{
 
 	public void setGamecenterFacade(IGamecenterFacade gamecenterFacade) {
 		this.gamecenterFacade = gamecenterFacade;
+	}
+
+	public UserTO getaUser() {
+		return aUser;
+	}
+
+	public void setaUser(UserTO aUser) {
+		this.aUser = aUser;
 	}
 }

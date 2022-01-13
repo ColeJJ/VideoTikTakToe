@@ -7,6 +7,7 @@
     <h:head>
     	<h:outputStylesheet name="css/lobbyAnzeigen.css" />
         <title>Lobby anzeigen</title>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </h:head>
     <h:body>
         <h:form styleClass="form">
@@ -47,17 +48,21 @@
  			<h:panelGroup class="cell">
  				<h:commandButton 
              			value="Lobby verlassen" 
+             			onclick="return confirm('Lobby wirklick verlassen?')"
              			action="#{lobbyMB.lobbyVerlassen()}"
-             			styleClass="button">
-                	<f:ajax execute="@form" render="@form" />
+             			styleClass="button"
+             			rendered = "#{!lobbyMB.aUser.admin}">
+                	<f:ajax execute="@form"/>
             	</h:commandButton>
  			</h:panelGroup>
  			<h:panelGroup class="cell">
  				<h:commandButton 
-             			value="Lobby löschen"	
+             			value="Lobby löschen"
+             			onclick="return confirm('Lobby wirklick loeschen?')"	
              			action="#{lobbyMB.lobbyLoeschen()}"	
-             			styleClass="button">
-                	<f:ajax execute="@form" render="@form" />
+             			styleClass="button"
+             			rendered = "#{lobbyMB.aUser.admin}">
+                	<f:ajax execute="@form"/>
             	</h:commandButton>
  			</h:panelGroup>
 			</h:panelGroup>

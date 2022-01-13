@@ -8,16 +8,7 @@
 >
   <h:head>
     <h:outputStylesheet name="css/game.css" />
-    <script src='https://8x8.vc/external_api.js' async="async"></script>
     <h:outputScript name="js/tiktaktoe.js" target="body" />
-    <script type="text/javascript">
-      window.onload = () => {
-        const api = new JitsiMeetExternalAPI("8x8.vc", {
-          roomName: "vpaas-magic-cookie-65e9dc1e683c479ab44c705afe448a8c/SampleAppImpossibleBellsBlockOverly",
-          parentNode: document.querySelector('#jaas-container')
-        });
-      }
-    </script>
     <title>TikTakToe</title>
   </h:head>
   <h:body>
@@ -26,7 +17,18 @@
 	   <br/>
 	   
 	   <!-- Jitsi Videoserver -->
-	   <div id="jaas-container" />
+	   <div id="jaas-container" class="jitsi"/>
+	   <script src='https://8x8.vc/external_api.js' async="async"></script>
+    <style>#jaas-container</style>
+    <script type="text/javascript">
+      window.onload = () => {
+        const api = new JitsiMeetExternalAPI("8x8.vc", {
+          roomName: "vpaas-magic-cookie-65e9dc1e683c479ab44c705afe448a8c/SampleAppImpossibleBellsBlockOverly",
+          parentNode: document.querySelector('#jaas-container')
+        });
+      }
+    </script>
+	   <div/>
 	   
 	   <!-- Scoreboard -->
 	  	<h:panelGroup id="scoreboard">

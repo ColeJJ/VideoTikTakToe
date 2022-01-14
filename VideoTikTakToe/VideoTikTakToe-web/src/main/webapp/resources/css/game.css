@@ -9,6 +9,7 @@
 
 body {
   margin: 0;
+  background: #DEDEDE;
 }
 
 .board {
@@ -19,7 +20,7 @@ body {
   align-content: center;
   justify-items: center;
   align-items: center;
-  transform: translate(0px, -200px);
+  transform: translate(0px, -300px);
   grid-template-columns: repeat(3, auto)
   
 }
@@ -99,19 +100,21 @@ body {
   content: '';
   position: absolute;
   border-radius: 50%;
+  
 }
 
 .cell.circle::before,
 .board.circle .cell:not(.x):not(.circle):hover::before {
   width: var(--mark-size);
   height: var(--mark-size);
+  
 }
 
 .cell.circle::after,
 .board.circle .cell:not(.x):not(.circle):hover::after {
   width: calc(var(--mark-size) * .7);
   height: calc(var(--mark-size) * .7);
-  background-color: white;
+  background-color: #DEDEDE;
 }
 
 .winning-message {
@@ -147,13 +150,49 @@ body {
   display: flex;
 }
 
-
-form{
-  height: 100%;
-  width: 100%;
-}
-form .jitsi{
+.jitsi{
   width: 300px;
   height: 500px;
   float: right;
+  transform: translate(0px, -110px)
 }
+
+.label_player1{
+  font-family: monospace;
+  font-size: 15px;
+}
+
+form .label_player2{
+  font-family: monospace;
+  font-size: 15px;
+  
+}
+
+h3{
+  text-align: center;
+}
+
+.center .label_vs{
+  font-family: monospace;
+  font-size: 15px;
+}
+
+form .label_bestof{
+  font-family: monospace;
+  font-size: 15px;
+}
+.center{
+  width: 100%;
+  margin: 0 auto;
+}
+form#game{
+  display: block;
+  text-align: center;
+}
+.button{
+  transform: translate(0px, -120px);
+  width: 200px;
+  height: 60px;
+  font-family: monospace;
+}
+

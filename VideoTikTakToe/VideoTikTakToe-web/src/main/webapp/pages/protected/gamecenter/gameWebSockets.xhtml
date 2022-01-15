@@ -8,7 +8,7 @@
 >
   <h:head>
     <h:outputStylesheet name="css/game.css" />
-    <h:outputScript name="js/tiktaktoe.js" target="body" />
+    <h:outputScript name="js/clientScript.js" target="body" />
     <title>TikTakToe</title>
   </h:head>
   <h:body>
@@ -19,15 +19,15 @@
 	   <!-- Jitsi Videoserver -->
 	   <div id="jaas-container" class="jitsi"/>
 	   <script src='https://8x8.vc/external_api.js' async="async"></script>
-    <style>#jaas-container</style>
-    <script type="text/javascript">
-      window.onload = () => {
-        const api = new JitsiMeetExternalAPI("8x8.vc", {
-          roomName: "vpaas-magic-cookie-65e9dc1e683c479ab44c705afe448a8c/SampleAppImpossibleBellsBlockOverly",
-          parentNode: document.querySelector('#jaas-container')
-        });
-      }
-    </script>
+	    <style>#jaas-container</style>
+	    <script type="text/javascript">
+	      window.onload = () => {
+	        const api = new JitsiMeetExternalAPI("8x8.vc", {
+	          roomName: "vpaas-magic-cookie-65e9dc1e683c479ab44c705afe448a8c/SampleAppImpossibleBellsBlockOverly",
+	          parentNode: document.querySelector('#jaas-container')
+	        });
+	      }
+	    </script>
 	   <div/>
 	   
 	   <!-- Scoreboard -->
@@ -42,10 +42,11 @@
 	   	<h:inputHidden id="niederlagenSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.niederlagen}"/>
 	   	
 	   	<h:panelGrid columns="2">
+	   		<textarea cols="50" rows="10" disabled="disabled" id="out"></textarea>
 			<h:outputLabel value="Lobby Spieler1: #{spielsessionMB.aLobbyTO.users[0].username}" />	
 			<h:outputLabel value="Lobby Spieler2: #{spielsessionMB.aLobbyTO.users[1].username}" />
 			<h:outputLabel value="Best of: ">
-				<h:outputLabel value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
+				<h:outputLabel id="test" value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
 			</h:outputLabel>			
 		</h:panelGrid>
 		

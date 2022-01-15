@@ -19,7 +19,7 @@
   
   
   <welcome-file-list>
-    <welcome-file>/pages/protected/hauptmenue.xhtml</welcome-file>
+    <welcome-file>/pages/protected/gamecenter/gameWebSockets.xhtml</welcome-file>
   </welcome-file-list>
   
   <security-constraint>

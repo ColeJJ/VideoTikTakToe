@@ -36,6 +36,7 @@ public class LobbyMB implements Serializable{
 	private static final long serialVersionUID = -3071715294950111471L;
 	
 	private LobbyTO aLobby;
+	//TODO: aUserTO
 	private UserTO aUser;
 	
 	//Konstruktor

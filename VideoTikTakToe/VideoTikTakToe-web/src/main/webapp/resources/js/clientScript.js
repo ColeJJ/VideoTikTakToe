@@ -33,6 +33,20 @@ var niederlagenSpieler1 = document.getElementById('game:niederlagenSpieler1');
 var scoreSpieler2 = document.getElementById('game:scoreSpieler2');
 var siegeSpieler2 = document.getElementById('game:siegeSpieler2');
 var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
+
+//Websocket
+const socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
+
+socket.onmessage = (msg) => {
+    let cValue = document.getElementById("out").value;
+    document.getElementById("out").value = cValue + msg.data + "\n";
+    
+    //hier hinbekommen, dass beide textfelder den text sehen, wenn das klappt, dann koennen wir auch den anderen shit setzen
+}
+
+function sendMessage() {
+    socket.send(document.getElementById("msg").value);
+}
  
 //init
 rundenAnzahl = parseInt(rundenAnzahl);
@@ -55,6 +69,7 @@ function manageGame() {
 function handleClick(e) {
   const cell = e.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
+  socket.send("test");
   placeMark(cell, currentClass);
   if (checkWin(currentClass)) {
     endGame(false);
@@ -90,7 +105,6 @@ function endGame(draw) {
 }
 
 function checkEndBestOf(){
-	//TODO: hier logik anpassen, denn 2:1 wird noch nicht als spielende gesehen
 	if(score1 == rundenAnzahl) {
 		siegeSpieler1.value++;
 		niederlagenSpieler2.value++;

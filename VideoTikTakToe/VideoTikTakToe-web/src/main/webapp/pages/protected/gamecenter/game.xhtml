@@ -15,8 +15,15 @@
 	 <h:form id="game">
 	   <h3>TikTakToe - Game</h3>
 	   <br/>
+	   <h:panelGrid styleClass = "center">
+			<h:outputText  styleClass ="label_player1" value="#{spielsessionMB.aLobbyTO.users[0].username} vs. #{spielsessionMB.aLobbyTO.users[1].username}" />
+			<h:outputLabel styleClass = "label_bestof" value="Best of: ">
+				<h:outputLabel id="test" value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
+			</h:outputLabel>			
+		</h:panelGrid>
 	   
 	   <!-- Jitsi Videoserver -->
+	   
 	   <div id="jaas-container" class="jitsi"/>
 	   <script src='https://8x8.vc/external_api.js' async="async"></script>
     <style>#jaas-container</style>
@@ -30,8 +37,9 @@
     </script>
 	   <div/>
 	   
+	   
 	   <!-- Scoreboard -->
-	  	<h:panelGroup id="scoreboard">
+	  	<h:panelGroup styleClass = "scoreboard" id="scoreboard">
 	  	<!-- Mit inputHidden kann js auf MB Values zugreifen -->
 	  	<h:inputHidden id="bestof" value="#{spielsessionMB.aSessionTO.rundenAnzahl}"/>
 	   	<h:inputHidden id="scoreSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.punktestand}"/>   	
@@ -41,15 +49,6 @@
 	   	<h:inputHidden id="siegeSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.siege}"/>
 	   	<h:inputHidden id="niederlagenSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.niederlagen}"/>
 	   	
-	   	<h:panelGrid columns="2">
-			<h:outputLabel value="Lobby Spieler1: #{spielsessionMB.aLobbyTO.users[0].username}" />	
-			<h:outputLabel value="Lobby Spieler2: #{spielsessionMB.aLobbyTO.users[1].username}" />
-			<h:outputLabel value="Best of: ">
-				<h:outputLabel id="test" value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
-			</h:outputLabel>			
-		</h:panelGrid>
-		
-		<h:commandButton value="Spiel Abbrechen" action="#{spielsessionMB.spielAbbrechen()}" />
 		</h:panelGroup>
 	
 		<!-- TikTakToe -->
@@ -64,6 +63,7 @@
 	    <h:panelGroup class="cell"></h:panelGroup>
 	    <h:panelGroup class="cell"></h:panelGroup>
 	   </h:panelGroup>
+	   <h:commandButton styleClass = "button" value="Spiel Abbrechen" action="#{spielsessionMB.spielAbbrechen()}" />
 	   <h:panelGroup class="winning-message" id="winningMessage">
 	   	<h:panelGroup class="data-winning-message-text" id="data-winning-message-score"></h:panelGroup>
 	   	<h:panelGroup class="data-winning-message-text" id="data-winning-message-text"></h:panelGroup>
@@ -72,6 +72,7 @@
 	  	 	</h:commandButton>
 	  	 	<h:commandButton value="Exit" id="exitButton" action="#{spielsessionMB.spielBeenden()}" styleClass="restartButton" />
 	   </h:panelGroup>
+	   
 	  </h:form>
   </h:body>
 </html>

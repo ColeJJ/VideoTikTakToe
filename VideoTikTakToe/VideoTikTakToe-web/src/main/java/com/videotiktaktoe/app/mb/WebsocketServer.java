@@ -17,12 +17,13 @@ public class WebsocketServer {
     @OnOpen
     public void onOpen(Session userSession) {
     	System.out.println("Neue Verbindung aufgebaut...");
+    	userSessions.add(userSession);
     }
 
     @OnClose
     public void onClose(Session userSession) {
-	System.out.println("Verbindung getrennt...");
-	userSessions.remove(userSession);
+		System.out.println("Verbindung getrennt...");
+		userSessions.remove(userSession);
 
     }
 

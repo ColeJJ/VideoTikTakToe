@@ -23,6 +23,7 @@ const winningMessageTextElement = document.querySelector("[id='game:data-winning
 const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
 var score1 = 0;
 var score2 = 0;
+var socket;
 let circleTurn;
 
 //SP - Variablen
@@ -33,19 +34,29 @@ var niederlagenSpieler1 = document.getElementById('game:niederlagenSpieler1');
 var scoreSpieler2 = document.getElementById('game:scoreSpieler2');
 var siegeSpieler2 = document.getElementById('game:siegeSpieler2');
 var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
+var textfeld = document.getElementById('game:out');
 
 //Websocket
-const socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
+function connect() {
+    socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
+    socket.onmessage = (msg) => {
+        let cValue = document.getElementById("game:out").value;
+        document.getElementById("game:out").value = cValue + msg.data + "\n";
+    }
+    document.getElementById("game:connect").setAttribute("disabled", "true");
+    document.getElementById("game:disconnect").removeAttribute("disabled");
+}
 
-socket.onmessage = (msg) => {
-    let cValue = document.getElementById("out").value;
-    document.getElementById("out").value = cValue + msg.data + "\n";
-    
-    //hier hinbekommen, dass beide textfelder den text sehen, wenn das klappt, dann koennen wir auch den anderen shit setzen
+function disconnect() {
+    socket.close();
+    document.getElementById("game:out").value = "";
+    document.getElementById("game:disconnect").setAttribute("disabled", "true");
+    document.getElementById("game:connect").removeAttribute("disabled");
 }
 
 function sendMessage() {
-    socket.send(document.getElementById("msg").value);
+	console.log("im executed");
+    socket.send(document.getElementById("game:msg").value);
 }
  
 //init
@@ -69,7 +80,6 @@ function manageGame() {
 function handleClick(e) {
   const cell = e.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-  socket.send("test");
   placeMark(cell, currentClass);
   if (checkWin(currentClass)) {
     endGame(false);

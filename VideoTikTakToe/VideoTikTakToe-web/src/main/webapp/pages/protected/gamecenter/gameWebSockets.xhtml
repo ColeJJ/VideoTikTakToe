@@ -30,6 +30,14 @@
 	    </script>
 	   <div/>
 	   
+	    <!-- WebSocket -->
+	    <h:commandButton value="verbinden" onclick="connect()" style="color: green" id="connect"></h:commandButton>
+	    <h:commandButton value="trennen" onclick="disconnect()" style="color: red" id="disconnect" disabled="true"></h:commandButton>
+	    <h:inputText type="text" placeholder="nachricht eingeben" id="msg" />
+	    <h:commandButton value="senden" onclick="sendMessage()"> <f:ajax execute="@form" /></h:commandButton>
+	    <br/>
+	    <h:inputTextarea col="50" row="10" readonly="true" id="out"></h:inputTextarea>
+	   
 	   <!-- Scoreboard -->
 	  	<h:panelGroup id="scoreboard">
 	  	<!-- Mit inputHidden kann js auf MB Values zugreifen -->
@@ -42,7 +50,6 @@
 	   	<h:inputHidden id="niederlagenSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.niederlagen}"/>
 	   	
 	   	<h:panelGrid columns="2">
-	   		<textarea cols="50" rows="10" disabled="disabled" id="out"></textarea>
 			<h:outputLabel value="Lobby Spieler1: #{spielsessionMB.aLobbyTO.users[0].username}" />	
 			<h:outputLabel value="Lobby Spieler2: #{spielsessionMB.aLobbyTO.users[1].username}" />
 			<h:outputLabel value="Best of: ">
@@ -73,6 +80,8 @@
 	  	 	</h:commandButton>
 	  	 	<h:commandButton value="Exit" id="exitButton" action="#{spielsessionMB.spielBeenden()}" styleClass="restartButton" />
 	   </h:panelGroup>
-	  </h:form>
+	   
+	   <h:commandButton type="submit" value="Zug machen" onclick="sendMessage()"> <f:ajax execute="@form" /> </h:commandButton>
+	 </h:form>
   </h:body>
 </html>

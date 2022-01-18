@@ -30,6 +30,7 @@ public class SpielsessionMB implements Serializable{
 	private LobbyTO aLobbyTO;
 	private WertungTO aWertungTOSpieler1;
 	private WertungTO aWertungTOSpieler2;
+	private boolean isAdmin;
 	private int[] bestOfs = {3,5};
 	
 	//Konstruktor
@@ -52,6 +53,7 @@ public class SpielsessionMB implements Serializable{
 		this.aLobbyTO = new LobbyTO();
 		this.aWertungTOSpieler1 = new WertungTO();
 		this.aWertungTOSpieler2 = new WertungTO();
+		this.isAdmin = spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin();	
 	}
 	
 	public void refreshBean() {
@@ -95,27 +97,26 @@ public class SpielsessionMB implements Serializable{
 		}
 	}
 	
-	public String spielBeenden() {
+	public String spielSichern() {
 		try {
-			if(this.aWertungTOSpieler1 != null && this.aWertungTOSpieler2 != null) {
-				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
-				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);
-				this.refreshBean();	
-				
-				if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
-					sendInfoMessageToUser("Spiel wurde beendet.");
-					return this.toLobby();
-				} else {
-					sendErrorMessageToUser("Spiel konnte nicht beendet werden, weil es nicht gelöscht werden konnte.");
-					return this.stayAtSide();
-				}
-			}
+			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
+			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);	
 			
-			return this.toLobby();
+			if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+				sendInfoMessageToUser("Spiel wurde geloescht.");
+				return this.toLobby();
+			} else {
+				sendErrorMessageToUser("Spiel konnte nicht geloescht werden.");
+				return this.toLobby();
+			}
 		} catch(EJBException e) {
 			sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
-			return this.stayAtSide();
+			return this.toLobby();
 		}
+	}
+	
+	public String spielBeenden() {
+		return this.toLobby();
 	}
 	
 	public String spielAbbrechen() {
@@ -193,5 +194,13 @@ public class SpielsessionMB implements Serializable{
 
 	public void setaWertungTOSpieler2(WertungTO aWertungTOSpieler2) {
 		this.aWertungTOSpieler2 = aWertungTOSpieler2;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

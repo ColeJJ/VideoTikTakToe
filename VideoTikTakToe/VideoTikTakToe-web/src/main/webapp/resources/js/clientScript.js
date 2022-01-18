@@ -21,6 +21,8 @@ const restartButton = document.getElementById("game:restartButton");
 const exitButton = document.getElementById("game:exitButton");
 const winningMessageTextElement = document.querySelector("[id='game:data-winning-message-text']");
 const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
+var currentCell;
+var currentClass;
 var score1 = 0;
 var score2 = 0;
 var socket;
@@ -39,10 +41,29 @@ var textfeld = document.getElementById('game:out');
 //Websocket
 function connect() {
     socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
-    socket.onmessage = (msg) => {
-        let cValue = document.getElementById("game:out").value;
-        document.getElementById("game:out").value = cValue + msg.data + "\n";
-    }
+    socket.onmessage = function(e) {
+		//Test Textarea
+		let cValue = document.getElementById("game:out").value;
+        document.getElementById("game:out").value = "Test \n";
+        
+        //Variable, die gesetzt werden müssen, damit alle die currentCell und co haben
+        
+        //handle click event
+        var message = e.data.split(',');
+        var currentCellID = message[1];
+        var currentCell = document.getElementById(currentCellID);
+        console.log(currentCell);
+	    currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
+	    currentCell.classList.add(currentClass);
+	    if (checkWin(currentClass)) {
+	      endGame(false);
+	    } else if (isDraw()) {
+	      endGame(true);
+	    } else {
+	      swapTurns();
+	      setBoardHoverClass();
+	    }
+    };
     document.getElementById("game:connect").setAttribute("disabled", "true");
     document.getElementById("game:disconnect").removeAttribute("disabled");
 }
@@ -55,7 +76,6 @@ function disconnect() {
 }
 
 function sendMessage() {
-	console.log("im executed");
     socket.send(document.getElementById("game:msg").value);
 }
  
@@ -78,17 +98,9 @@ function manageGame() {
 }
 
 function handleClick(e) {
-  const cell = e.target;
-  const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-  placeMark(cell, currentClass);
-  if (checkWin(currentClass)) {
-    endGame(false);
-  } else if (isDraw()) {
-    endGame(true);
-  } else {
-    swapTurns();
-    setBoardHoverClass();
-  }
+  cell = e.target;
+  var id = "," + cell.id;
+  socket.send(id);
 }
 
 function endGame(draw) {

@@ -62,15 +62,15 @@
 	
 		<!-- TikTakToe -->
 	   <h:panelGroup class="board" id="board">
-	    <h:panelGroup class="cell"></h:panelGroup>
-	    <h:panelGroup class="cell"></h:panelGroup>
-	    <h:panelGroup class="cell"></h:panelGroup>
-	    <h:panelGroup class="cell"></h:panelGroup>
-	    <h:panelGroup class="cell"></h:panelGroup>
-	    <h:panelGroup class="cell"></h:panelGroup>
-	    <h:panelGroup class="cell"></h:panelGroup>
-	    <h:panelGroup class="cell"></h:panelGroup>
-	    <h:panelGroup class="cell"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell1"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell2"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell3"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell4"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell5"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell6"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell7"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell8"></h:panelGroup>
+	    <h:panelGroup class="cell" id="cell9"></h:panelGroup>
 	   </h:panelGroup>
 	   <h:panelGroup class="winning-message" id="winningMessage">
 	   	<h:panelGroup class="data-winning-message-text" id="data-winning-message-score"></h:panelGroup>
@@ -80,8 +80,6 @@
 	  	 	</h:commandButton>
 	  	 	<h:commandButton value="Exit" id="exitButton" action="#{spielsessionMB.spielBeenden()}" styleClass="restartButton" />
 	   </h:panelGroup>
-	   
-	   <h:commandButton type="submit" value="Zug machen" onclick="sendMessage()"> <f:ajax execute="@form" /> </h:commandButton>
 	 </h:form>
   </h:body>
 </html>

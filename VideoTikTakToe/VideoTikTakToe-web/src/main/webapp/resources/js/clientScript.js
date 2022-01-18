@@ -19,6 +19,7 @@ const board = document.getElementById("game:board");
 const winningMessageElement = document.getElementById("game:winningMessage");
 const restartButton = document.getElementById("game:restartButton");
 const exitButton = document.getElementById("game:exitButton");
+const exitButtonHidden = document.getElementById("game:exitButtonHidden");
 const winningMessageTextElement = document.querySelector("[id='game:data-winning-message-text']");
 const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
 var currentCell;
@@ -52,6 +53,7 @@ function connect() {
         //exit und restart game klappt bei beiden
         if(message[1] === 'exit') {
 			//hier das game beenden
+			exitButtonHidden.click();
 	
 		} else if(message[1] === 'restart') {
 			//hier das game restarten
@@ -87,6 +89,10 @@ function disconnect() {
 
 function sendRestart() {
     socket.send(',restart');
+}
+
+function sendExit() {
+	socket.send(',exit');
 }
  
 //init

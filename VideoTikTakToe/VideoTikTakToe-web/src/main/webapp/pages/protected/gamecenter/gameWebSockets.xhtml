@@ -78,7 +78,8 @@
 	  	 	<h:commandButton value="Restart" id="restartButton" styleClass="restartButton">
 	  	 		<f:ajax execute="@form" />   	 	
 	  	 	</h:commandButton>
-	  	 	<h:commandButton value="Exit" id="exitButton" action="#{spielsessionMB.spielBeenden()}" styleClass="restartButton" />
+	  	 	<h:commandButton value="Exit" id="exitButton" onclick="sendExit()" styleClass="restartButton" />
+	  	 	<h:commandButton id="exitButtonHidden" action="#{spielsessionMB.spielBeenden()}" style="display: none" />
 	   </h:panelGroup>
 	 </h:form>
   </h:body>

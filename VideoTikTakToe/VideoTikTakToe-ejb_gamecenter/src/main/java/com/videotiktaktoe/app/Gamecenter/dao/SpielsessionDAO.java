@@ -15,8 +15,9 @@ public class SpielsessionDAO extends GenericDAO<Spielsession>{
 	public Spielsession findSessionByLobbyID(int lobbyID) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.put("lobbyID", lobbyID);
+		Spielsession aSession = super.findOneResult(Spielsession.FIND_BY_LOBBYID, parameters);
 		
-		return super.findOneResult(Spielsession.FIND_BY_LOBBYID, parameters);
+		return aSession != null ? aSession : null;
 	}
 	
 	public boolean deleteLobby(int sessionID) {

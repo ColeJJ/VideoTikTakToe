@@ -20,10 +20,8 @@ const winningMessageElement = document.getElementById("game:winningMessage");
 const restartButton = document.getElementById("game:restartButton");
 const exitButton = document.getElementById("game:exitButton");
 const exitButtonHidden = document.getElementById("game:exitButtonHidden");
-const saveButtonHidden = document.getElementById("game:saveButtonHidden");
 const winningMessageTextElement = document.querySelector("[id='game:data-winning-message-text']");
 const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
-const isAdmin = document.getElementById("game:isAdmin").value;
 var currentCell;
 var currentClass;
 var score1 = 0;
@@ -39,6 +37,7 @@ var niederlagenSpieler1 = document.getElementById('game:niederlagenSpieler1');
 var scoreSpieler2 = document.getElementById('game:scoreSpieler2');
 var siegeSpieler2 = document.getElementById('game:siegeSpieler2');
 var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
+var isAdmin = document.getElementById('game:isAdmin').value;
 
 //Websocket
 socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
@@ -59,7 +58,6 @@ socket.onmessage = function(e) {
 		//handle click event
         var currentCellID = message[1];
         var currentCell = document.getElementById(currentCellID);
-        console.log(currentCell);
 	    currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
 	    currentCell.classList.add(currentClass);
 	    if (checkWin(currentClass)) {
@@ -106,9 +104,6 @@ function handleClick(e) {
 }
 
 function endGame(draw) {
-  if(isAdmin){
-	saveButtonHidden.click();
-  }
   if (draw) {
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
 	    winningMessageTextElement.innerText = "Draw!";
@@ -132,21 +127,24 @@ function endGame(draw) {
 }
 
 function checkEndBestOf(){
-	//TODO: hier logik anpassen, denn 2:1 wird noch nicht als spielende gesehen
 	if(score1 == rundenAnzahl) {
 		siegeSpieler1.value++;
 		niederlagenSpieler2.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 1 won the best of!";
+    	if(isAdmin){
+			exitButton.style.display = "block";
+        }
     	restartButton.style.display = "none";
-		exitButton.style.display = "block";
 	} else if (score2 == rundenAnzahl){
 		siegeSpieler2.value++;
 		niederlagenSpieler1.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 2 won the best of!";
+    	if(isAdmin){
+			exitButton.style.display = "block";
+        }
     	restartButton.style.display = "none";
-		exitButton.style.display = "block";
 	}
 }
 

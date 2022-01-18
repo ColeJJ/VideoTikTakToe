@@ -97,25 +97,25 @@ public class SpielsessionMB implements Serializable{
 		}
 	}
 	
-	public String spielSichern() {
-		try {
-			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
-			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);	
-			
-			if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
-				sendInfoMessageToUser("Spiel wurde geloescht.");
-				return this.toLobby();
-			} else {
-				sendErrorMessageToUser("Spiel konnte nicht geloescht werden.");
+	public String spielBeenden() {
+		if(this.isAdmin) {
+			try {
+				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
+				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);	
+				
+				if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+					sendInfoMessageToUser("Spiel wurde geloescht.");
+					return this.toLobby();
+				} else {
+					sendErrorMessageToUser("Spiel konnte nicht geloescht werden.");
+					return this.toLobby();
+				}
+			} catch(EJBException e) {
+				sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
 				return this.toLobby();
 			}
-		} catch(EJBException e) {
-			sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
-			return this.toLobby();
 		}
-	}
-	
-	public String spielBeenden() {
+			
 		return this.toLobby();
 	}
 	
@@ -194,6 +194,14 @@ public class SpielsessionMB implements Serializable{
 
 	public void setaWertungTOSpieler2(WertungTO aWertungTOSpieler2) {
 		this.aWertungTOSpieler2 = aWertungTOSpieler2;
+	}
+
+	public boolean getisAdmin() {
+		return isAdmin;
+	}
+
+	public void setisAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public boolean isAdmin() {

@@ -79,10 +79,9 @@
 	   	<h:panelGroup class="data-winning-message-text" id="data-winning-message-text"></h:panelGroup>
 	  	 	<h:commandButton value="Restart" id="restartButton" styleClass="restartButton">
 	  	 		<f:ajax execute="@form" />   	 	
-	  	 	</h:commandButton>
+	  	 	</h:commandButton> 
 	  	 	<h:commandButton value="Exit" id="exitButton" onclick="sendExit()" styleClass="restartButton" />
 	  	 	<h:commandButton id="exitButtonHidden" action="#{spielsessionMB.spielBeenden()}" style="display: none" />
-	  	 	<h:commandButton id="saveButtonHidden" action="#{spielsessionMB.spielSichern()}" style="display: none" />
 	   </h:panelGroup>
 	   
 	  </h:form>

@@ -40,13 +40,41 @@ var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
 var textfeld = document.getElementById('game:out');
 
 //Websocket
+socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
+socket.onmessage = function(e) {
+    //Message nehmen und vom RE: trennen
+    var message = e.data.split(',');
+    
+    //exit und restart game klappt bei beiden
+    if(message[1] === 'exit') {
+		//hier das game beenden
+		exitButtonHidden.click();
+
+	} else if(message[1] === 'restart') {
+		//hier das game restarten
+		manageGame();
+		
+	} else {
+		//handle click event
+        var currentCellID = message[1];
+        var currentCell = document.getElementById(currentCellID);
+        console.log(currentCell);
+	    currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
+	    currentCell.classList.add(currentClass);
+	    if (checkWin(currentClass)) {
+	      endGame(false);
+	    } else if (isDraw()) {
+	      endGame(true);
+	    } else {
+	      swapTurns();
+	      setBoardHoverClass();
+	    }
+	}
+};
+/*
 function connect() {
     socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
     socket.onmessage = function(e) {
-		//Test Textarea
-		let cValue = document.getElementById("game:out").value;
-        document.getElementById("game:out").value = "Test \n";
-        
         //Message nehmen und vom RE: trennen
         var message = e.data.split(',');
         
@@ -78,7 +106,7 @@ function connect() {
     };
     document.getElementById("game:connect").setAttribute("disabled", "true");
     document.getElementById("game:disconnect").removeAttribute("disabled");
-}
+}*/
 
 function disconnect() {
     socket.close();

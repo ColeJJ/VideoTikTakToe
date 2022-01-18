@@ -46,23 +46,33 @@ function connect() {
 		let cValue = document.getElementById("game:out").value;
         document.getElementById("game:out").value = "Test \n";
         
-        //Variable, die gesetzt werden müssen, damit alle die currentCell und co haben
-        
-        //handle click event
+        //Message nehmen und vom RE: trennen
         var message = e.data.split(',');
-        var currentCellID = message[1];
-        var currentCell = document.getElementById(currentCellID);
-        console.log(currentCell);
-	    currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-	    currentCell.classList.add(currentClass);
-	    if (checkWin(currentClass)) {
-	      endGame(false);
-	    } else if (isDraw()) {
-	      endGame(true);
-	    } else {
-	      swapTurns();
-	      setBoardHoverClass();
-	    }
+        
+        //exit und restart game klappt bei beiden
+        if(message[1] === 'exit') {
+			//hier das game beenden
+	
+		} else if(message[1] === 'restart') {
+			//hier das game restarten
+			manageGame();
+			
+		} else {
+			//handle click event
+	        var currentCellID = message[1];
+	        var currentCell = document.getElementById(currentCellID);
+	        console.log(currentCell);
+		    currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
+		    currentCell.classList.add(currentClass);
+		    if (checkWin(currentClass)) {
+		      endGame(false);
+		    } else if (isDraw()) {
+		      endGame(true);
+		    } else {
+		      swapTurns();
+		      setBoardHoverClass();
+		    }
+		}
     };
     document.getElementById("game:connect").setAttribute("disabled", "true");
     document.getElementById("game:disconnect").removeAttribute("disabled");
@@ -75,15 +85,15 @@ function disconnect() {
     document.getElementById("game:connect").removeAttribute("disabled");
 }
 
-function sendMessage() {
-    socket.send(document.getElementById("game:msg").value);
+function sendRestart() {
+    socket.send(',restart');
 }
  
 //init
 rundenAnzahl = parseInt(rundenAnzahl);
 exitButton.style.display = "none";
 manageGame();
-restartButton.addEventListener("click", manageGame);
+restartButton.addEventListener("click", sendRestart);
 
 function manageGame() {
   circleTurn = false;

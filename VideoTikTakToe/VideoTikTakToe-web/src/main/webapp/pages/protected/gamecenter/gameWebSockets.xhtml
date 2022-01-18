@@ -41,7 +41,7 @@
 	   <!-- Scoreboard -->
 	  	<h:panelGroup id="scoreboard">
 	  	<!-- Mit inputHidden kann js auf MB Values zugreifen -->
-	  	<h:inputHidden id="bestof" value="#{spielsessionMB.aSessionTO.rundenAnzahl}"/>
+	  	<h:inputHidden id="bestof" value="3"/>
 	   	<h:inputHidden id="scoreSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.punktestand}"/>   	
 	   	<h:inputHidden id="siegeSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.siege}"/>
 	   	<h:inputHidden id="niederlagenSpieler1" value="#{spielsessionMB.aWertungTOSpieler1.niederlagen}"/>
@@ -53,7 +53,7 @@
 			<h:outputLabel value="Lobby Spieler1: #{spielsessionMB.aLobbyTO.users[0].username}" />	
 			<h:outputLabel value="Lobby Spieler2: #{spielsessionMB.aLobbyTO.users[1].username}" />
 			<h:outputLabel value="Best of: ">
-				<h:outputLabel id="test" value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
+				<h:outputLabel id="test" value="3" />
 			</h:outputLabel>			
 		</h:panelGrid>
 		

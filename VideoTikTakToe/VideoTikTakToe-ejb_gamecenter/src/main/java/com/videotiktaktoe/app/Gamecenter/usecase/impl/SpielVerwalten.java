@@ -54,6 +54,7 @@ public class SpielVerwalten implements ISpielVerwalten{
 
 	@Override
 	public boolean sessionLoeschen(int sessionID) {
+		//TODO: nicht deleteLobby sondern deleteSession
 		return sessionDAO.deleteLobby(sessionID);
 	}
 }

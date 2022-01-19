@@ -58,7 +58,10 @@
 				</h:outputLabel>			
 			</h:panelGrid>
 			
-			<h:commandButton value="Spiel Abbrechen" action="#{spielsessionMB.spielAbbrechen()}" />
+			<h:commandButton id="abbrechenButton" value="Spiel Abbrechen"> 
+				<f:ajax execute="@form" />
+			</h:commandButton>
+			<h:commandButton id="abbrechenButtonHidden" action="#{spielsessionMB.spielAbbrechen()}" style="display: none" />
 		</h:panelGroup>
 	
 		<!-- TikTakToe -->

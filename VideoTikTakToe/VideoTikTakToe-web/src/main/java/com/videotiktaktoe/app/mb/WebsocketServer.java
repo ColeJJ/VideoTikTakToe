@@ -33,9 +33,6 @@ public class WebsocketServer {
     }
     
     public static void broadcast(String msg) {
-    	System.out.println("Broadcast Nachricht an alle:" + msg);
-    	for (Session session : userSessions) {
-    	    session.getAsyncRemote().sendText("Re: " + msg);
-    	}
+    	System.out.println("Broadcast Nachricht:" + msg);
     }
 }

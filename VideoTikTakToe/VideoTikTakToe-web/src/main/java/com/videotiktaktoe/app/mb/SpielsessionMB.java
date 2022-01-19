@@ -126,18 +126,34 @@ public class SpielsessionMB implements Serializable{
 				sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
 				return this.toLobby();
 			}
+		} else {
+			try {
+				TimeUnit.SECONDS.sleep(1);
+				return this.toLobby();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				return this.stayAtSide();
+			}
 		}
-			
-		return this.toLobby();
 	}
 	
 	public String spielAbbrechen() {
-		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
-			sendInfoMessageToUser("Spiel wurde abgebrochen.");
-			return this.toLobby();
+		if(this.isAdmin) {
+			if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+				sendInfoMessageToUser("Spiel wurde abgebrochen.");
+				return this.toLobby();
+			} else {
+				sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");
+				return this.stayAtSide();
+			}
 		} else {
-			sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");
-			return this.stayAtSide();
+			try {
+				TimeUnit.SECONDS.sleep(1);
+				return this.toLobby();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				return this.stayAtSide();
+			}
 		}
 	}
 	

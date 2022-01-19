@@ -20,6 +20,8 @@ const winningMessageElement = document.getElementById("game:winningMessage");
 const restartButton = document.getElementById("game:restartButton");
 const exitButton = document.getElementById("game:exitButton");
 const exitButtonHidden = document.getElementById("game:exitButtonHidden");
+const abbrechenButton = document.getElementById("game:abbrechenButton");
+const abbrechenButtonHidden = document.getElementById("game:abbrechenButtonHidden");
 const winningMessageTextElement = document.querySelector("[id='game:data-winning-message-text']");
 const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
 var currentCell;
@@ -29,7 +31,7 @@ var score2 = 0;
 var socket;
 let circleTurn;
 
-//SP - Variablen
+//SP - HiddenValues
 var rundenAnzahl = document.getElementById('game:bestof').value;
 var scoreSpieler1 = document.getElementById('game:scoreSpieler1');
 var siegeSpieler1 = document.getElementById('game:siegeSpieler1');
@@ -48,16 +50,20 @@ socket.onmessage = function(e) {
     if(message[1] === 'restart') {
 		//hier das game beenden
 		manageGame();
-
 	} else if (message[1] === 'exit'){
 		//hier das game beenden
 		exitButtonHidden.click();
-	}else {
+	} else if (message[1] === 'abbrechen'){
+		//hier das game abbrechen
+		abbrechenButtonHidden.click();
+	} else {
 		//handle click event
         var currentCellID = message[1];
         var currentCell = document.getElementById(currentCellID);
 	    currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-	    currentCell.classList.add(currentClass);
+	    if(currentCell != null){
+			currentCell.classList.add(currentClass);
+	    }
 	    if (checkWin(currentClass)) {
 	      endGame(false);
 	    } else if (isDraw()) {
@@ -76,6 +82,10 @@ function sendRestart() {
 function sendExit() {
 	socket.send(',exit');
 }
+
+function sendAbbrechen() {
+	socket.send(',abbrechen')
+}
  
 //init
 rundenAnzahl = parseInt(rundenAnzahl);
@@ -83,6 +93,7 @@ exitButton.style.display = "none";
 manageGame();
 restartButton.addEventListener("click", sendRestart);
 exitButton.addEventListener("click", sendExit);
+abbrechenButton.addEventListener("click", sendAbbrechen);
 
 
 function manageGame() {

@@ -56,12 +56,7 @@
 				<h:outputLabel value="Best of: ">
 					<h:outputLabel value="#{spielsessionMB.aSessionTO.rundenAnzahl}" />
 				</h:outputLabel>			
-			</h:panelGrid>
-			
-			<h:commandButton id="abbrechenButton" value="Spiel Abbrechen"> 
-				<f:ajax execute="@form" />
-			</h:commandButton>
-			<h:commandButton id="abbrechenButtonHidden" action="#{spielsessionMB.spielAbbrechen()}" style="display: none" />
+			</h:panelGrid>		
 		</h:panelGroup>
 	
 		<!-- TikTakToe -->
@@ -76,7 +71,10 @@
 	    <h:panelGroup class="cell" id="cell8"></h:panelGroup>
 	    <h:panelGroup class="cell" id="cell9"></h:panelGroup>
 	   </h:panelGroup>
-	   <h:commandButton styleClass = "button" value="Spiel Abbrechen" action="#{spielsessionMB.spielAbbrechen()}" />
+	   <h:commandButton id="abbrechenButton" value="Spiel Abbrechen" styleClass="button"> 
+				<f:ajax execute="@form" />
+		</h:commandButton>
+	   <h:commandButton id="abbrechenButtonHidden" action="#{spielsessionMB.spielAbbrechen()}" style="display: none" />
 	   <h:panelGroup class="winning-message" id="winningMessage">
 	   	<h:panelGroup class="data-winning-message-text" id="data-winning-message-score"></h:panelGroup>
 	   	<h:panelGroup class="data-winning-message-text" id="data-winning-message-text"></h:panelGroup>

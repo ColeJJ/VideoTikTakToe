@@ -38,11 +38,8 @@
  			</h:panelGroup>
  			<h:panelGroup class="cell"></h:panelGroup>
  			<h:panelGroup class="cell">
- 				<h:commandButton 
-             			value="Spiel starten"	
-             			onclick="sendStartGame()"
-             			id="startGameButton"			
-             			styleClass="button">
+ 				<h:commandButton value="Spiel starten" id="startGameButton"	styleClass="button">
+             		<f:ajax execute="@form" />
             	</h:commandButton>
  				<h:commandButton 
              			value="Spiel starten"	
@@ -50,7 +47,6 @@
              			id="startGameButtonHidden"			
              			styleClass="button">
              		<f:setPropertyActionListener target="#{spielsessionMB.aSessionTO.lobbyID}" value="#{lobbyMB.aLobby.id}"  /> 
-                	<f:ajax execute="@form" />
             	</h:commandButton>
  			</h:panelGroup>
  			<h:panelGroup class="cell">

@@ -43,22 +43,19 @@ var isAdmin = document.getElementById('game:isAdmin').value;
 
 //Websocket
 socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
-socket.onmessage = function(e) {
-    //Message nehmen und vom RE: trennen
-    var message = e.data.split(',');
-    
-    if(message[1] === 'restart') {
+socket.onmessage = function(e) {  
+    if(e.data === 'restart') {
 		//hier das game beenden
 		manageGame();
-	} else if (message[1] === 'exit'){
+	} else if (e.data  === 'exit'){
 		//hier das game beenden
 		exitButtonHidden.click();
-	} else if (message[1] === 'abbrechen'){
+	} else if (e.data  === 'abbrechen'){
 		//hier das game abbrechen
 		abbrechenButtonHidden.click();
 	} else {
 		//handle click event
-        var currentCellID = message[1];
+        var currentCellID = e.data;
         var currentCell = document.getElementById(currentCellID);
 	    currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
 	    if(currentCell != null){
@@ -76,15 +73,15 @@ socket.onmessage = function(e) {
 };
 
 function sendRestart() {
-    socket.send(',restart');
+    socket.send('restart');
 }
 
 function sendExit() {
-	socket.send(',exit');
+	socket.send('exit');
 }
 
 function sendAbbrechen() {
-	socket.send(',abbrechen')
+	socket.send('abbrechen')
 }
  
 //init
@@ -110,7 +107,7 @@ function manageGame() {
 
 function handleClick(e) {
   cell = e.target;
-  var id = "," + cell.id;
+  var id = cell.id;
   socket.send(id);
 }
 

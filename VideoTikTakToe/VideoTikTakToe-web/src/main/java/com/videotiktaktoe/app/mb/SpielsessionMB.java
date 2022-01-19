@@ -110,7 +110,7 @@ public class SpielsessionMB implements Serializable{
 	}
 	
 	public String spielBeenden() {
-		if(this.isAdmin) {
+		if(spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin()) {
 			try {
 				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
 				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);	

@@ -24,7 +24,6 @@ public class WebsocketServer {
     public void onClose(Session userSession) {
 		System.out.println("Verbindung getrennt...");
 		userSessions.remove(userSession);
-
     }
 
     @OnMessage
@@ -34,5 +33,8 @@ public class WebsocketServer {
     
     public static void broadcast(String msg) {
     	System.out.println("Broadcast Nachricht:" + msg);
+    	for (Session session : userSessions) {
+    	    session.getAsyncRemote().sendText(msg);
+    	}
     }
 }

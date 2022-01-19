@@ -45,16 +45,14 @@ socket.onmessage = function(e) {
     //Message nehmen und vom RE: trennen
     var message = e.data.split(',');
     
-    //exit und restart game klappt bei beiden
-    if(message[1] === 'exit') {
+    if(message[1] === 'restart') {
+		//hier das game beenden
+		manageGame();
+
+	} else if (message[1] === 'exit'){
 		//hier das game beenden
 		exitButtonHidden.click();
-
-	} else if(message[1] === 'restart') {
-		//hier das game restarten
-		manageGame();
-		
-	} else {
+	}else {
 		//handle click event
         var currentCellID = message[1];
         var currentCell = document.getElementById(currentCellID);
@@ -84,6 +82,8 @@ rundenAnzahl = parseInt(rundenAnzahl);
 exitButton.style.display = "none";
 manageGame();
 restartButton.addEventListener("click", sendRestart);
+exitButton.addEventListener("click", sendExit);
+
 
 function manageGame() {
   circleTurn = false;
@@ -132,18 +132,14 @@ function checkEndBestOf(){
 		niederlagenSpieler2.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 1 won the best of!";
-    	if(isAdmin){
-			exitButton.style.display = "block";
-        }
+		exitButton.style.display = "block";
     	restartButton.style.display = "none";
 	} else if (score2 == rundenAnzahl){
 		siegeSpieler2.value++;
 		niederlagenSpieler1.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = "Player 2 won the best of!";
-    	if(isAdmin){
-			exitButton.style.display = "block";
-        }
+		exitButton.style.display = "block";
     	restartButton.style.display = "none";
 	}
 }

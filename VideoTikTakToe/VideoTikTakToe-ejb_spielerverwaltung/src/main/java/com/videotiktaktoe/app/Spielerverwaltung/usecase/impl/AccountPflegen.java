@@ -36,7 +36,6 @@ public class AccountPflegen implements IAccountPflegen{
 		
 		//passwort in hash umwandeln
 		user.setPassword(this.generateHash(user.getPassword()));
-		System.out.println(user.getPassword());
 		
 		userDAO.save(user);
 	}

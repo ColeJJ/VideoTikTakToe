@@ -81,17 +81,16 @@ function sendExit() {
 }
 
 function sendAbbrechen() {
-	socket.send('abbrechen')
+	socket.send('abbrechen');
 }
  
 //init
 rundenAnzahl = parseInt(rundenAnzahl);
 exitButton.style.display = "none";
-manageGame();
 restartButton.addEventListener("click", sendRestart);
 exitButton.addEventListener("click", sendExit);
 abbrechenButton.addEventListener("click", sendAbbrechen);
-
+manageGame();
 
 function manageGame() {
   circleTurn = false;

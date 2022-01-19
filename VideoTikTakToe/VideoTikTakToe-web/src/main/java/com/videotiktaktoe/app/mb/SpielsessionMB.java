@@ -85,7 +85,7 @@ public class SpielsessionMB implements Serializable{
 	}
 	
 	public String spielStarten() {
-		if(this.isAdmin) {
+		if(this.isUserAdmin()) {
 			try {
 				this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
 				this.aLobbyTO.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(this.aLobbyTO.getId()));
@@ -110,7 +110,7 @@ public class SpielsessionMB implements Serializable{
 	}
 	
 	public String spielBeenden() {
-		if(spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin()) {
+		if(this.isUserAdmin()) {
 			try {
 				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
 				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);	
@@ -138,7 +138,7 @@ public class SpielsessionMB implements Serializable{
 	}
 	
 	public String spielAbbrechen() {
-		if(this.isAdmin) {
+		if(this.isUserAdmin()) {
 			if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
 				sendInfoMessageToUser("Spiel wurde abgebrochen.");
 				return this.toLobby();
@@ -155,6 +155,10 @@ public class SpielsessionMB implements Serializable{
 				return this.stayAtSide();
 			}
 		}
+	}
+	
+	public boolean isUserAdmin() {
+		return spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin();
 	}
 	
 	//Navigation

@@ -45,7 +45,7 @@
              			value="Spiel starten"	
              			action="#{spielsessionMB.spielStarten()}"	
              			id="startGameButtonHidden"			
-             			styleClass="button">
+             			style="display: none">
              		<f:setPropertyActionListener target="#{spielsessionMB.aSessionTO.lobbyID}" value="#{lobbyMB.aLobby.id}"  /> 
             	</h:commandButton>
  			</h:panelGroup>

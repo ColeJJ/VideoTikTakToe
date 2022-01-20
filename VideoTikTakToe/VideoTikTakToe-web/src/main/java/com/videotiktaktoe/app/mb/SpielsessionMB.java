@@ -85,9 +85,16 @@ public class SpielsessionMB implements Serializable{
 	}
 	
 	public String spielStarten() {
+		//Check, ob lobby vorhanden ist
+		this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
+		if(this.aLobbyTO == null) {
+			sendErrorMessageToUser("Die Lobby wurde geloescht. Bitte verlassen Sie die Lobby");
+			return this.stayAtSide();
+		}
+		
+		
 		if(this.isUserAdmin()) {
 			try {
-				this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
 				this.aLobbyTO.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(this.aLobbyTO.getId()));
 				this.aSessionTO = gamecenterFacade.spielStarten(this.aSessionTO.getRundenAnzahl(), this.aLobbyTO.getId(), this.aLobbyTO.getUsers());
 				this.aWertungTOSpieler1 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(0).getId());

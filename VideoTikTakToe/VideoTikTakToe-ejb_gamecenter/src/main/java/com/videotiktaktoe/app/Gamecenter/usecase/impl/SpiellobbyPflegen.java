@@ -76,7 +76,8 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 	@Override
 	public LobbyTO lobbySuchen(int lobbyID) {
 		Lobby aLobby = lobbyDAO.find(lobbyID);
-		return aLobby.toLobbyTO();
+		LobbyTO aLobbyTO = aLobby != null ? aLobby.toLobbyTO() : null;
+		return aLobbyTO;
 	}
 
 

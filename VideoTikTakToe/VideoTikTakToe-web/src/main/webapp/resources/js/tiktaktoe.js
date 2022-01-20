@@ -19,13 +19,19 @@ const board = document.getElementById("game:board");
 const winningMessageElement = document.getElementById("game:winningMessage");
 const restartButton = document.getElementById("game:restartButton");
 const exitButton = document.getElementById("game:exitButton");
+const exitButtonHidden = document.getElementById("game:exitButtonHidden");
+const abbrechenButton = document.getElementById("game:abbrechenButton");
+const abbrechenButtonHidden = document.getElementById("game:abbrechenButtonHidden");
 const winningMessageTextElement = document.querySelector("[id='game:data-winning-message-text']");
 const winningMessageScoreElement = document.querySelector("[id='game:data-winning-message-score']");
+var currentCell;
+var currentClass;
 var score1 = 0;
 var score2 = 0;
+var socket;
 let circleTurn;
 
-//SP - Variablen
+//SP - HiddenValues
 var rundenAnzahl = document.getElementById('game:bestof').value;
 var scoreSpieler1 = document.getElementById('game:scoreSpieler1');
 var siegeSpieler1 = document.getElementById('game:siegeSpieler1');
@@ -33,16 +39,65 @@ var niederlagenSpieler1 = document.getElementById('game:niederlagenSpieler1');
 var scoreSpieler2 = document.getElementById('game:scoreSpieler2');
 var siegeSpieler2 = document.getElementById('game:siegeSpieler2');
 var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
+
 var spieler1 = document.getElementById('game:spielerName1').value;
 var spieler2 = document.getElementById('game:spielerName2').value;
+var isAdmin = document.getElementById('game:isAdmin').value;
 
+
+
+
+//Websocket
+socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
+socket.onmessage = function(e) {  
+    if(e.data === 'restart') {
+		//hier das game beenden
+		manageGame();
+	} else if (e.data  === 'exit'){
+		//hier das game beenden
+		exitButtonHidden.click();
+	} else if (e.data  === 'abbrechen'){
+		//hier das game abbrechen
+		abbrechenButtonHidden.click();
+	} else {
+		//handle click event
+        var currentCellID = e.data;
+        var currentCell = document.getElementById(currentCellID);
+	    currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
+	    if(currentCell != null){
+			currentCell.classList.add(currentClass);
+	    }
+	    if (checkWin(currentClass)) {
+	      endGame(false);
+	    } else if (isDraw()) {
+	      endGame(true);
+	    } else {
+	      swapTurns();
+	      setBoardHoverClass();
+	    }
+	}
+};
+
+function sendRestart() {
+    socket.send('restart');
+}
+
+function sendExit() {
+	socket.send('exit');
+}
+
+function sendAbbrechen() {
+	socket.send('abbrechen');
+}
 
  
 //init
 rundenAnzahl = parseInt(rundenAnzahl);
 exitButton.style.display = "none";
+restartButton.addEventListener("click", sendRestart);
+exitButton.addEventListener("click", sendExit);
+abbrechenButton.addEventListener("click", sendAbbrechen);
 manageGame();
-restartButton.addEventListener("click", manageGame);
 
 function manageGame() {
   circleTurn = false;
@@ -57,17 +112,9 @@ function manageGame() {
 }
 
 function handleClick(e) {
-  const cell = e.target;
-  const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-  placeMark(cell, currentClass);
-  if (checkWin(currentClass)) {
-    endGame(false);
-  } else if (isDraw()) {
-    endGame(true);
-  } else {
-    swapTurns();
-    setBoardHoverClass();
-  }
+  cell = e.target;
+  var id = cell.id;
+  socket.send(id);
 }
 
 function endGame(draw) {
@@ -106,8 +153,8 @@ function checkEndBestOf(){
 		niederlagenSpieler1.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
     	winningMessageTextElement.innerText = spieler2 + " hat gewonnen!";
-    	restartButton.style.display = "none";
 		exitButton.style.display = "block";
+    	restartButton.style.display = "none";
 	}
 }
 

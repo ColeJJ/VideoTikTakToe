@@ -1,9 +1,11 @@
 package com.videotiktaktoe.app.mb;
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJBException;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,7 +20,7 @@ import com.videotiktaktoe.app.Spielerverwaltung.entity.WertungTO;
 import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @Named("spielsessionMB")
-@SessionScoped
+@ApplicationScoped
 public class SpielsessionMB implements Serializable{
 
 	/**
@@ -30,6 +32,7 @@ public class SpielsessionMB implements Serializable{
 	private LobbyTO aLobbyTO;
 	private WertungTO aWertungTOSpieler1;
 	private WertungTO aWertungTOSpieler2;
+	private boolean isAdmin;
 	private int[] bestOfs = {3,5};
 	
 	//Konstruktor
@@ -52,10 +55,10 @@ public class SpielsessionMB implements Serializable{
 		this.aLobbyTO = new LobbyTO();
 		this.aWertungTOSpieler1 = new WertungTO();
 		this.aWertungTOSpieler2 = new WertungTO();
+		this.isAdmin = spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin();	
 	}
 	
 	public void refreshBean() {
-		this.aLobbyTO = null;
 		this.aWertungTOSpieler1 = null;
 		this.aWertungTOSpieler2 = null;
 	}
@@ -82,48 +85,89 @@ public class SpielsessionMB implements Serializable{
 		this.aWertungTOSpieler1.setPunktestand(0);
 		this.aWertungTOSpieler1.setPunktestand(0);
 	}
-	
 	public String spielStarten() {
-		try {
-			this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
-			this.aLobbyTO.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(this.aLobbyTO.getId()));
-			this.aSessionTO = gamecenterFacade.spielStarten(this.aSessionTO.getRundenAnzahl(), this.aLobbyTO.getId(), this.aLobbyTO.getUsers());
-			this.aWertungTOSpieler1 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(0).getId());
-			this.aWertungTOSpieler2 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(1).getId());
-			sendInfoMessageToUser("Spiel wurde erfolgreich gestartet.");
-			return this.toGame();
-		} catch(EJBException e) {
-			sendErrorMessageToUser("Spiel konnte nicht gestartet werden.");
+		//Check, ob lobby vorhanden ist
+		this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
+		if(this.aLobbyTO == null) {
+			sendErrorMessageToUser("Die Lobby wurde geloescht. Bitte verlassen Sie die Lobby");
 			return this.stayAtSide();
 		}
+		
+		
+		if(this.isUserAdmin()) {
+			try {
+				this.aLobbyTO.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(this.aLobbyTO.getId()));
+				this.aSessionTO = gamecenterFacade.spielStarten(this.aSessionTO.getRundenAnzahl(), this.aLobbyTO.getId(), this.aLobbyTO.getUsers());
+				this.aWertungTOSpieler1 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(0).getId());
+				this.aWertungTOSpieler2 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(1).getId());
+				sendInfoMessageToUser("Spiel wurde gestartet.");
+				return this.toGame();
+			} catch(EJBException e) {
+				sendErrorMessageToUser("Spiel konnte nicht gestartet werden.");
+				return this.stayAtSide();
+			}
+		} else {
+			try {
+				TimeUnit.SECONDS.sleep(1);
+				return this.toGame();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				return this.stayAtSide();
+			}
+		}
 	}
+	
 	
 	public String spielBeenden() {
-		try {
-			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
-			spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);
-		} catch(EJBException e) {
-			sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
-			return this.stayAtSide();
-		}
-
-		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
-			sendInfoMessageToUser("Spiel wurde erfolgreich beendet.");
-			return this.toLobby();
+		if(this.isUserAdmin()) {
+			try {
+				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler1);
+				spielerverwaltungFacade.wertungSichern(aWertungTOSpieler2);	
+				
+				if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+					sendInfoMessageToUser("Spiel wurde geloescht.");
+					return this.toLobby();
+				} else {
+					sendErrorMessageToUser("Spiel konnte nicht geloescht werden.");
+					return this.toLobby();
+				}
+			} catch(EJBException e) {
+				sendErrorMessageToUser("Wertungen konnten nicht gesichert werden.");
+				return this.toLobby();
+			}
 		} else {
-			sendErrorMessageToUser("Spiel konnte nicht beendet werden, weil es nicht gelöscht werden konnte.");
-			return this.stayAtSide();
+			try {
+				TimeUnit.SECONDS.sleep(1);
+				return this.toLobby();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				return this.stayAtSide();
+			}
 		}
 	}
 	
-	public String spielAbbrechen() {
-		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
-			sendInfoMessageToUser("Spiel wurde erfolgreich abgebrochen.");
-			return this.toLobby();
-		} else {
-			sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");
-			return this.stayAtSide();
+		public String spielAbbrechen() {
+			if(this.isUserAdmin()) {
+				if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+					sendInfoMessageToUser("Spiel wurde abgebrochen.");
+					return this.toLobby();
+				} else {
+					sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");
+					return this.stayAtSide();
+				}
+			} else {
+				try {
+					TimeUnit.SECONDS.sleep(1);
+					return this.toLobby();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					return this.stayAtSide();
+				}
+			}
 		}
+	
+	public boolean isUserAdmin() {
+		return spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin();
 	}
 	
 	//Navigation
@@ -191,5 +235,21 @@ public class SpielsessionMB implements Serializable{
 
 	public void setaWertungTOSpieler2(WertungTO aWertungTOSpieler2) {
 		this.aWertungTOSpieler2 = aWertungTOSpieler2;
+	}
+
+	public boolean getisAdmin() {
+		return isAdmin;
+	}
+
+	public void setisAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

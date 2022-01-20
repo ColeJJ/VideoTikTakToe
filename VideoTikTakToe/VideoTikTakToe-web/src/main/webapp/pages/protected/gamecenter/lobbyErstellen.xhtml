@@ -9,8 +9,10 @@
         <title>Lobby erstellen</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h1>TikTakToe - Lobby erstellen</h1>            
+    <h:form id="form">
+    <h1>TikTakToe - Lobby erstellen</h1>
+    <h:messages styleClass ="message" layout="table" errorStyle="background: #AFEEEE;"
+				infoStyle="background: #AFEEEE;" globalOnly="true" />       
             <h:panelGroup class="board" id="board">
             	<h:panelGroup class="cell"></h:panelGroup>
             	<h:panelGroup class="cell">
@@ -54,8 +56,7 @@
             	
             			
 			</h:panelGroup>
-			<h:messages layout="table" errorStyle="background: #AFEEEE;"
-				infoStyle="background: #AFEEEE;" globalOnly="true" />
+			
 				<h:inputHidden value="#{lobbyMB.aLobby.id}" />	
         </h:form>
     </h:body>

@@ -14,6 +14,8 @@
   <h:body>
 	 <h:form id="game">
 	   <h3>TikTakToe - Game</h3>
+	   <h:messages styleClass ="message" layout="table" errorStyle="background: #AFEEEE;"
+				infoStyle="background: #AFEEEE;" globalOnly="true" />
 	   <br/>
 	   <h:panelGrid styleClass = "center">
 			<h:outputText  styleClass ="label_player1" value="#{spielsessionMB.aLobbyTO.users[0].username} vs. #{spielsessionMB.aLobbyTO.users[1].username}" />
@@ -48,7 +50,8 @@
 	   	<h:inputHidden id="scoreSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.punktestand}"/>
 	   	<h:inputHidden id="siegeSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.siege}"/>
 	   	<h:inputHidden id="niederlagenSpieler2" value="#{spielsessionMB.aWertungTOSpieler2.niederlagen}"/>
-	   	
+	   	<h:inputHidden id="spielerName1" value="#{spielsessionMB.aLobbyTO.users[0].username}"/>
+	   	<h:inputHidden id="spielerName2" value="#{spielsessionMB.aLobbyTO.users[1].username}"/>
 		</h:panelGroup>
 	
 		<!-- TikTakToe -->

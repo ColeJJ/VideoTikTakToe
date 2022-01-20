@@ -64,11 +64,13 @@ public class SpielsessionMB implements Serializable{
 	private void sendInfoMessageToUser(String message){
 		FacesContext context = getContext();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+		context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	private void sendErrorMessageToUser(String message){
 		FacesContext context = getContext();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+		context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	private FacesContext getContext() {
@@ -88,7 +90,7 @@ public class SpielsessionMB implements Serializable{
 			this.aSessionTO = gamecenterFacade.spielStarten(this.aSessionTO.getRundenAnzahl(), this.aLobbyTO.getId(), this.aLobbyTO.getUsers());
 			this.aWertungTOSpieler1 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(0).getId());
 			this.aWertungTOSpieler2 = spielerverwaltungFacade.findWertungByUserID(this.aLobbyTO.getUsers().get(1).getId());
-			sendInfoMessageToUser("Spiel wurde gestartet.");
+			sendInfoMessageToUser("Spiel wurde erfolgreich gestartet.");
 			return this.toGame();
 		} catch(EJBException e) {
 			sendErrorMessageToUser("Spiel konnte nicht gestartet werden.");
@@ -106,7 +108,7 @@ public class SpielsessionMB implements Serializable{
 		}
 
 		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
-			sendInfoMessageToUser("Spiel wurde beendet.");
+			sendInfoMessageToUser("Spiel wurde erfolgreich beendet.");
 			return this.toLobby();
 		} else {
 			sendErrorMessageToUser("Spiel konnte nicht beendet werden, weil es nicht gelöscht werden konnte.");
@@ -116,7 +118,7 @@ public class SpielsessionMB implements Serializable{
 	
 	public String spielAbbrechen() {
 		if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
-			sendInfoMessageToUser("Spiel wurde abgebrochen.");
+			sendInfoMessageToUser("Spiel wurde erfolgreich abgebrochen.");
 			return this.toLobby();
 		} else {
 			sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");

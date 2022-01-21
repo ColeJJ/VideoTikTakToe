@@ -39,7 +39,13 @@ var niederlagenSpieler1 = document.getElementById('game:niederlagenSpieler1');
 var scoreSpieler2 = document.getElementById('game:scoreSpieler2');
 var siegeSpieler2 = document.getElementById('game:siegeSpieler2');
 var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
+
+var spieler1 = document.getElementById('game:spielerName1').value;
+var spieler2 = document.getElementById('game:spielerName2').value;
 var isAdmin = document.getElementById('game:isAdmin').value;
+
+
+
 
 //Websocket
 socket = new WebSocket('ws://localhost:8080/VideoTikTakToe-web/echo');
@@ -83,6 +89,7 @@ function sendExit() {
 function sendAbbrechen() {
 	socket.send('abbrechen');
 }
+
  
 //init
 rundenAnzahl = parseInt(rundenAnzahl);
@@ -119,12 +126,12 @@ function endGame(draw) {
 			scoreSpieler2.value++;
 			score2++;
 			winningMessageScoreElement.innerText = score1 + ":" + score2;
-			winningMessageTextElement.innerText = "O'sWins!";
+			winningMessageTextElement.innerText = spieler2 + " Wins!";
 		 } else {
 			scoreSpieler1.value++;
 			score1++;
 			winningMessageScoreElement.innerText = score1 + ":" + score2;
-			winningMessageTextElement.innerText = "X'sWins!";
+			winningMessageTextElement.innerText = spieler1+ " Wins!";
 		}
   }
   
@@ -134,18 +141,18 @@ function endGame(draw) {
 }
 
 function checkEndBestOf(){
-	if(score1 == rundenAnzahl) {
+	if(score1 > (rundenAnzahl / 2)) {
 		siegeSpieler1.value++;
 		niederlagenSpieler2.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
-    	winningMessageTextElement.innerText = "Player 1 won the best of!";
-		exitButton.style.display = "block";
+    	winningMessageTextElement.innerText = spieler1 + " hat gewonnen!";
     	restartButton.style.display = "none";
-	} else if (score2 == rundenAnzahl){
+		exitButton.style.display = "block";
+	} else if (score2 > (rundenAnzahl / 2)){
 		siegeSpieler2.value++;
 		niederlagenSpieler1.value++;
 		winningMessageScoreElement.innerText = score1 + ":" + score2;
-    	winningMessageTextElement.innerText = "Player 2 won the best of!";
+    	winningMessageTextElement.innerText = spieler2 + " hat gewonnen!";
 		exitButton.style.display = "block";
     	restartButton.style.display = "none";
 	}

@@ -55,7 +55,7 @@ public class UserMB implements Serializable{
 	}
 	
 	public void loadUsergroups() {		
-		System.out.println("Usergruppen werden geladen");
+		System.out.println("Usergruppen werden geladen.");
 		this.usergroups = spielerverwaltungFacade.getAllGroups();
 	}
 	
@@ -63,6 +63,7 @@ public class UserMB implements Serializable{
 	private void sendInfoMessageToUser(String message){
 		FacesContext context = getContext();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+		context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	private FacesContext getContext() {
@@ -83,15 +84,13 @@ public class UserMB implements Serializable{
 	     boolean b = m.find();
 	     	
 	     if (b == true || n == false) {
-	        System.out.println("Falsche Syntax bei Username oder E-Mail.");
-	     	sendInfoMessageToUser("Kann den User nicht registrieren.");
+	     	sendInfoMessageToUser("User registrieren war nicht erfolgreich.");
 			return this.stayOnSide();
 	     }
 	     else {
 	    	if(this.aUser.getPassword().equals(confirmPassword)) {
 	    	spielerverwaltungFacade.userRegistrieren(this.aUser);
-	    	System.out.println("Korrekte Sxntax bei Username und E-Mail.");
-			sendInfoMessageToUser("User registrieren.");
+			sendInfoMessageToUser("User registrieren war erfolgreich.");
 			return this.toLogin();
 	    	}
 	    	else {

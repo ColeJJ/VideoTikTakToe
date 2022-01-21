@@ -65,11 +65,13 @@ public class LobbyMB implements Serializable{
 	private void sendInfoMessageToUser(String message){
 		FacesContext context = getContext();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));	
+		context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	private void sendErrorMessageToUser(String message){
 		FacesContext context = getContext();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+		context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	private FacesContext getContext() {
@@ -120,7 +122,7 @@ public class LobbyMB implements Serializable{
 	public String lobbyBeitreten() {
 		//check, ob ein lobbycode eingegeben wurde
 		if (this.aLobby.getLobbyCode()== null || this.aLobby.getLobbyCode().isEmpty()) {
-			sendInfoMessageToUser("Bitte geben Sie einen Lobbynamen an.");
+			sendInfoMessageToUser("Bitte geben Sie einen Lobbycode ein.");
 	        return null;
 	    }
 		
@@ -132,7 +134,7 @@ public class LobbyMB implements Serializable{
 				return this.stayAtSide();
 			}
 			else {
-				sendErrorMessageToUser("Lobby erfolgreich beigetreten");
+				sendErrorMessageToUser("Lobby erfolgreich beigetreten.");
 				String username = securityContext.getCallerPrincipal().getName();
 				aUserTO = spielerverwaltungFacade.findUserByName(username);
 				return this.toLobbyAnzeigen();
@@ -147,7 +149,7 @@ public class LobbyMB implements Serializable{
 		try {
 			gamecenterFacade.lobbyVerlassen(securityContext.getCallerPrincipal().getName());
 			this.reinitBean();
-			sendErrorMessageToUser("Lobby verlassen.");
+			sendErrorMessageToUser("Lobby wurde erfolgreich verlassen.");
 			return this.toHauptmenue();
 		} catch (EJBException e) {
 			sendErrorMessageToUser("Lobby verlassen hat nicht funktioniert.");
@@ -157,7 +159,7 @@ public class LobbyMB implements Serializable{
 
 	public String lobbyLoeschen() {
 		if(gamecenterFacade.lobbyLoeschen(securityContext.getCallerPrincipal().getName(), this.aLobby.getLobbyName())) {
-			sendInfoMessageToUser("Lobby geloescht.");
+			sendInfoMessageToUser("Lobby wurde erfolgreich geloescht.");
 			this.reinitBean();
 			return this.toHauptmenue();
 		} else {

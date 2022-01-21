@@ -84,3 +84,7 @@ h1{
 	font-family: monospace;
 	border-style: none;
 }
+#form .message{
+  font-family: monospace;
+  margin: 0 auto;
+}

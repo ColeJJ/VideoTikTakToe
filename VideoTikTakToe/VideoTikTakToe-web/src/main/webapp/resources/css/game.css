@@ -195,4 +195,7 @@ form#game{
   height: 60px;
   font-family: monospace;
 }
-
+#game .message{
+  margin: 0 auto;
+  font-family: monospace;
+}

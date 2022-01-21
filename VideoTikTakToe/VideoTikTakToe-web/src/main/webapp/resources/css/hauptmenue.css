@@ -69,3 +69,7 @@ h1{
   font-weight: 700;
   font-size:  large;
 }
+#form .message{
+  font-family: monospace;
+  margin: 0 auto;
+}

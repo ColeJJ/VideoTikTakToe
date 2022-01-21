@@ -103,3 +103,7 @@ body {
   font-family: monospace;
   font-size: 120%;
 }
+.form .message{
+  font-family: monospace;
+  margin: 0 auto;
+}

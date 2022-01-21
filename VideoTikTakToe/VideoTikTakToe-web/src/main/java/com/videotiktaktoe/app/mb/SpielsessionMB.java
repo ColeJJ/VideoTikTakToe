@@ -66,11 +66,13 @@ public class SpielsessionMB implements Serializable{
 	private void sendInfoMessageToUser(String message){
 		FacesContext context = getContext();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
+		context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	private void sendErrorMessageToUser(String message){
 		FacesContext context = getContext();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+		context.getExternalContext().getFlash().setKeepMessages(true);
 	}
 	
 	private FacesContext getContext() {
@@ -82,7 +84,6 @@ public class SpielsessionMB implements Serializable{
 		this.aWertungTOSpieler1.setPunktestand(0);
 		this.aWertungTOSpieler1.setPunktestand(0);
 	}
-	
 	public String spielStarten() {
 		//Check, ob die Lobby vorhanden ist oder nicht vorher schon geloescht wurde
 		this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
@@ -115,6 +116,7 @@ public class SpielsessionMB implements Serializable{
 		}
 	}
 	
+	
 	public String spielBeenden() {
 		if(this.isUserAdmin()) {
 			try {
@@ -144,26 +146,26 @@ public class SpielsessionMB implements Serializable{
 		}
 	}
 	
-	public String spielAbbrechen() {
-		if(this.isUserAdmin()) {
-			if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
-				sendInfoMessageToUser("Spiel wurde abgebrochen.");
-				return this.toLobby();
+		public String spielAbbrechen() {
+			if(this.isUserAdmin()) {
+				if(gamecenterFacade.sessionLoeschen(this.aSessionTO.getId())) {
+					sendInfoMessageToUser("Spiel wurde abgebrochen.");
+					return this.toLobby();
+				} else {
+					sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");
+					return this.stayAtSide();
+				}
 			} else {
-				sendErrorMessageToUser("Spiel konnte nicht abgebrochen werden, weil es nicht gelöscht werden konnte.");
-				return this.stayAtSide();
-			}
-		} else {
-			try {
-				//hier ein kleiner Delay fuer die Websockets Sessions, die kein Admin sind und die BE Requests nicht aufrufen
-				TimeUnit.SECONDS.sleep(1);
-				return this.toLobby();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				return this.stayAtSide();
+				try {
+					//hier ein kleiner Delay fuer die Websockets Sessions, die kein Admin sind und die BE Requests nicht aufrufen
+					TimeUnit.SECONDS.sleep(1);
+					return this.toLobby();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					return this.stayAtSide(); 
+				}
 			}
 		}
-	}
 	
 	private boolean isUserAdmin() {
 		return spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin();

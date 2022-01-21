@@ -12,6 +12,11 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint("/echo")
 public class WebsocketServer {
+	
+	/**
+	 *  Das hier ist der Websocket Server, um Aktionen auf mehreren Sessions ausfuehren zu koennen
+	 */
+	
 	private static Set<Session> userSessions = Collections.newSetFromMap(new ConcurrentHashMap<Session, Boolean>());
 	
     @OnOpen

@@ -8,8 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -18,7 +16,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
 import javax.servlet.ServletException;
-import javax.swing.JOptionPane;
 
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UsergroupTO;
@@ -28,7 +25,6 @@ import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @SessionScoped
 @Named("userMB")
-
 public class UserMB implements Serializable{
 	
 	@SuppressWarnings("cdi-ambiguous-dependency")
@@ -67,11 +63,6 @@ public class UserMB implements Serializable{
 	private void sendInfoMessageToUser(String message){
 		FacesContext context = getContext();
 		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
-	}
-	
-	private void sendErrorMessageToUser(String message){
-		FacesContext context = getContext();
-		context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
 	}
 	
 	private FacesContext getContext() {
@@ -126,11 +117,11 @@ public class UserMB implements Serializable{
 	}
 	
 	//Navigation
-	public String toLogin() {
+	private String toLogin() {
 		return "BACK_TO_LOGIN";
 	}
 	
-	public String stayOnSide() {
+	private String stayOnSide() {
 		return "";
 	}
 	

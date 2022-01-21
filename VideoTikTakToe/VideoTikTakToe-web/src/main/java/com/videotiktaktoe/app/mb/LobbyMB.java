@@ -27,7 +27,6 @@ import com.videotiktaktoe.app.Spielerverwaltung.facade.ISpielerverwaltungFacade;
 
 @Named("lobbyMB")
 @SessionScoped
-@RolesAllowed({"USER","ADMIN"})
 public class LobbyMB implements Serializable{
 
 	/**
@@ -36,8 +35,7 @@ public class LobbyMB implements Serializable{
 	private static final long serialVersionUID = -3071715294950111471L;
 	
 	private LobbyTO aLobby;
-	//TODO: aUserTO
-	private UserTO aUser;
+	private UserTO aUserTO;
 	
 	//Konstruktor
 	public LobbyMB() {}
@@ -79,17 +77,14 @@ public class LobbyMB implements Serializable{
 		return context;
 	}
 	 
-//	@RolesAllowed({"USER"})
 	public String lobbyErstellenClicked() {
-		//this.aLobby = gamecenterFacade.lobbyNameSuchen(this.aLobby.getLobbyName());
 		if (this.aLobby.getLobbyName()== null || this.aLobby.getLobbyName().isEmpty()) {
 			sendInfoMessageToUser("Bitte geben Sie einen Lobbynamen an.");
 	         return null;
 	     }
-			
+		 
 		 Pattern p = Pattern.compile("[^A-Za-z0-9]");
 	     Matcher m = p.matcher(this.aLobby.getLobbyName());
-	    // boolean b = m.matches();
 	     boolean b = m.find();
 	     if (b == true) {
 	    	 sendErrorMessageToUser("Kann die Lobby nicht erstellen.");
@@ -98,7 +93,7 @@ public class LobbyMB implements Serializable{
 	    	try {
 			this.aLobby = gamecenterFacade.lobbyErstellen(this.aLobby, securityContext.getCallerPrincipal().getName());
 			String username = securityContext.getCallerPrincipal().getName();
-			aUser = spielerverwaltungFacade.findUserByName(username);
+			aUserTO = spielerverwaltungFacade.findUserByName(username);
 			sendInfoMessageToUser("Lobby wurde erstellt.");
 			return this.toLobbyAnzeigen();
 	    	}catch(EJBException e) {
@@ -106,12 +101,12 @@ public class LobbyMB implements Serializable{
 				return this.stayAtSide();
 	    	}
 		}
-	  
 	}
+	
 	public UserTO updateUser(){
 		String username = securityContext.getCallerPrincipal().getName();
-		aUser = spielerverwaltungFacade.findUserByName(username);
-		return aUser;
+		aUserTO = spielerverwaltungFacade.findUserByName(username);
+		return aUserTO;
 	}
 	
 	public void generateCode() {
@@ -123,10 +118,12 @@ public class LobbyMB implements Serializable{
 	}
 	
 	public String lobbyBeitreten() {
+		//check, ob ein lobbycode eingegeben wurde
 		if (this.aLobby.getLobbyCode()== null || this.aLobby.getLobbyCode().isEmpty()) {
 			sendInfoMessageToUser("Bitte geben Sie einen Lobbynamen an.");
 	        return null;
-	     }
+	    }
+		
 		try {
 			this.aLobby = gamecenterFacade.lobbyBeitreten(this.aLobby.getLobbyCode(), securityContext.getCallerPrincipal().getName());
 			if(this.aLobby.getLobbyCode() == null ) {
@@ -137,7 +134,7 @@ public class LobbyMB implements Serializable{
 			else {
 				sendErrorMessageToUser("Lobby erfolgreich beigetreten");
 				String username = securityContext.getCallerPrincipal().getName();
-				aUser = spielerverwaltungFacade.findUserByName(username);
+				aUserTO = spielerverwaltungFacade.findUserByName(username);
 				return this.toLobbyAnzeigen();
 			}
 		} catch(EJBException e) {
@@ -145,9 +142,8 @@ public class LobbyMB implements Serializable{
 			return this.stayAtSide();
 		}
 	}
-//	@RolesAllowed({"USER"})
+
 	public String lobbyVerlassen() {
-//		if (securityContext.isCallerInRole("USER")) {
 		try {
 			gamecenterFacade.lobbyVerlassen(securityContext.getCallerPrincipal().getName());
 			this.reinitBean();
@@ -157,14 +153,9 @@ public class LobbyMB implements Serializable{
 			sendErrorMessageToUser("Lobby verlassen hat nicht funktioniert.");
 			return this.stayAtSide();
 		}
-//		}else {
-//			sendInfoMessageToUser("Keine Rechte um die Lobby zu verlassen.");
-//			return "";	
-//		}
 	}
-//	@RolesAllowed({"ADMIN"})
+
 	public String lobbyLoeschen() {
-//		if (securityContext.isCallerInRole("ADMIN")) {
 		if(gamecenterFacade.lobbyLoeschen(securityContext.getCallerPrincipal().getName(), this.aLobby.getLobbyName())) {
 			sendInfoMessageToUser("Lobby geloescht.");
 			this.reinitBean();
@@ -173,26 +164,18 @@ public class LobbyMB implements Serializable{
 			sendErrorMessageToUser("Lobby loeschen hat nicht funktioniert.");
 			return this.stayAtSide();
 		}
-//		}else {
-//			sendInfoMessageToUser("Keine Rechte um die Lobby zu loeschen.");
-//			return "";	
-//		}
 	}
 	
-	//Navigation
-	public String toLogin() {
-		return "BACK_TO_LOGIN";
-	}
-	
-	public String toLobbyAnzeigen() {
+	//Navigation	
+	private String toLobbyAnzeigen() {
 		return "LOBBY_ANZEIGEN";
 	}
 	
-	public String stayAtSide() {
+	private String stayAtSide() {
 		return "";
 	}
 	
-	public String toHauptmenue() {
+	private String toHauptmenue() {
 		return "BACK_TO_HAUPTMENUE";
 	}
 	
@@ -213,11 +196,11 @@ public class LobbyMB implements Serializable{
 		this.gamecenterFacade = gamecenterFacade;
 	}
 
-	public UserTO getaUser() {
-		return aUser;
+	public UserTO getaUserTO() {
+		return aUserTO;
 	}
 
-	public void setaUser(UserTO aUser) {
-		this.aUser = aUser;
+	public void setaUserTO(UserTO aUserTO) {
+		this.aUserTO = aUserTO;
 	}
 }

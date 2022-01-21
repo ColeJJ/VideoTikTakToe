@@ -1,5 +1,5 @@
 /**
- * 
+ *  Das Skript, um Websockets Interaktionen in der Lobby zu ermoeglichen
  */
  
 const startGameButton = document.getElementById("lobby:startGameButton");

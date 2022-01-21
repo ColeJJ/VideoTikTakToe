@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJBException;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -85,13 +84,12 @@ public class SpielsessionMB implements Serializable{
 	}
 	
 	public String spielStarten() {
-		//Check, ob lobby vorhanden ist
+		//Check, ob die Lobby vorhanden ist oder nicht vorher schon geloescht wurde
 		this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
 		if(this.aLobbyTO == null) {
 			sendErrorMessageToUser("Die Lobby wurde geloescht. Bitte verlassen Sie die Lobby");
 			return this.stayAtSide();
 		}
-		
 		
 		if(this.isUserAdmin()) {
 			try {
@@ -107,6 +105,7 @@ public class SpielsessionMB implements Serializable{
 			}
 		} else {
 			try {
+				//hier ein kleiner Delay fuer die Websockets Sessions, die kein Admin sind und die BE Requests nicht aufrufen
 				TimeUnit.SECONDS.sleep(1);
 				return this.toGame();
 			} catch (InterruptedException e) {
@@ -135,6 +134,7 @@ public class SpielsessionMB implements Serializable{
 			}
 		} else {
 			try {
+				//hier ein kleiner Delay fuer die Websockets Sessions, die kein Admin sind und die BE Requests nicht aufrufen
 				TimeUnit.SECONDS.sleep(1);
 				return this.toLobby();
 			} catch (InterruptedException e) {
@@ -155,6 +155,7 @@ public class SpielsessionMB implements Serializable{
 			}
 		} else {
 			try {
+				//hier ein kleiner Delay fuer die Websockets Sessions, die kein Admin sind und die BE Requests nicht aufrufen
 				TimeUnit.SECONDS.sleep(1);
 				return this.toLobby();
 			} catch (InterruptedException e) {
@@ -164,28 +165,20 @@ public class SpielsessionMB implements Serializable{
 		}
 	}
 	
-	public boolean isUserAdmin() {
+	private boolean isUserAdmin() {
 		return spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin();
 	}
 	
-	//Navigation
-	public String toLogin() {
-		return "BACK_TO_LOGIN";
-	}
-	
-	public String toGame() {
+	//Navigation	
+	private String toGame() {
 		return "TO_GAME";
 	}
 	
-	public String stayAtSide() {
+	private String stayAtSide() {
 		return "";
 	}
 	
-	public String toHauptmenue() {
-		return "BACK_TO_HAUPTMENUE";
-	}
-	
-	public String toLobby() {
+	private String toLobby() {
 		return "LOBBY_ANZEIGEN";
 	}
 		
@@ -211,14 +204,6 @@ public class SpielsessionMB implements Serializable{
 		this.bestOfs = bestOfs;
 	}
 
-	public IGamecenterFacade getGamecenterFacade() {
-		return gamecenterFacade;
-	}
-
-	public void setGamecenterFacade(IGamecenterFacade gamecenterFacade) {
-		this.gamecenterFacade = gamecenterFacade;
-	}
-
 	public WertungTO getaWertungTOSpieler1() {
 		return aWertungTOSpieler1;
 	}
@@ -233,14 +218,6 @@ public class SpielsessionMB implements Serializable{
 
 	public void setaWertungTOSpieler2(WertungTO aWertungTOSpieler2) {
 		this.aWertungTOSpieler2 = aWertungTOSpieler2;
-	}
-
-	public boolean getisAdmin() {
-		return isAdmin;
-	}
-
-	public void setisAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
 	}
 
 	public boolean isAdmin() {

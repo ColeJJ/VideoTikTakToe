@@ -1,5 +1,5 @@
 /**
- * 
+ *  Das Skript, um die Interaktionen mit dem TikTakToe zu verarbeiten
  */
 
 const X_CLASS = "x";
@@ -48,10 +48,10 @@ socket.onmessage = function(e) {
 		//hier das game beenden
 		manageGame();
 	} else if (e.data  === 'exit'){
-		//hier das game beenden
+		//hier das game beenden, Aufruf einer MB Methoden
 		exitButtonHidden.click();
 	} else if (e.data  === 'abbrechen'){
-		//hier das game abbrechen
+		//hier das game abbrechen, Aufruf einer MB Methoden
 		abbrechenButtonHidden.click();
 	} else {
 		//handle click event

@@ -1,44 +1,23 @@
 package com.videotiktaktoe.app.mb;
 import java.io.Serializable;
 
-import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
-
-import javax.security.enterprise.SecurityContext;
 
 @Named("naviMB")
 @RequestScoped
-@RolesAllowed({"USER","ADMIN"})
 public class NavigationMB implements Serializable {
+	
+	/**
+	 *  Diese Klasse dient zur allgemeinen und klassenuebergreifenden Navigation
+	 */
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6183980918040292096L;
-	@Inject
-	SecurityContext securityContext;
-	
-//Info-Messages
-		private void sendInfoMessageToUser(String message){
-			FacesContext context = getContext();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, message));
-		}
 		
-		private void sendErrorMessageToUser(String message){
-			FacesContext context = getContext();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
-		}
-		
-		private FacesContext getContext() {
-			FacesContext context = FacesContext.getCurrentInstance();
-			return context;
-		}
-		
-//	Login
+    //Login
 	public String starteRegistrierung() {
 		return this.toRegistrierung();
 	}
@@ -47,16 +26,9 @@ public class NavigationMB implements Serializable {
 		return this.toLogin();
 	}
 	
-//Menue
-//	@RolesAllowed({"ADMIN"})
+	//Menue
 	public String starteLobbyErstellen() {
-//		if (securityContext.isCallerInRole("ADMIN")) {
-			return this.toLobbyErstellen();
-//		}
-//		else {
-//				sendInfoMessageToUser("Keine Rechte um Lobby zu erstellen.");
-//				return "";	
-//			}
+		return this.toLobbyErstellen();
 	}
 	
 	public String starteLobbyBeitreten() {
@@ -76,43 +48,33 @@ public class NavigationMB implements Serializable {
 	}
 	
 	
-//	Freundesliste
+    //Freundesliste
 	public String freudeslisteAbbrechenClicked() {
 		return this.toHauptmenue();
 	}
 	
-	
-//	Allgemein nutzbar
-//	public String abbrechenToHauptmenueClicked() {
-//		return "BACK_TO_HAUPTMENUE";
-//	}
-//	
-//	public String abbrechenToLoginClicked() {
-//		return "BACK_TO_LOGIN";
-//	}
-	
 	//Navigation
-	public String toHauptmenue() {
+	private String toHauptmenue() {
 		return "BACK_TO_HAUPTMENUE";
 	}
 	
-	public String toLogin() {
+	private String toLogin() {
 		return "BACK_TO_LOGIN";
 	}
 	
-	public String toRegistrierung() {
+	private String toRegistrierung() {
 		return "REGISTRIEREN";
 	}
 	
-	public String toLobbyErstellen() {
+	private String toLobbyErstellen() {
 		return "LOBBY_ERSTELLEN";
 	}
 	
-	public String toLobbyBeitreten() {
+	private String toLobbyBeitreten() {
 		return "LOBBY_BEITRETEN";
 	}
 	
-	public String toStarteFreundesliste() {
+	private String toStarteFreundesliste() {
 		return "STARTE_FREUNDESLISTE";
 	}
 

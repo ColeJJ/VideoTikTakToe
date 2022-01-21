@@ -20,9 +20,9 @@ public class UsergroupTO implements Serializable{
 	
 	public Usergroup toUsergroup() {
 		Usergroup group = new Usergroup(
-				this.getId(),
-				this.getGroupname()
-				);
+			this.getId(),
+			this.getGroupname()
+		);
 		return group;
 	}
 	

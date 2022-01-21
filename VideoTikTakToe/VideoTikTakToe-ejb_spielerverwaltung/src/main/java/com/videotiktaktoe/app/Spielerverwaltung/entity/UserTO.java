@@ -27,13 +27,14 @@ public class UserTO implements Serializable{
 	public User toUser() {
 		
 		User aUser = new User(
-				this.getId(),
-				this.getUsername(),
-				this.getPassword(),
-				this.geteMailAddress(),
-				this.isAdmin(),
-				this.getUsergroup(),
-				this.getLobbyID());
+			this.getId(),
+			this.getUsername(),
+			this.getPassword(),
+			this.geteMailAddress(),
+			this.isAdmin(),
+			this.getUsergroup(),
+			this.getLobbyID()
+		);
 		return aUser;
 	}
 	

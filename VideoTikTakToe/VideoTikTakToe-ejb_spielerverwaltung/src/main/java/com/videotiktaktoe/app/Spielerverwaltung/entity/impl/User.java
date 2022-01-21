@@ -24,7 +24,6 @@ public class User {
 	public static final String FIND_BY_ID = "User.findUserByID";
 	public static final String FIND_BY_LOBBYID = "User.findByLobbyID";
 	
-	//PK
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
@@ -41,7 +40,7 @@ public class User {
 	private int lobbyID;
 	
 	
-	//Contructor
+	//Konstruktor
 	public User() {}
 	
 	public User(int id, String username, String password, String eMailAddress, boolean admin, String usergroup, int lobbyID) {
@@ -77,6 +76,21 @@ public class User {
 	
 	public String toString() {
 		return "ID: " + this.getId() +", Username: " + this.getUsername() + ", Password: " + this.getPassword() + ", Mail: " + this.geteMailAddress() + ", Admin: " + this.isAdmin();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof User) {
+			User user = (User) obj;
+			return user.username.equals(getUsername());
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return getId();
 	}
 	
 	//Getters and Setter
@@ -125,20 +139,5 @@ public class User {
 
 	public void setLobbyID(int lobbyID) {
 		this.lobbyID = lobbyID;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof User) {
-			User user = (User) obj;
-			return user.username.equals(getUsername());
-		}
-		
-		return false;
-	}
-	
-	@Override
-	public int hashCode() {
-		return getId();
 	}
 }

@@ -68,7 +68,6 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 	    String randomString = sb.toString();
 	    aLobby.setLobbyCode(randomString);
 	    
-	    //TODO: Lobby Code auf Einmaligkeit prüfen, bevor es gespeichert wird 
 		lobbyDAO.update(aLobby);
 		return aLobby.getLobbyCode();
 	}

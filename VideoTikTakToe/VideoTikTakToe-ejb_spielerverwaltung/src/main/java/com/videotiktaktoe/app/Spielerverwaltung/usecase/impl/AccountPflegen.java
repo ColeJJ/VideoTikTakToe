@@ -40,6 +40,7 @@ public class AccountPflegen implements IAccountPflegen{
 		userDAO.save(user);
 	}
 
+	//generiert aus dem PW String ein Hash zum Speichern in der DB
 	public String generateHash(String password) {
 		String generatedPassword = null;
 		String passwordToHash = password;

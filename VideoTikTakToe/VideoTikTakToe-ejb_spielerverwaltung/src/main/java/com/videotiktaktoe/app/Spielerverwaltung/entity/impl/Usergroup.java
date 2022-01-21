@@ -25,7 +25,7 @@ public class Usergroup {
 	@Column(unique=true, nullable=false)
 	private String groupname;
 	
-	//Constructor
+	//Konstruktor
 	public Usergroup() {}
 	
 	public Usergroup(int id, String groupname) {

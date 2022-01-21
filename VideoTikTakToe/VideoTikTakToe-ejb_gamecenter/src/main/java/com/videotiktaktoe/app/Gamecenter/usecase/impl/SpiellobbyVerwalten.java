@@ -30,8 +30,6 @@ public class SpiellobbyVerwalten implements ISpiellobbyVerwalten {
 			aLobbyTO.setUsers(spielerverwaltungFacade.getAllUsersInSameLobby(aLobbyTO.getId()));
 		}
 
-		//TODO: vllt gibts hier in Java auch Möglichkeiten Exceptions zu werfen, die dann im FE abgefangen werden.. 
-		//tendenziell brauch man ja nicht n Objekt zurückgeben, wenn der Code ungültig ist
 		return aLobbyTO;
 	}
 

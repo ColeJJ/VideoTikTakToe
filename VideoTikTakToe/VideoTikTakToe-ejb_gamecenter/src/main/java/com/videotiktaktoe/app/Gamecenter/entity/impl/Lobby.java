@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -18,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.videotiktaktoe.app.Gamecenter.entity.LobbyTO;
-import com.videotiktaktoe.app.Gamecenter.usecase.ISpiellobbyPflegen;
 import com.videotiktaktoe.app.Spielerverwaltung.entity.UserTO;
 
 
@@ -52,10 +50,6 @@ public class Lobby implements Serializable {
 	
 	@Transient
 	private List<UserTO> users;
-	
-	@Transient
-	@Inject
-	ISpiellobbyPflegen spiellobbyPflegen;
 	
 	//Konstruktor
 	public Lobby() {}

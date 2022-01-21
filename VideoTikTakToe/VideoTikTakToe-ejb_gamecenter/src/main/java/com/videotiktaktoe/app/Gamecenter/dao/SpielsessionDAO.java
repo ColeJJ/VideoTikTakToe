@@ -3,7 +3,6 @@ package com.videotiktaktoe.app.Gamecenter.dao;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.videotiktaktoe.app.Gamecenter.entity.impl.Lobby;
 import com.videotiktaktoe.app.Gamecenter.entity.impl.Spielsession;
 
 public class SpielsessionDAO extends GenericDAO<Spielsession>{
@@ -20,7 +19,7 @@ public class SpielsessionDAO extends GenericDAO<Spielsession>{
 		return aSession != null ? aSession : null;
 	}
 	
-	public boolean deleteLobby(int sessionID) {
+	public boolean deleteSession(int sessionID) {
 		return this.delete(sessionID, Spielsession.class);
 	}
 }

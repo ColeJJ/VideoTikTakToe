@@ -34,7 +34,7 @@ public class LobbyMB implements Serializable{
 	 */
 	private static final long serialVersionUID = -3071715294950111471L;
 	
-	private LobbyTO aLobby;
+	private LobbyTO aLobbyTO;
 	private UserTO aUserTO;
 	
 	//Konstruktor
@@ -52,13 +52,13 @@ public class LobbyMB implements Serializable{
 	//init
 	@PostConstruct
 	public void initBean() {
-		if(this.aLobby == null) {
-			this.aLobby = new LobbyTO();
+		if(this.aLobbyTO == null) {
+			this.aLobbyTO = new LobbyTO();
 		}
 	}
 	
 	public void reinitBean() {
-		this.aLobby = new LobbyTO();
+		this.aLobbyTO = new LobbyTO();
 	}
 	
 	//Info-Messages
@@ -80,20 +80,20 @@ public class LobbyMB implements Serializable{
 	}
 	 
 	public String lobbyErstellenClicked() {
-		if (this.aLobby.getLobbyName()== null || this.aLobby.getLobbyName().isEmpty()) {
+		if (this.aLobbyTO.getLobbyName()== null || this.aLobbyTO.getLobbyName().isEmpty()) {
 			sendInfoMessageToUser("Bitte geben Sie einen Lobbynamen an.");
 	         return null;
 	     }
 		 
 		 Pattern p = Pattern.compile("[^A-Za-z0-9]");
-	     Matcher m = p.matcher(this.aLobby.getLobbyName());
+	     Matcher m = p.matcher(this.aLobbyTO.getLobbyName());
 	     boolean b = m.find();
 	     if (b == true) {
 	    	 sendErrorMessageToUser("Kann die Lobby nicht erstellen.");
 	    	 return this.stayAtSide();
 	     }else {
 	    	try {
-			this.aLobby = gamecenterFacade.lobbyErstellen(this.aLobby, securityContext.getCallerPrincipal().getName());
+			this.aLobbyTO = gamecenterFacade.lobbyErstellen(this.aLobbyTO, securityContext.getCallerPrincipal().getName());
 			String username = securityContext.getCallerPrincipal().getName();
 			aUserTO = spielerverwaltungFacade.findUserByName(username);
 			sendInfoMessageToUser("Lobby wurde erstellt.");
@@ -112,25 +112,26 @@ public class LobbyMB implements Serializable{
 	}
 	
 	public void generateCode() {
-		this.aLobby.setLobbyCode(gamecenterFacade.generateCode(this.aLobby));
+		this.aLobbyTO.setLobbyCode(gamecenterFacade.generateCode(this.aLobbyTO));
 	}
 	
 	public String getLobbygroesse() {
-		return "Lobbygroesse: " + this.aLobby.getUsers().size() + "/2";
+		return "Lobbygroesse: " + this.aLobbyTO.getUsers().size() + "/2";
 	}
 	
 	public String lobbyBeitreten() {
 		//check, ob ein lobbycode eingegeben wurde
-		if (this.aLobby.getLobbyCode()== null || this.aLobby.getLobbyCode().isEmpty()) {
+		if (this.aLobbyTO.getLobbyCode()== null || this.aLobbyTO.getLobbyCode().isEmpty()) {
 			sendInfoMessageToUser("Bitte geben Sie einen Lobbycode ein.");
 	        return null;
 	    }
 		
 		try {
-			this.aLobby = gamecenterFacade.lobbyBeitreten(this.aLobby.getLobbyCode(), securityContext.getCallerPrincipal().getName());
-			if(this.aLobby.getLobbyCode() == null ) {
+			this.aLobbyTO = gamecenterFacade.lobbyBeitreten(this.aLobbyTO.getLobbyCode(), securityContext.getCallerPrincipal().getName());
+			if(this.aLobbyTO == null ) {
 				//TODO: hier ne Message im Dialogfenster anzeigen
 				sendErrorMessageToUser("Der Lobbycode ist ungültig.");
+				this.reinitBean();
 				return this.stayAtSide();
 			}
 			else {
@@ -141,6 +142,7 @@ public class LobbyMB implements Serializable{
 			}
 		} catch(EJBException e) {
 			sendErrorMessageToUser("Der Lobbycode ist ungültig.");
+			this.reinitBean();
 			return this.stayAtSide();
 		}
 	}
@@ -158,7 +160,7 @@ public class LobbyMB implements Serializable{
 	}
 
 	public String lobbyLoeschen() {
-		if(gamecenterFacade.lobbyLoeschen(securityContext.getCallerPrincipal().getName(), this.aLobby.getLobbyName())) {
+		if(gamecenterFacade.lobbyLoeschen(securityContext.getCallerPrincipal().getName(), this.aLobbyTO.getLobbyName())) {
 			sendInfoMessageToUser("Lobby wurde erfolgreich geloescht.");
 			this.reinitBean();
 			return this.toHauptmenue();
@@ -182,12 +184,12 @@ public class LobbyMB implements Serializable{
 	}
 	
 	//Getters and Setters
-	public LobbyTO getaLobby() {
-		return aLobby;
+	public LobbyTO getaLobbyTO() {
+		return aLobbyTO;
 	}
 
-	public void setaLobby(LobbyTO aLobby) {
-		this.aLobby = aLobby;
+	public void setaLobbyTO(LobbyTO aLobbyTO) {
+		this.aLobbyTO = aLobbyTO;
 	}
 
 	public IGamecenterFacade getGamecenterFacade() {

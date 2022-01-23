@@ -12,7 +12,7 @@
     </h:head>
     <h:body>
         <h:form styleClass="form" id="lobby">
-            <h:outputLabel styleClass="header" value="Lobby Name: #{lobbyMB.aLobby.lobbyName}" />
+            <h:outputLabel styleClass="header" value="Lobby Name: #{lobbyMB.aLobbyTO.lobbyName}" />
             <br/>
             <h:messages styleClass ="message" layout="table" errorStyle="background: #AFEEEE;"
 				infoStyle="background: #AFEEEE;" globalOnly="true" />
@@ -20,7 +20,7 @@
 			<h:panelGroup class="cell">
 				<!-- Spieler1 , erster Spieler aus der Liste-->
 				<h:outputLabel styleClass="label" value="Spieler 1: " readonly="true"/>
-				<h:outputLabel styleClass="label_playername" value="#{lobbyMB.aLobby.users[0].username}" readonly="true"/>
+				<h:outputLabel styleClass="label_playername" value="#{lobbyMB.aLobbyTO.users[0].username}" readonly="true"/>
 			</h:panelGroup>
 			<h:panelGroup class="cell">
 				<!--  Lobbygröße = User List größe -->
@@ -29,7 +29,7 @@
 			<h:panelGroup class="cell">
 				<!-- Spieler2, noch leer, zweiter Spieler aus der Liste-->
 				<h:outputLabel styleClass="label" value="Spieler 2: " readonly="true"/>
-				<h:outputLabel styleClass="label_playername" value="#{lobbyMB.aLobby.users[1].username}" readonly="true"/>
+				<h:outputLabel styleClass="label_playername" value="#{lobbyMB.aLobbyTO.users[1].username}" readonly="true"/>
 			</h:panelGroup>
 			<h:panelGroup class="cell"></h:panelGroup>
 			<h:panelGroup class="cell">
@@ -48,7 +48,7 @@
              			action="#{spielsessionMB.spielStarten()}"	
              			id="startGameButtonHidden"			
              			style="display: none">
-             		<f:setPropertyActionListener target="#{spielsessionMB.aSessionTO.lobbyID}" value="#{lobbyMB.aLobby.id}"  /> 
+             		<f:setPropertyActionListener target="#{spielsessionMB.aSessionTO.lobbyID}" value="#{lobbyMB.aLobbyTO.id}"  /> 
             	</h:commandButton>
  			</h:panelGroup>
  			<h:panelGroup class="cell">
@@ -57,7 +57,7 @@
              			onclick="return confirm('Lobby wirklick verlassen?')"
              			action="#{lobbyMB.lobbyVerlassen()}"
              			styleClass="button"
-             			rendered = "#{!lobbyMB.aUser.admin}">
+             			rendered = "#{!lobbyMB.aUserTO.admin}">
                 	<f:ajax execute="@form"/>
             	</h:commandButton>
  			</h:panelGroup>
@@ -67,7 +67,7 @@
              			onclick="return confirm('Lobby wirklick loeschen?')"
              			action="#{lobbyMB.lobbyLoeschen()}"	
              			styleClass="button"
-             			rendered = "#{lobbyMB.aUser.admin}">
+             			rendered = "#{lobbyMB.aUserTO.admin}">
                 	<f:ajax execute="@form"/>
             	</h:commandButton>
  			</h:panelGroup>
@@ -78,9 +78,9 @@
 				styleClass="button_friends">
 			</h:commandButton>
 			<br/>
-			<h:outputText styleClass="code" value="#{lobbyMB.aLobby.lobbyCode}"></h:outputText>
+			<h:outputText styleClass="code" value="#{lobbyMB.aLobbyTO.lobbyCode}"></h:outputText>
 			 
-				<h:inputHidden value="#{lobbyMB.aLobby.id}" />	
+				<h:inputHidden value="#{lobbyMB.aLobbyTO.id}" />	
         </h:form>
     </h:body>
 </html>

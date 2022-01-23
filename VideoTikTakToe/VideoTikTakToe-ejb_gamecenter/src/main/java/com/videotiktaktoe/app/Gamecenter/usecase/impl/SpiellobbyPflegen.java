@@ -31,7 +31,9 @@ public class SpiellobbyPflegen implements ISpiellobbyPflegen{
 		spielerverwaltungFacade.userSichern(aUserTO);
 		
 		//admin als User der Userliste hinzufügen
-		savedLobbyTO.addUser(aUserTO);
+		if(savedLobbyTO != null) {
+			savedLobbyTO.addUser(aUserTO);
+		}
 		
 		return savedLobbyTO;
 	}

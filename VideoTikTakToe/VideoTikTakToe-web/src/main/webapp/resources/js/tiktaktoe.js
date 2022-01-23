@@ -42,9 +42,6 @@ var niederlagenSpieler2 = document.getElementById('game:niederlagenSpieler2');
 
 var spieler1 = document.getElementById('game:spielerName1').value;
 var spieler2 = document.getElementById('game:spielerName2').value;
-var isAdmin = document.getElementById('game:isAdmin').value;
-
-
 
 
 //Websocket

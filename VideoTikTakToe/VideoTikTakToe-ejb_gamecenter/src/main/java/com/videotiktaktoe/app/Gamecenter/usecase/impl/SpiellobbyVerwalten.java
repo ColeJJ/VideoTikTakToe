@@ -22,7 +22,8 @@ public class SpiellobbyVerwalten implements ISpiellobbyVerwalten {
 	
 	@Override
 	public LobbyTO lobbyBeitreten(String lobbyCode, String username) {
-		LobbyTO aLobbyTO = lobbyDAO.findLobbyByCode(lobbyCode).toLobbyTO();
+		Lobby aLobby = lobbyDAO.findLobbyByCode(lobbyCode);
+		LobbyTO aLobbyTO = aLobby != null ? aLobby.toLobbyTO() : null ;
 		UserTO aUserTO = spielerverwaltungFacade.findUserByName(username);
 		if(aLobbyTO != null) {
 			aUserTO.setLobbyID(aLobbyTO.getId());

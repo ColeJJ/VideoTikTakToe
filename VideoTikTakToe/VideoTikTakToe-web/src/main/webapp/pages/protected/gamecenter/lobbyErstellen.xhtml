@@ -17,12 +17,12 @@
             	<h:panelGroup class="cell"></h:panelGroup>
             	<h:panelGroup class="cell">
             		<h:outputLabel styleClass="label" value="Lobby benennen: " />
-					<h:inputText styleClass="input_field" value="#{lobbyMB.aLobby.lobbyName}" />
+					<h:inputText styleClass="input_field" value="#{lobbyMB.aLobbyTO.lobbyName}" />
             	</h:panelGroup>
             	<h:panelGroup class="cell"></h:panelGroup>
             	<h:panelGroup class="cell">
             		<h:outputLabel styleClass="label" value="Audioeinstellungen auswaehlen: " />
-            		<h:selectOneRadio styleClass="select_field" value="#{lobbyMB.aLobby.audioEinstellung}">
+            		<h:selectOneRadio styleClass="select_field" value="#{lobbyMB.aLobbyTO.audioEinstellung}">
 						<f:selectItem itemValue="#{true}" itemLabel="Audio ein"/>
 						<f:selectItem itemValue="#{false}" itemLabel="Audio aus"/>
 					</h:selectOneRadio>	
@@ -30,7 +30,7 @@
             	<h:panelGroup class="cell"></h:panelGroup>
             	<h:panelGroup class="cell">
             		<h:outputLabel styleClass="label" value="Videoeinstellungen auswaehlen: " />
-            		<h:selectOneRadio styleClass="select_field" value="#{lobbyMB.aLobby.videoEinstellung}">
+            		<h:selectOneRadio styleClass="select_field" value="#{lobbyMB.aLobbyTO.videoEinstellung}">
 						<f:selectItem itemValue="#{true}" itemLabel="Video ein"/>
 						<f:selectItem itemValue="#{false}" itemLabel="Video aus"/>
 					</h:selectOneRadio>	
@@ -40,7 +40,7 @@
 							styleClass="button" 
              				value="Lobby erstellen"	
              				action="#{lobbyMB.lobbyErstellenClicked()}">
-             			<f:setPropertyActionListener target="#{lobbyMB.aLobby}" value="#{lobbyMB.aLobby}"  /> 
+             			<f:setPropertyActionListener target="#{lobbyMB.aLobbyTO}" value="#{lobbyMB.aLobbyTO}"  /> 
                 		<f:ajax execute="@form" render="@form" />
             		</h:commandButton>
             	</h:panelGroup>
@@ -57,7 +57,7 @@
             			
 			</h:panelGroup>
 			
-				<h:inputHidden value="#{lobbyMB.aLobby.id}" />	
+				<h:inputHidden value="#{lobbyMB.aLobbyTO.id}" />	
         </h:form>
     </h:body>
 </html>

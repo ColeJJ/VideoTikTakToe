@@ -84,7 +84,14 @@ public class SpielsessionMB implements Serializable{
 		this.aWertungTOSpieler1.setPunktestand(0);
 		this.aWertungTOSpieler1.setPunktestand(0);
 	}
+	
 	public String spielStarten() {
+		//Check, ob 2 Spieler drin sind
+		if(!this.checkLobbyVollstaendig()) {
+			sendErrorMessageToUser("Die Lobby muss vollstaendig sein.");
+			return this.stayAtSide();
+		}
+		
 		//Check, ob die Lobby vorhanden ist oder nicht vorher schon geloescht wurde
 		this.aLobbyTO = gamecenterFacade.lobbySuchen(this.aSessionTO.getLobbyID());
 		if(this.aLobbyTO == null) {
@@ -169,6 +176,10 @@ public class SpielsessionMB implements Serializable{
 	
 	private boolean isUserAdmin() {
 		return spielerverwaltungFacade.findUserByName(securityContext.getCallerPrincipal().getName()).isAdmin();
+	}
+	
+	private boolean checkLobbyVollstaendig() {
+		return spielerverwaltungFacade.getAllUsersInSameLobby(this.aSessionTO.getLobbyID()).size() < 2 ? false : true;
 	}
 	
 	//Navigation	

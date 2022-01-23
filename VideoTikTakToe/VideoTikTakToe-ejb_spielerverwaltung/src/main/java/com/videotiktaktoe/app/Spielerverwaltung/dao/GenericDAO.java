@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
@@ -63,7 +64,11 @@ public abstract class GenericDAO<T> {
 				populateQueryParameters(query, parameters);
 			}
 			
-			result = (T) query.getSingleResult();
+			try {
+				result = (T) query.getSingleResult();
+			} catch (NoResultException e) {
+				result = null;
+			}
 					
 		} catch (Exception e){
 			System.out.println("Fehler bei der Query: "+e.getMessage());

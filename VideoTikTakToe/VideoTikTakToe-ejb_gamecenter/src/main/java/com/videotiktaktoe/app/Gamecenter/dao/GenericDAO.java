@@ -64,7 +64,12 @@ public abstract class GenericDAO<T> {
 				populateQueryParameters(query, parameters);
 			}
 			
-			result = (T) query.getSingleResult();
+			try {
+				result = (T) query.getSingleResult();
+			} catch (NoResultException e) {
+				result = null;
+			}
+			
 					
 		} catch (NoResultException e){
 			System.out.println("Es konnte keine Entity gefunden werden");
@@ -73,7 +78,7 @@ public abstract class GenericDAO<T> {
 			e.printStackTrace();
 		}
 		
-		return result != null ? result : null;
+		return result;
 	}
 	
 	@SuppressWarnings("unchecked")
